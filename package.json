@@ -2,7 +2,7 @@
   "name": "gympanel",
   "version": "1.0.0",
   "description": "This is a collaborative project for NEU CS 5610 Assignment 2. The authors of the project and the instructor of the course preserve any right to the content of the project",
-  "main": "index.html",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
