@@ -1,11 +1,12 @@
 const express = require("express");
 const mainController = require("./controller/mainController");
+const dashboardController = require("./controller/dashboardController");
 const app = express();
 
-app.use(express.static('./public'));
+app.use(express.static("./public"));
 
 mainController(app);
-
+dashboardController(app);
 
 
 app.listen(3000, () => {
