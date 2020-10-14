@@ -1,0 +1,16 @@
+{
+  "name": "gympanel",
+  "version": "1.0.0",
+  "description": "This is a collaborative project for NEU CS 5610 Assignment 2. The authors of the project and the instructor of the course preserve any right to the content of the project",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rujun Yao, Yiman Liu",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "eslint": "^7.11.0",
+    "express": "^4.17.1"
+  }
+}
