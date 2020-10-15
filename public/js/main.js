@@ -1,10 +1,10 @@
 (() => {
     function init() {
-        document.getElementById("login-button").addEventListener("click", onLoginClicked)
+        document.getElementById("login-button").addEventListener("click", onLoginClicked);
     }
 
     function onLoginClicked() {
-        location.href = "./login/" + document.getElementById("username").value;
+        location.href = "./" + document.getElementById("username").value;
     }
 
     init()

@@ -29,7 +29,7 @@ module.exports = (app) => {
         res.send("Todo: Handle register post request");
     });
 
-    app.get('/login/:username', (req, res) => {
+    app.get('/:username', (req, res) => {
         const username = req.params.username;
         console.log("receive post request; Current username: " + username);
         void client.connect((err, db) => {

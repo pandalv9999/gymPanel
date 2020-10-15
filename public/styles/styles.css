@@ -1,11 +1,15 @@
 
 body {background: skyblue;
     font-family: Verdana, serif; color: white; padding: 30px;}
-h1 {font-size: 48px; text-transform: uppercase; letter-spacing: 2px; text-align: center}
+h1{font-size: 48px; text-transform: uppercase; letter-spacing: 2px; text-align: center}
+h2{font-size: 36px; letter-spacing: 2px;text-align: center}
 p, li {font-size: 16px; text-align: center}
+ul {list-style: none}
+a {text-decoration: none;
+    color: white;}
 
 #login-form {
-    margin: 0px auto;
+    margin: 0 auto;
     overflow: auto;
     padding: 40px;
     width: 350px;
