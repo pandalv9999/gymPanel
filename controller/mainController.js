@@ -1,4 +1,12 @@
 const fs = require("fs");
+const MongoClient = require('mongodb').MongoClient;
+require('dotenv').config();
+
+const url = 'mongodb+srv://' +
+    process.env.username + ':' +
+    process.env.password + '@testdb.qzr4t.mongodb.net/' +
+    process.env.database + '?retryWrites=true&w=majority';
+const client = new MongoClient(url, { useNewUrlParser: true });
 
 module.exports = (app) => {
 
@@ -21,17 +29,20 @@ module.exports = (app) => {
         res.send("Todo: Handle register post request");
     });
 
-    app.get('/login', (req, res) => {
-        console.log("Todo: Handle login get request");
-        res.send("Todo: Handle login get request");
+    app.get('/login/:username', (req, res) => {
+        const username = req.params.username;
+        console.log("receive post request; Current username: " + username);
+        void client.connect((err, db) => {
+            if (err) throw err;
+            void client.db(process.env.database).collection("users").findOne({"username": username},
+                (err, result) => {
+                if (err) throw err;
+                if (!result) res.render('error',
+                    {errorCode: 403, errorMessage: "The user " + username + " does not exist"});
+                else res.render('dashboard', {user: result})
+            });
+        });
     });
 
-    // I have already handled to sending of post request from the client end.
-    // At here I just log the received username and print it out. Communication to mongoDB needs to be implemented.
-    app.post('/login', (req, res) => {
-        const username = req.body.username;
-        console.log("receive post request; Current username: " + username);
-        res.sendStatus(200);
-    });
 
 };
