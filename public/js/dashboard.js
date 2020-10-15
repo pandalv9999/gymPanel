@@ -11,9 +11,10 @@
         const url = "./" + userInfo + "/schedule";
         ajax('GET', url, null, (res) => {
             document.getElementById("data-holder").innerHTML = res;
+            document.getElementById("error-holder").innerText = "";
         }, () => {
             document.getElementById("error-holder").innerText = "Cannot load your current schedule!";
-
+            document.getElementById("data-holder").innerText = "";
         })
     }
 
@@ -21,8 +22,10 @@
         const url = "./" + userInfo + "/profile";
         ajax('GET', url, null, (res) => {
             document.getElementById("data-holder").innerHTML = res;
+            document.getElementById("error-holder").innerText = "";
         }, () => {
             document.getElementById("error-holder").innerText = "Cannot load your current profile!";
+            document.getElementById("data-holder").innerText = ""
         })
     }
 
@@ -30,8 +33,10 @@
         const url = "./" + userInfo + "/courses";
         ajax('GET', url, null, (res) => {
             document.getElementById("data-holder").innerHTML = res;
+            document.getElementById("error-holder").innerText = "";
         }, () => {
             document.getElementById("error-holder").innerText = "Cannot load courses!";
+            document.getElementById("data-holder").innerText = ""
         })
     }
 
@@ -39,11 +44,24 @@
         const url = "./" + userInfo + "/trainers";
         ajax('GET', url, null, (res) => {
             document.getElementById("data-holder").innerHTML = res;
+            document.getElementById("error-holder").innerText = "";
         }, () => {
             document.getElementById("error-holder").innerText = "Cannot load trainers!";
+            document.getElementById("data-holder").innerText = ""
         })
     }
+
+
 
     init();
 
 })();
+
+function onRegisterCourseClicked(course) {
+    console.log("Register!")
+}
+
+function onUnregisterCourseClicked(course) {
+    console.log("Unregister!")
+}
+

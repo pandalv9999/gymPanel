@@ -1,4 +1,11 @@
-const fs = require("fs");
+const MongoClient = require('mongodb').MongoClient;
+require('dotenv').config();
+
+const url = 'mongodb+srv://' +
+    process.env.username + ':' +
+    process.env.password + '@testdb.qzr4t.mongodb.net/' +
+    process.env.database + '?retryWrites=true&w=majority';
+const client = new MongoClient(url, { useNewUrlParser: true });
 
 module.exports = (app) => {
 
@@ -17,8 +24,13 @@ module.exports = (app) => {
 
     app.get('/:username/courses',  (req, res) => {
         const user = {username: req.params.username};
-        // use mongoDB to load current user's schedule
-        res.render('courses', {user: user})
+        void client.connect((err, db) => {
+            if (err) throw err;
+            void client.db(process.env.database).collection("courses").find({}).toArray((err, result) => {
+                if (err) throw err;
+                res.render('courses', {user: user, courses: result})
+            });
+        });
     });
 
     app.get('/:username/trainers',  (req, res) => {

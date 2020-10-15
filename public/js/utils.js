@@ -31,3 +31,4 @@ function ajax(method, url, data, successCallback, errorCallback) {
         xhr.send(data);
     }
 }
+
