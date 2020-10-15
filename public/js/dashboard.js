@@ -52,16 +52,21 @@
     }
 
 
-
     init();
 
 })();
 
-function onRegisterCourseClicked(course) {
-    console.log("Register!")
+function onRegisterCourseClicked(courseId) {
+    document.getElementById("info-holder" + courseId).innerText = "Registered course successfully!";
+    document.getElementById("button-placeholder" + courseId).innerHTML =
+        "<button onclick=onUnregisterCourseClicked(" + courseId + ")>Unregister</button>";
+    setTimeout(() => document.getElementById("info-holder" + courseId).innerText = "", 5000);
 }
 
-function onUnregisterCourseClicked(course) {
-    console.log("Unregister!")
+function onUnregisterCourseClicked(courseId) {
+    document.getElementById("info-holder" + courseId).innerText = "Unregistered course successfully!";
+    document.getElementById("button-placeholder" + courseId).innerHTML =
+        "<button onclick=onRegisterCourseClicked(" + courseId + ")>Register</button>";
+    setTimeout(() => document.getElementById("info-holder" + courseId).innerText = "", 5000);
 }
 

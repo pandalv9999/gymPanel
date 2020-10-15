@@ -8,11 +8,14 @@
             <p><%=courses[i].description%>
             <p>Instructor: <%=courses[i].instructor%></p>
             <p><%=courses[i].enrolledMember.length%>/<%=courses[i].capacity%> Enrolled</p>
-            <% if (!courses[i].enrolledMember.includes(user.username)) { %>
+            <div id="button-placeholder<%=courses[i].id%>">
+                <% if (!courses[i].enrolledMember.includes(user.username)) { %>
                 <button onclick=onRegisterCourseClicked(<%=courses[i].id%>)>Register</button>
-            <% } else { %>
-                <button onclick="onUnregisterCourseClicked(<%=courses[i].id%>)">Unegister</button>
-            <% } %>
+                <% } else { %>
+                <button onclick=onUnregisterCourseClicked(<%=courses[i].id%>)>Unregister</button>
+                <% } %>
+            </div>
+            <p id="info-holder<%=courses[i].id%>"></p>
         </li>
     <%}%>
 </ul>
