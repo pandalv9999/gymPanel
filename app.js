@@ -1,9 +1,14 @@
 const express = require("express");
 const mainController = require("./controller/mainController");
 const dashboardController = require("./controller/dashboardController");
+const bodyParser = require('body-parser');
 const app = express();
 
 app.use(express.static("./public"));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 
 mainController(app);
 dashboardController(app);

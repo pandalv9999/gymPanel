@@ -26,9 +26,12 @@ module.exports = (app) => {
         res.send("Todo: Handle login get request");
     });
 
+    // I have already handled to sending of post request from the client end.
+    // At here I just log the received username and print it out. Communication to mongoDB needs to be implemented.
     app.post('/login', (req, res) => {
-        console.log("Todo: Handle login post request");
-        res.send("Todo: Handle login post request");
+        const username = req.body.username;
+        console.log("receive post request; Current username: " + username);
+        res.sendStatus(200);
     });
 
 };

@@ -1,0 +1,45 @@
+
+body {background: skyblue;
+    font-family: Verdana, serif; color: white; padding: 30px;}
+h1 {font-size: 48px; text-transform: uppercase; letter-spacing: 2px; text-align: center}
+p, li {font-size: 16px; text-align: center}
+
+#login-form {
+    margin: 0px auto;
+    overflow: auto;
+    padding: 40px;
+    width: 350px;
+}
+
+#login-form label {
+    display: block;
+}
+
+#login-form input {
+    border: none;
+    display: block;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 8px;
+    width: 100%;
+}
+
+#login-form #login-btn {
+    cursor: pointer;
+    float: right;
+    padding: 8px 20px;
+    text-align: right;
+}
+
+#login-form #register-form-btn {
+    cursor: pointer;
+    float: left;
+    padding: 8px 10px;
+    text-align: left;
+}
+
+#login-error {
+    clear: both;
+    color: #990000;
+    padding-top: 10px;
+}
