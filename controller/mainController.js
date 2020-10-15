@@ -29,17 +29,23 @@ module.exports = (app) => {
         res.send("Todo: Handle register post request");
     });
 
+    // login
     app.get('/:username', (req, res) => {
         const username = req.params.username;
-        console.log("receive post request; Current username: " + username);
+        console.log("Received login request for " + username);
         void client.connect((err, db) => {
             if (err) throw err;
             void client.db(process.env.database).collection("users").findOne({"username": username},
                 (err, result) => {
                 if (err) throw err;
-                if (!result) res.render('error',
-                    {errorCode: 403, errorMessage: "The user " + username + " does not exist"});
-                else res.render('dashboard', {user: result})
+                if (!result) {
+                    console.log("User " + req.params.username + " login failed! No user matches.");
+                    res.render('error', {errorCode: 403, errorMessage: "The user " + username + " does not exist"});
+                }
+                else {
+                    console.log("User " + req.params.username + " login success.");
+                    res.render('dashboard', {user: result})
+                }
             });
         });
     });

@@ -1,5 +1,5 @@
 <!--partial html file for page rendering-->
-<h2>Courses Of <%=user.username%></h2>
+<h2>Courses</h2>
 <ul>
     <% for (let i = 0; i < courses.length; i++){ %>
         <li>
@@ -7,10 +7,11 @@
             <h4><%=courses[i].date%> <%=courses[i].startTime%>:00 -- <%=courses[i].endTime%>:00</h4>
             <p><%=courses[i].description%>
             <p>Instructor: <%=courses[i].instructor%></p>
-            <p><%=courses[i].enrolledMember.length%>/<%=courses[i].capacity%> Enrolled</p>
+            <p><span id="curr-enrolled<%=courses[i].id%>"><%=courses[i].enrolledMember.length%></span>/<%=courses[i].capacity%> Enrolled</p>
             <div id="button-placeholder<%=courses[i].id%>">
                 <% if (!courses[i].enrolledMember.includes(user.username)) { %>
-                <button onclick=onRegisterCourseClicked(<%=courses[i].id%>)>Register</button>
+                <button onclick=onRegisterCourseClicked(<%=courses[i].id%>)
+                        <%if(courses[i].enrolledMember.length === courses[i].capacity) {%>disabled="true"<%}%>>Register</button>
                 <% } else { %>
                 <button onclick=onUnregisterCourseClicked(<%=courses[i].id%>)>Unregister</button>
                 <% } %>

@@ -1,6 +1,7 @@
 const express = require("express");
 const mainController = require("./controller/mainController");
 const dashboardController = require("./controller/dashboardController");
+const courseController = require("./controller/courseController");
 const bodyParser = require('body-parser');
 const app = express();
 
@@ -13,6 +14,7 @@ app.set('view engine', 'ejs');
 
 mainController(app);
 dashboardController(app);
+courseController(app);
 
 
 app.listen(3000, () => {
