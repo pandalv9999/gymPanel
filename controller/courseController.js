@@ -29,14 +29,15 @@ module.exports = (app, utils) => {
                 if (!result || result.length === 0) {
                     return null;
                 }
-                const intervals = result.scheduledAppointments[utils.nameToDay(courseTime.date)]
-                    .push([courseTime.startTime, courseTime.endTime]);
+                const intervals = result.scheduledAppointments[utils.nameToDay(courseTime.date)];
+                intervals.push([courseTime.startTime, courseTime.endTime]);
                 if (utils.existOverlap(intervals)) {
                     return null;
                 } else {
                     return client.db(process.env.database).collection("courses").updateOne(
                         {id: req.body.courseId, $expr: {$lt: [{$size: "$enrolledMember"}, "$capacity"]}},
-                        {$push: {enrolledMember: req.body.username}});
+                        {$push: {enrolledMember: req.body.username}}
+                        );
                 }
             }, err => console.log(err)).then(result => {
                 if (!result || result.modifiedCount === 0) {
@@ -44,7 +45,8 @@ module.exports = (app, utils) => {
                 } else {
                     return client.db(process.env.database).collection("users").updateOne(
                         {username: req.body.username},
-                        {$push: {registeredCourses: req.body.courseId}});
+                        {$push: {registeredCourses: {courseId: req.body.courseId, courseTime: courseTime}}}
+                        );
                 }
             }, err => console.log(err)).then(result => {
                 if (!result || result.modifiedCount === 0) {
@@ -71,7 +73,7 @@ module.exports = (app, utils) => {
                 } else {
                     return client.db(process.env.database).collection("users").updateOne(
                         {username: req.body.username},
-                        {$pull: {registeredCourses: req.body.courseId}});
+                        {$pull: {registeredCourses: {courseId: req.body.courseId}}});
                 }
             }, err => console.log(err)).then(result => {
                 if (!result) {

@@ -20,9 +20,63 @@ module.exports = (app, utils) => {
                     res.writeHead(404);
                     res.end("Trainer " + trainerId + " is not found!");
                 } else {
-                    res.json(result.avaliableTime)
+                    res.json(result.scheduledTime)
                 }
             });
+        });
+    });
+
+    app.put("/trainer", (req, res) => {
+        const appointment = req.body;
+        console.log(`Received request for user ${appointment.username} to schedule ${appointment.startTime} 
+        - ${appointment.endTime} for trainer ${appointment.trainerId} at day ${appointment.date}`);
+        void client.connect((err, db) => {
+            if (err) throw err;
+            client.db(process.env.database).collection("users").findOne({username: appointment.username}).then(result => {
+                if (!result) return null;
+                const appointmentIntervals = result.scheduledAppointments[appointment.date];
+                appointmentIntervals.push([appointment.startTime, appointment.endTime]);
+                const courseIntervals = utils.convertCoursesToInterval(result.registeredCourses)[appointment.date];
+                courseIntervals.push([appointment.startTime, appointment.endTime]);
+                if (utils.existOverlap(appointmentIntervals) || utils.existOverlap(courseIntervals)) {
+                    return null;
+                } else {
+                    return client.db(process.env.database).collection("trainers")
+                        .findOne({id: appointment.trainerId});
+                }
+            }, err => console.log(err)).then(result => {
+                if (!result || result.length === 0) return null;
+                const intervals = result.scheduledTime[appointment.date]
+                    .push([appointment.startTime, appointment.endTime]);
+                if (utils.existOverlap(intervals)) {
+                    return null;
+                } else {
+                    const identifier = "scheduledAppointments." + appointment.date;
+                    return client.db(process.env.database).collection("users").updateOne(
+                        {username: appointment.username},
+                        {$push: {[identifier]: [appointment.startTime, appointment.endTime]}}
+                        );
+                }
+            }, err => console.log(err)).then(result => {
+                if (!result || result.modifiedCount === 0) {
+                    console.log("push time to user failed");
+                    return null;
+                } else {
+                    const identifier = "scheduledTime." + appointment.date;
+                    return client.db(process.env.database).collection("trainers").updateOne(
+                        {id: appointment.trainerId},
+                        {$push: {[identifier]: [appointment.startTime, appointment.endTime]}}
+                    );
+                }
+            }, err => console.log(err)).then(result => {
+                if (!result || result.modifiedCount === 0) {
+                    console.log(appointment.username + " fail schedule appointment with " + appointment.trainerId);
+                    res.sendStatus(409)
+                } else {
+                    console.log(appointment.username + " successfully schedule appointment with " + appointment.trainerId);
+                    res.sendStatus(200)
+                }
+            }, err => console.log(err));
         });
     });
 

@@ -28,5 +28,14 @@ module.exports =  {
         }
         return res.length <= preLen;
 
+    },
+
+    convertCoursesToInterval: function (courses) {
+        let intervals = [[], [], [], [], [], [], []];
+        for (let course of courses) {
+            intervals[this.nameToDay(course.courseTime.date)]
+                .push([course.courseTime.startTime, course.courseTime.endTime])
+        }
+        return intervals;
     }
 };

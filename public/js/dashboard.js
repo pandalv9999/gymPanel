@@ -106,8 +106,8 @@ function onTrainerTimeExpandClicked(trainerId) {
         document.getElementById("button-placeholder" + trainerId).innerHTML =
             "<button onclick=onTrainerTimeCollapseClicked(" + trainerId + ")>Collapse</button>";
     }, (err) => {
-        document.getElementById("schedule-holder" + trainerId).innerHTML = "<p>" + err + "</p>"
-        setTimeout(() => document.getElementById("schedule-holder" + trainerId).innerHTML = "", 5000);
+        document.getElementById("info-holder" + trainerId).innerText = err;
+        setTimeout(() => document.getElementById("info-holder" + trainerId).innerText = "", 5000);
     });
 }
 
@@ -118,7 +118,24 @@ function onTrainerTimeCollapseClicked(trainerId) {
 }
 
 function onAppointmentTimeClicked(date, startTime, endTime, trainerId) {
-    console.log(date,startTime,endTime,trainerId)
+    const url = "./trainer";
+    const data = JSON.stringify({
+        username: document.getElementById("user-info").innerText,
+        trainerId: trainerId,
+        date: date,
+        startTime: startTime,
+        endTime: endTime
+    });
+    ajax('PUT', url, data, () => {
+        onTrainerTimeExpandClicked(trainerId);
+        document.getElementById("info-holder" + trainerId).innerText = "Schedule Appointment Success";
+        setTimeout(() => document.getElementById("info-holder" + trainerId).innerText = "", 5000);
+    }, () => {
+        document.getElementById("info-holder" + trainerId).innerText = "Schedule Appointment failed!";
+        setTimeout(() => document.getElementById("info-holder" + trainerId).innerText = "", 5000);
+    });
+
+
 }
 
 function generateHTMLFromIntervals(arrayOfIntervals, trainedId) {
