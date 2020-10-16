@@ -1,2 +1,15 @@
 <!--partial html file for page rendering-->
-<h2>Trainer Of <%=user.username%></h2>
+<h2>Trainer</h2>
+<ul>
+    <% for (let i = 0; i < trainers.length; i++) { %>
+        <li>
+            <h3><%=trainers[i].name%></h3>
+            <img src="<%=trainers[i].url%>" alt="%=trainers[i].name%> picture" width="150px" height="150px">
+            <p><%=trainers[i].description%></p>
+            <div id="button-placeholder<%=trainers[i].id%>">
+                <button onclick=onTrainerTimeExpandClicked(<%=trainers[i].id%>)>Expand</button>
+            </div>
+            <div id="schedule-holder<%=trainers[i].id%>"></div>
+        </li>
+    <% } %>
+</ul>

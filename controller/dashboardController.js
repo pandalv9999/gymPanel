@@ -36,7 +36,13 @@ module.exports = (app) => {
 
     app.get('/:username/trainers',  (req, res) => {
         const user = {username: req.params.username};
-        // use mongoDB to load current user's schedule
-        res.render('trainers', {user: user})
+        void client.connect((err, db) => {
+            if (err) throw err;
+            void client.db(process.env.database).collection("trainers").find({}).toArray((err, result) => {
+                if (err) throw err;
+                console.log("Successfully got trainer for user " + req.params.username);
+                res.render('trainers', {user: user, trainers: result})
+            });
+        });
     });
 };

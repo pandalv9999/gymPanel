@@ -99,3 +99,47 @@ function onUnregisterCourseClicked(courseId) {
 
 }
 
+function onTrainerTimeExpandClicked(trainerId) {
+    const url = "./trainer/" + trainerId;
+    ajax('GET', url, null, (res) => {
+        document.getElementById("schedule-holder" + trainerId).innerHTML = generateHTMLFromIntervals(res, trainerId);
+        document.getElementById("button-placeholder" + trainerId).innerHTML =
+            "<button onclick=onTrainerTimeCollapseClicked(" + trainerId + ")>Collapse</button>";
+    }, (err) => {
+        document.getElementById("schedule-holder" + trainerId).innerHTML = "<p>" + err + "</p>"
+        setTimeout(() => document.getElementById("schedule-holder" + trainerId).innerHTML = "", 5000);
+    });
+}
+
+function onTrainerTimeCollapseClicked(trainerId) {
+    document.getElementById("schedule-holder" + trainerId).innerHTML = "";
+    document.getElementById("button-placeholder" + trainerId).innerHTML =
+        "<button onclick=onTrainerTimeExpandClicked(" + trainerId + ")>Expand</button>";
+}
+
+function onAppointmentTimeClicked(date, startTime, endTime, trainerId) {
+    console.log(date,startTime,endTime,trainerId)
+}
+
+function generateHTMLFromIntervals(arrayOfIntervals, trainedId) {
+    arrayOfIntervals = JSON.parse(arrayOfIntervals);
+    let result = "<table style='margin: auto'>";
+    result += "<tr><th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th>" +
+        "<th>Friday</th><th>Saturday</th><th>Sunday</th></tr>";
+    for (let startTime = 8; startTime <= 19; startTime++) {
+        result += "<tr>";
+        result += `<td>${startTime}:00 -- ${startTime + 1}:00<td>`;
+        for (let day = 0; day < 7; day++) {
+            const currDayIntervals = arrayOfIntervals[day];
+            if (isAvailableForInterval(currDayIntervals, [startTime, startTime + 1])) {
+                result += `<td><button onclick="onAppointmentTimeClicked(${day}, ${startTime}, ${startTime + 1}, ${trainedId})">Schedule</button>`
+            } else {
+                result += "<td><button disabled='true'>Schedule</button></td>"
+            }
+        }
+        result += "</tr>";
+    }
+    result += "</table>";
+    return result;
+}
+

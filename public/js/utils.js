@@ -32,3 +32,12 @@ function ajax(method, url, data, successCallback, errorCallback) {
     }
 }
 
+function isAvailableForInterval(intervals, interval) {
+    for (let curr of intervals) {
+        if (curr[0] === interval[0] && curr[1] === interval[1]) {
+            return false;
+        }
+    }
+    return true;
+}
+
