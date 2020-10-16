@@ -5,6 +5,7 @@
         <li>
             <h3><%=courses[i].courseName%></h3>
             <h4><%=courses[i].date%> <%=courses[i].startTime%>:00 -- <%=courses[i].endTime%>:00</h4>
+            <img src="<%=courses[i].url%>" alt="<%=courses[i].courseName%> picture" width="150px" height="150px">
             <p><%=courses[i].description%>
             <p>Instructor: <%=courses[i].instructor%></p>
             <p><span id="curr-enrolled<%=courses[i].id%>"><%=courses[i].enrolledMember.length%></span>/<%=courses[i].capacity%> Enrolled</p>
