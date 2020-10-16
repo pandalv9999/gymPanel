@@ -15,12 +15,12 @@ module.exports =  {
     existOverlap: function (intervals) {
         if (!intervals.length) return false;
         const preLen = intervals.length;
-        intervals.sort((a, b) => a.start !== b.start ? a.start - b.start : a.end - b.end);
+        intervals.sort((a, b) => a[0] !== b[0] ? a[0] - b[0] : a[1] - b[1]);
         let prev = intervals[0];
         const res = [prev];
         for (const curr of intervals) {
-            if (curr.start <= prev.end) {
-                prev.end = Math.max(prev.end, curr.end)
+            if (curr[0] <= prev[1]) {
+                prev[1] = Math.max(prev[1], curr[1])
             } else {
                 res.push(curr);
                 prev = curr
@@ -30,12 +30,4 @@ module.exports =  {
 
     },
 
-    convertCoursesToInterval: function (courses) {
-        let intervals = [[], [], [], [], [], [], []];
-        for (let course of courses) {
-            intervals[this.nameToDay(course.courseTime.date)]
-                .push([course.courseTime.startTime, course.courseTime.endTime])
-        }
-        return intervals;
-    }
 };

@@ -29,7 +29,7 @@ module.exports = (app, utils) => {
                 if (!result || result.length === 0) {
                     return null;
                 }
-                const intervals = result.scheduledAppointments[utils.nameToDay(courseTime.date)];
+                const intervals = result.scheduledTime[utils.nameToDay(courseTime.date)];
                 intervals.push([courseTime.startTime, courseTime.endTime]);
                 if (utils.existOverlap(intervals)) {
                     return null;
@@ -50,30 +50,62 @@ module.exports = (app, utils) => {
                 }
             }, err => console.log(err)).then(result => {
                 if (!result || result.modifiedCount === 0) {
+                    return null;
+                } else {
+                    const identifier = "scheduledTime." + utils.nameToDay(courseTime.date);
+                    return client.db(process.env.database).collection("users").updateOne(
+                        {username: req.body.username},
+                        {$push: {[identifier]: [courseTime.startTime, courseTime.endTime]}}
+                    );
+                }
+            }, err => console.log(err)).then(result => {
+                if (!result || result.modifiedCount === 0) {
                     console.log(req.body.username + " fail registered course " + req.body.courseId);
                     res.sendStatus(409)
                 } else {
                     console.log(req.body.username + " successfully registered course " + req.body.courseId);
                     res.sendStatus(200)
                 }
-            }, err => console.log(err)); // using $expr to prevent when two user register simultaneously, all of then will registered.
+            }, err => console.log(err));
         });
     });
 
     // unregister course
     app.delete('/course', (req, res) => {
         console.log("receive " + req.body.username + " unregister course " + req.body.courseId);
+        let courseTime;
         void client.connect((err, db) => {
             if (err) throw err;
-            client.db(process.env.database).collection("courses").updateOne(
-                {id: req.body.courseId, enrolledMember: req.body.username},
-                {$pull: {enrolledMember: req.body.username}}).then(result => {
+            client.db(process.env.database).collection("courses").findOne({id: req.body.courseId}).then(result => {
+                if (result.length === 0) {
+                    return null;
+                }
+                courseTime = {
+                    date: result.date,
+                    startTime: result.startTime,
+                    endTime: result.endTime
+                };
+                return client.db(process.env.database).collection("courses").updateOne(
+                    {id: req.body.courseId, enrolledMember: req.body.username},
+                    {$pull: {enrolledMember: req.body.username}}
+                    );
+            }, err => console.log(err)).then(result => {
                 if (result.modifiedCount === 0) {
                     return null;
                 } else {
                     return client.db(process.env.database).collection("users").updateOne(
                         {username: req.body.username},
                         {$pull: {registeredCourses: {courseId: req.body.courseId}}});
+                }
+            }, err => console.log(err)).then(result => {
+                if (!result || result.modifiedCount === 0) {
+                    return null;
+                } else {
+                    const identifier = "scheduledTime." + utils.nameToDay(courseTime.date);
+                    return client.db(process.env.database).collection("users").updateOne(
+                        {username: req.body.username},
+                        {$pull: {[identifier]: {$in: [courseTime.startTime, courseTime.endTime]}}}
+                    );
                 }
             }, err => console.log(err)).then(result => {
                 if (!result) {

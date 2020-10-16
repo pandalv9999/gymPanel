@@ -34,11 +34,9 @@ module.exports = (app, utils) => {
             if (err) throw err;
             client.db(process.env.database).collection("users").findOne({username: appointment.username}).then(result => {
                 if (!result) return null;
-                const appointmentIntervals = result.scheduledAppointments[appointment.date];
+                const appointmentIntervals = result.scheduledTime[appointment.date];
                 appointmentIntervals.push([appointment.startTime, appointment.endTime]);
-                const courseIntervals = utils.convertCoursesToInterval(result.registeredCourses)[appointment.date];
-                courseIntervals.push([appointment.startTime, appointment.endTime]);
-                if (utils.existOverlap(appointmentIntervals) || utils.existOverlap(courseIntervals)) {
+                if (utils.existOverlap(appointmentIntervals)) {
                     return null;
                 } else {
                     return client.db(process.env.database).collection("trainers")
@@ -51,7 +49,7 @@ module.exports = (app, utils) => {
                 if (utils.existOverlap(intervals)) {
                     return null;
                 } else {
-                    const identifier = "scheduledAppointments." + appointment.date;
+                    const identifier = "scheduledTime." + appointment.date;
                     return client.db(process.env.database).collection("users").updateOne(
                         {username: appointment.username},
                         {$push: {[identifier]: [appointment.startTime, appointment.endTime]}}
@@ -59,7 +57,15 @@ module.exports = (app, utils) => {
                 }
             }, err => console.log(err)).then(result => {
                 if (!result || result.modifiedCount === 0) {
-                    console.log("push time to user failed");
+                    return null;
+                } else {
+                    return client.db(process.env.database).collection("users").updateOne(
+                        {username: appointment.username},
+                        {$push: {scheduledAppointments: appointment}}
+                    );
+                }
+            }, err => console.log(err)).then(result => {
+                if (!result || result.modifiedCount === 0) {
                     return null;
                 } else {
                     const identifier = "scheduledTime." + appointment.date;
