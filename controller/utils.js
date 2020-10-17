@@ -1,4 +1,7 @@
+// this module has some useful util function for the main logic.
 module.exports =  {
+
+    // this function converts a name of a day to the index of the week. 0-indexed.
     nameToDay: function(name) {
         switch (name) {
             case "Monday": return 0;
@@ -12,6 +15,7 @@ module.exports =  {
         }
     },
 
+    // check if there is overlap in a given list of intervals.
     existOverlap: function (intervals) {
         if (!intervals.length) return false;
         const preLen = intervals.length;
@@ -19,14 +23,14 @@ module.exports =  {
         let prev = intervals[0];
         const res = [prev];
         for (const curr of intervals) {
-            if (curr[0] <= prev[1]) {
+            if (curr[0] < prev[1]) {
                 prev[1] = Math.max(prev[1], curr[1])
             } else {
                 res.push(curr);
                 prev = curr
             }
         }
-        return res.length <= preLen;
+        return res.length < preLen;
 
     },
 

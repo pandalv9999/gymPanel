@@ -141,11 +141,11 @@ function onAppointmentTimeClicked(date, startTime, endTime, trainerId) {
 function generateHTMLFromIntervals(arrayOfIntervals, trainedId) {
     arrayOfIntervals = JSON.parse(arrayOfIntervals);
     let result = "<table style='margin: auto'>";
-    result += "<tr><th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th>" +
-        "<th>Friday</th><th>Saturday</th><th>Sunday</th></tr>";
+    result += "<thead><tr><th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th>" +
+        "<th>Friday</th><th>Saturday</th><th>Sunday</th></tr></thead><tbody>";
     for (let startTime = 8; startTime <= 19; startTime++) {
         result += "<tr>";
-        result += `<td>${startTime}:00 -- ${startTime + 1}:00<td>`;
+        result += `<td>${startTime}:00 -- ${startTime + 1}:00</td>`;
         for (let day = 0; day < 7; day++) {
             const currDayIntervals = arrayOfIntervals[day];
             if (isAvailableForInterval(currDayIntervals, [startTime, startTime + 1])) {
@@ -156,7 +156,7 @@ function generateHTMLFromIntervals(arrayOfIntervals, trainedId) {
         }
         result += "</tr>";
     }
-    result += "</table>";
+    result += "</tbody></table>";
     return result;
 }
 
