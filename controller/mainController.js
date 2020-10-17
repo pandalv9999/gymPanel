@@ -19,6 +19,18 @@ module.exports = (app) => {
         fs.createReadStream(__dirname + "/../public/index.html").pipe(res)
     });
 
+    // get request to getting the view for user to login
+    app.get('/register', (req, res) => {
+        console.log("Todo: Handle register get request");
+        res.render('register');
+    });
+
+    // post request is where user send their register credentials in the body of the request
+    app.post('/register', (req, res) => {
+        console.log("Todo: Handle register post request");
+        res.send("Todo: Handle register post request");
+    });
+
     // This router handle the get request from the front-end to handle the log-in features
     // Note that I use get request for simplicity. Post request will be more appropriate in the current situation.
     app.get('/:username', (req, res) => {
