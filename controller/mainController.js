@@ -8,7 +8,8 @@ const url = 'mongodb+srv://' +
     process.env.username + ':' +
     process.env.password + '@testdb.qzr4t.mongodb.net/' +
     process.env.database + '?retryWrites=true&w=majority';
-const client = new MongoClient(url, { useNewUrlParser: true });
+// The second argument in MongoClient is an object for not getting the deprecation warnings from MongoDB
+const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
 module.exports = (app) => {
 
@@ -19,17 +20,64 @@ module.exports = (app) => {
         fs.createReadStream(__dirname + "/../public/index.html").pipe(res)
     });
 
-    // get request to getting the view for user to login
+    // This router returns the view for user to register
     app.get('/register', (req, res) => {
         console.log("Todo: Handle register get request");
         res.render('register');
     });
 
-    // post request is where user send their register credentials in the body of the request
-    app.post('/register', (req, res) => {
-        console.log("Todo: Handle register post request");
-        res.send("Todo: Handle register post request");
+    // This router lets user send their register info in the body of the request
+    app.post('/create-data', (req, res) => {
+      // Sending request to create a data
+      void client.connect((err, db) => {
+          if (err) throw err;
+
+          // check if the username or email has been used
+          client.db(process.env.database).collection("users").findOne({
+            $or: [{
+                email: req.body.email
+            }, {
+                username: req.body.username
+            }]
+        }).then(user => {
+            if (user) {
+                let errors = {};
+                if (user.username === req.body.username) {
+                    errors.username = "Username already exists, please go back to choose another username or directly login";
+                } else {
+                    errors.email = "Email already exists, please go back to choose another email or directly login";
+                }
+                res.status(400).json(errors);
+            } else {
+                // if the username or email has not been used, then create a new user
+                return client.db(process.env.database).collection("users").insertOne (
+                    {
+                    username: req.body.username, 
+                    firstName: req.body.firstName,
+                    lastName: req.body.lastName,
+                    email: req.body.email,
+                    phone: req.body.phone,
+                    DOB: req.body.username,
+                    gender: req.body.gender,
+                    weight: req.body.weight,
+                    height: req.body.height 
+                }, function (err, info) {
+                    if (err) throw err;
+                    console.log("Successfully create an account!");
+                    //res.send("Successfully create an account!");
+                    //res.json(info.ops)
+                    res.redirect('/');
+                });
+            }
+           })
+           .catch(err => {
+            return res.status(500).json({
+                error: err
+            });
+          });
+        });
     });
+    
 
     // This router handle the get request from the front-end to handle the log-in features
     // Note that I use get request for simplicity. Post request will be more appropriate in the current situation.
@@ -54,6 +102,4 @@ module.exports = (app) => {
             });
         });
     });
-
-
 };
