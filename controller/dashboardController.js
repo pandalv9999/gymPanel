@@ -29,7 +29,8 @@ module.exports = (app) => {
             void client.db(process.env.database).collection("courses").find({}).toArray((err, result) => {
                 if (err) throw err;
                 console.log("Successfully got courses for user " + req.params.username);
-                res.render('courses', {user: user, courses: result})
+                // res.render('courses', {user: user, courses: result})
+                res.status(200).json(result)
             });
         });
     });

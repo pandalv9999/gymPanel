@@ -86,14 +86,15 @@ module.exports = (app, utils) => {
     });
 
     // This router handles the delete request from the front end to unregister a user to a course.
-    app.delete('/course', (req, res) => {
-        console.log("receive " + req.body.username + " unregister course " + req.body.courseId);
+    app.delete('/course/:username/:courseId', (req, res) => {
+        const courseId = parseInt(req.params.courseId);
+        console.log("receive " + req.params.username + " unregister course " + req.params.courseId);
         let courseTime;
         void client.connect((err, db) => {
             if (err) throw err;
 
             // get the detailed information of current course, including data, start time and end time.
-            client.db(process.env.database).collection("courses").findOne({id: req.body.courseId}).then(result => {
+            client.db(process.env.database).collection("courses").findOne({id: courseId}).then(result => {
                 if (result.length === 0) {
                     return null;
                 }
@@ -105,8 +106,8 @@ module.exports = (app, utils) => {
 
                 // remove current user from the course's enrollment list.
                 return client.db(process.env.database).collection("courses").updateOne(
-                    {id: req.body.courseId, enrolledMember: req.body.username},
-                    {$pull: {enrolledMember: req.body.username}}
+                    {id: courseId, enrolledMember: req.params.username},
+                    {$pull: {enrolledMember: req.params.username}}
                     );
             }, err => console.log(err)).then(result => {
                 if (result.modifiedCount === 0) {
@@ -115,8 +116,8 @@ module.exports = (app, utils) => {
 
                     // remove the current course from user's registeredCourse list.
                     return client.db(process.env.database).collection("users").updateOne(
-                        {username: req.body.username},
-                        {$pull: {registeredCourses: {courseId: req.body.courseId}}});
+                        {username: req.params.username},
+                        {$pull: {registeredCourses: {courseId: courseId}}});
                 }
             }, err => console.log(err)).then(result => {
                 if (!result || result.modifiedCount === 0) {
@@ -126,16 +127,16 @@ module.exports = (app, utils) => {
                     // remove the course' time interval to user's scheduled time table .
                     const identifier = "scheduledTime." + utils.nameToDay(courseTime.date);
                     return client.db(process.env.database).collection("users").updateOne(
-                        {username: req.body.username},
+                        {username: req.params.username},
                         {$pull: {[identifier]: {$in: [courseTime.startTime, courseTime.endTime]}}}
                     );
                 }
             }, err => console.log(err)).then(result => {
                 if (!result) {
                     res.sendStatus(409);
-                    console.log(req.body.username + " fail unregistered course " + req.body.courseId);
+                    console.log(req.params.username + " fail unregistered course " + courseId);
                 } else {
-                    console.log(req.body.username + " successfully unregistered course " + req.body.courseId);
+                    console.log(req.params.username + " successfully unregistered course " + courseId);
                     res.sendStatus(200);
                 }
             }, err => console.log(err));
