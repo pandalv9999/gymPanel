@@ -98,10 +98,12 @@ module.exports = (app) => {
                     if (err) throw err;
                     if (!result) {
                         console.log("User " + req.params.username + " login failed! No user matches.");
-                        res.render('error', {errorCode: 403, errorMessage: "The user " + username + " does not exist"});
+                        // res.render('error', {errorCode: 403, errorMessage: "The user " + username + " does not exist"});
+                        res.status(403).send(`Error! The user ${username} does not exist`);
                     } else {
                         console.log("User " + req.params.username + " login success.");
-                        res.render('dashboard', {user: result})
+                        // res.render('dashboard', {user: result})
+                        res.status(200).json(result);
                     }
                 });
         });
