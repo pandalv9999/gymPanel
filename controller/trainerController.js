@@ -7,7 +7,7 @@ const url = 'mongodb+srv://' +
     process.env.username + ':' +
     process.env.password + '@testdb.qzr4t.mongodb.net/' +
     process.env.database + '?retryWrites=true&w=majority';
-const client = new MongoClient(url, { useNewUrlParser: true });
+const client = new MongoClient(url, {useNewUrlParser: true, useUnifiedTopology: true});
 
 module.exports = (app, utils) => {
 

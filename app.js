@@ -23,6 +23,6 @@ courseController(app, utils);
 trainerController(app, utils);
 
 //listen to a specific port.
-app.listen(3000, () => {
-    console.log("Start listening for the port 3000.")
+app.listen(5000, () => {
+    console.log("Start listening for the port 5000.")
 });
