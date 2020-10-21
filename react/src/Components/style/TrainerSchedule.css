@@ -1,0 +1,44 @@
+#trainer-schedule {
+    margin: auto;
+}
+
+#trainer-schedule th td{
+    width: 150px;
+}
+
+.available {
+    background: cornflowerblue;
+}
+
+.unavailable {
+    background: indianred;
+}
+
+#trainer-schedule button {
+    background: none;
+    padding: 0.5em 3em;
+    border: none;
+    box-sizing: border-box;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color:cornflowerblue;
+    text-align: center;
+    transition: all 0.15s;
+}
+
+#trainer-schedule button:active{
+    color:#BBBBBB;
+    border-color:#BBBBBB;
+}
+
+#trainer-schedule button:hover {
+    background: deepskyblue;
+    color: white;
+}
+
+#trainer-schedule button:disabled{
+    background: none;
+    color: indianred;
+}

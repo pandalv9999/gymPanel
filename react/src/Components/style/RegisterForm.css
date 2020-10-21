@@ -1,0 +1,36 @@
+.register-form h2{
+    position: relative;
+    left: 120px;
+}
+.register-form  {
+    text-align: center;
+    vertical-align: middle;
+    display: inline;
+}
+.register-form  input[type=text] {
+    width: 30%;
+    margin: 8px 0;
+    border: none;
+    border-radius: 18px;
+    cursor: pointer;
+    display: inline-block;
+}
+.register-form label {
+    width: 240px;
+    display: inline-block;
+    padding: 8px;
+}
+#gender {
+    width: 30%;
+    margin: 8px 0;
+    border: none;
+    border-radius: 18px;
+    cursor: pointer;
+    display: inline-block;
+}
+.register-form button{
+    margin: -20px -50px;
+    position:relative;
+    top:50%;
+    left:52%;
+}
