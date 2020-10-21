@@ -13,13 +13,15 @@ module.exports = (app) => {
     app.get('/:username/schedule',  (req, res) => {
         const user = {username: req.params.username};
         // use mongoDB to load current user's schedule
-        res.render('schedule', {user: user})
+        // Todo: This request can be handled by React.
+        res.status(200)
     });
 
     app.get('/:username/profile',  (req, res) => {
         const user = {username: req.params.username};
         // use mongoDB to load current user's schedule
-        res.render('profile', {user: user})
+        // Todo: This request can be handled completly by react.
+        res.status(200)
     });
 
     app.get('/:username/courses',  (req, res) => {
@@ -42,7 +44,8 @@ module.exports = (app) => {
             void client.db(process.env.database).collection("trainers").find({}).toArray((err, result) => {
                 if (err) throw err;
                 console.log("Successfully got trainer for user " + req.params.username);
-                res.render('trainers', {user: user, trainers: result})
+                // res.render('trainers', {user: user, trainers: result})
+                res.status(200).json(result);
             });
         });
     });

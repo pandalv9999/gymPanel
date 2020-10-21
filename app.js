@@ -9,7 +9,6 @@ const bodyParser = require('body-parser');
 
 // initialize the middleware of the app
 const app = express();
-app.use(express.static("./public"));
 app.use(bodyParser.urlencoded({
     extended: true
 }));

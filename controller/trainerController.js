@@ -23,10 +23,9 @@ module.exports = (app, utils) => {
                 .findOne({id: parseInt(trainerId)}, (err, result) => {
                 if (err) throw err;
                 if (!result || result.length === 0) {
-                    res.writeHead(404);
-                    res.end("Trainer " + trainerId + " is not found!");
+                    res.status(404).send("Trainer " + trainerId + " is not found!");
                 } else {
-                    res.json(result.scheduledTime)
+                    res.status(200).json(result.scheduledTime)
                 }
             });
         });

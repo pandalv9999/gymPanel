@@ -13,19 +13,6 @@ const client = new MongoClient(url, {useNewUrlParser: true, useUnifiedTopology: 
 
 module.exports = (app) => {
 
-    // This router returns the main page for the application
-    app.get('/index', (req, res) => {
-        console.log("receiving get request for the home page");
-        res.writeHead("200", {'content-Type': 'text/HTML'});
-        fs.createReadStream(__dirname + "/../public/index.html").pipe(res)
-    });
-
-    // This router returns the view for user to register
-    app.get('/register', (req, res) => {
-        console.log("Todo: Handle register get request");
-        res.render('register');
-    });
-
     // This router lets user send their register info in the body of the request
     app.post('/create-data', (req, res) => {
         // Sending request to create a data
