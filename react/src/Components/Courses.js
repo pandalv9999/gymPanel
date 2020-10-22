@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import './style/Courses.css';
 
 const Courses = ({user}) => {
 
@@ -66,23 +67,48 @@ const Courses = ({user}) => {
         <React.Fragment>
             <h2>Courses</h2>
             <p style={{color: "red"}}>{errMsg}</p>
+            <hr></hr>
             <ul>
                 {courses.map(course => {
                     return (
-                        <li key={course.id} style={{listStyleType : "None"}}>
-                            <h3>{course.courseName}</h3>
-                            <h4>{`${course.date} ${course.startTime}:00 -- ${course.endTime}:00`}</h4>
-                            <img src={course.url} alt={course.courseName} width={"150px"} height={"150px"}/>
-                            <p>{course.description}</p>
-                            <p>Instructor: {course.instructor}</p>
-                            <p>{`${course.enrolledMember.length}/${course.capacity} Enrolled`}</p>
-                            {!course.enrolledMember.includes(user.username) ?
-                                <button onClick={() => registerCourse(course.id)}
+                        // <li key={course.id} style={{listStyleType : "None"}}>
+                        //     <h3>{course.courseName}</h3>
+                        //     <h4>{`${course.date} ${course.startTime}:00 -- ${course.endTime}:00`}</h4>
+                        //     <img src={course.url} alt={course.courseName} width={"150px"} height={"150px"}/>
+                        //     <p>{course.description}</p>
+                        //     <p>Instructor: {course.instructor}</p>
+                        //     <p>{`${course.enrolledMember.length}/${course.capacity} Enrolled`}</p>
+                        //     {!course.enrolledMember.includes(user.username) ?
+                        //         <button onClick={() => registerCourse(course.id)}
+                        //                 disabled={course.enrolledMember.length === course.capacity}>Register</button> :
+                        //         <button onClick={() => unregisterCourse(course.id)}>Unregister</button>
+                        //     }
+                        //     <p id={`err-${course.id}`} style={{color: "red"}}/>
+                        // </li>
+
+                        <div class="container-fluid padding">
+                        <div class="row padding">
+                            <div class="col-lg-6">
+                                <h3>{course.courseName}</h3>
+                                <h4>{`${course.date} ${course.startTime}:00 -- ${course.endTime}:00`}</h4>
+                                <br></br>
+                                <img src={course.url} alt={course.courseName} width={"150px"} height={"150px"}/>
+                                <br></br>
+                                <br></br>
+                                <p>{course.description}</p>
+                                <br></br>
+                                <p>Instructor: {course.instructor}</p>
+                                <p>{`${course.enrolledMember.length}/${course.capacity} Enrolled`}</p>
+                                {!course.enrolledMember.includes(user.username) ?
+                                <button class="btn btn-primary" onClick={() => registerCourse(course.id)}
                                         disabled={course.enrolledMember.length === course.capacity}>Register</button> :
-                                <button onClick={() => unregisterCourse(course.id)}>Unregister</button>
-                            }
-                            <p id={`err-${course.id}`} style={{color: "red"}}/>
-                        </li>
+                                <button class="btn btn-primary" onClick={() => unregisterCourse(course.id)}>Unregister</button>
+                                }
+                                <p id={`err-${course.id}`} style={{color: "red"}}/>
+                                <hr></hr>
+                            </div>
+                        </div>
+                        </div>
                     );
                 })}
             </ul>

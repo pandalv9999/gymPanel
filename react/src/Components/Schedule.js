@@ -3,7 +3,7 @@ import React from "react";
 const Schedule = ({user}) => {
 
     return (
-        <p>Schedule of {user.username}</p>
+        <h3>Schedule of {user.username}</h3>
     )
 };
 

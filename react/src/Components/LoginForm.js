@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import axios from 'axios';
+import './style/LoginForm.css'
 
 const LoginForm = ({userSetter, registerSetter}) => {
 
@@ -18,7 +19,7 @@ const LoginForm = ({userSetter, registerSetter}) => {
 
     return (
         <div id="login-form">
-            <label htmlFor="username">Username:</label>
+            <label id="login-label" htmlFor="username">Username:</label>
             <input id="username" name="username" type="text"/>
             <button id="login-button" onClick={onLoginClicked}>Login</button>
             <button id="register-button" onClick={() => registerSetter(true)}>Register</button>

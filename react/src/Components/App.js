@@ -11,8 +11,8 @@ const App = () => {
     return (
         <div className="App">
             <header className="App-header">
-                <h2>Hello World</h2>
-                <p>Here is a sample Header and should be Replace by a actual header</p>
+                <h2>SF-GYM</h2>
+                <p>Welcome to SF-GYM Club</p>
             </header>
             {loggedInUser ? <Dashboard user={loggedInUser} userSetter={setLoggedInUser}/> :
                 registering ? <RegisterFrom setRegistering={setRegistering}/> :
