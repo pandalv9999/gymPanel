@@ -3,29 +3,36 @@
 }
 
 #trainer-schedule th td{
-    width: 150px;
+    width: 100px;
 }
 
-.available {
+#trainer-schedule .first-row {
+    width: 100px;
+}
+
+#trainer-schedule .available {
     background: cornflowerblue;
 }
 
-.unavailable {
+#trainer-schedule .unavailable {
     background: indianred;
 }
 
 #trainer-schedule button {
     background: none;
-    padding: 0.5em 3em;
+    //padding: 0.5em 3em;
+    font-size: 0.6em;
     border: none;
     box-sizing: border-box;
     text-decoration: none;
     text-transform: uppercase;
     font-family: 'Roboto', sans-serif;
-    font-weight: 400;
+    //font-weight: 400;
     color:cornflowerblue;
     text-align: center;
     transition: all 0.15s;
+    width: 100px;
+    height: 30px;
 }
 
 #trainer-schedule button:active{

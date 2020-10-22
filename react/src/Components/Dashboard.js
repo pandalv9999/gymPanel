@@ -11,32 +11,36 @@ const Dashboard = ({user, userSetter}) => {
     const currentPage = "#";
 
     return (
-        <div>
-            <h2>Welcome {user.username}</h2>
-            <ul className="list">
-                <li key="schedule" style={{listStyleType : "None"}}>
-                    <a href={currentPage} className="App-link"
-                       onClick={() => setCurrentModule(<Schedule user={user}/>)}>Schedule</a>
-                </li>
-                <li key="profile" style={{listStyleType : "None"}}>
-                    <a href={currentPage} className="App-link"
-                       onClick={() => setCurrentModule(<Profile user={user}/>)}>Profile</a>
-                </li>
-                <li key="courses" style={{listStyleType : "None"}}>
-                    <a href={currentPage} className="App-link" onClick={() => setCurrentModule(<Courses user={user}/>)}>Courses</a>
-                </li>
-                <li key="trainers" style={{listStyleType : "None"}}>
-                    <a href={currentPage} className="App-link" onClick={() => setCurrentModule(<Trainers user={user}/>)}>Trainers</a>
-                </li>
-                <li key="log-out" style={{listStyleType : "None"}}>
-                    <a href={currentPage} className="App-link" onClick={() => {
-                        userSetter(null);
-                        console.log(`User ${user.username} log out success`);
-                    }}>Log out</a>
-                </li>
-            </ul>
+        <React.Fragment>
+            <aside className={"side-nav"}>
+                <h2>Welcome<br/> {user.username}</h2>
+                <ul className="list">
+                    <li key="schedule" style={{listStyleType : "None"}}>
+                        <a href={currentPage} className="App-link"
+                           onClick={() => setCurrentModule(<Schedule user={user}/>)}>Schedule</a>
+                    </li>
+                    <li key="profile" style={{listStyleType : "None"}}>
+                        <a href={currentPage} className="App-link"
+                           onClick={() => setCurrentModule(<Profile user={user}/>)}>Profile</a>
+                    </li>
+                    <li key="courses" style={{listStyleType : "None"}}>
+                        <a href={currentPage} className="App-link" onClick={() => setCurrentModule(<Courses user={user}/>)}>Courses</a>
+                    </li>
+                    <li key="trainers" style={{listStyleType : "None"}}>
+                        <a href={currentPage} className="App-link" onClick={() => setCurrentModule(<Trainers user={user}/>)}>Trainers</a>
+                    </li>
+                    <li key="log-out" style={{listStyleType : "None"}}>
+                        <a href={currentPage} className="App-link" onClick={() => {
+                            userSetter(null);
+                            console.log(`User ${user.username} log out success`);
+                        }}>Log out</a>
+                    </li>
+                </ul>
+
+            </aside>
             <div>{currentModule}</div>
-        </div>
+        </React.Fragment>
+
     )
 };
 

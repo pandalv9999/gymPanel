@@ -34,7 +34,7 @@ const TrainerSchedule = ({user, trainerId}) => {
     };
 
     const onScheduleClicked = (date, startTime) => {
-        const url = './trainer'
+        const url = './trainer';
         const data = {
             username: user.username,
             trainerId: trainerId,
@@ -61,13 +61,13 @@ const TrainerSchedule = ({user, trainerId}) => {
         <React.Fragment>
             <p style={{color: "red"}}>{errMsg}</p>
             <table id={`trainer-schedule`}>
-                <thead><tr><th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th>
+                <thead><tr><th className={"first-row"}>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th>
                     <th>Friday</th><th>Saturday</th><th>Sunday</th></tr></thead>
                 <tbody>
                 {startTimes.map(startTime => {
                     return (
                         <tr key={startTime}>
-                            <td>{`${startTime}--${startTime + 1}`}</td>
+                            <td className={"first-row"}>{`${startTime}--${startTime + 1}`}</td>
                             {dates.map(date => {
                                 const isAvailable = isAvailableForInterval(trainerSchedule[date], [startTime, startTime + 1]);
                                 return (

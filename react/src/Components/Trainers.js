@@ -64,11 +64,11 @@ const Trainers = ({user}) => {
                         //     }
                         // </li>
 
-                        <div class="container-fluid padding">
-                        <div class="row padding">
+                        <div className={"container-fluid padding"}>
+                        <div className={"row padding"}>
                             <div class="col-lg-6">
                                 <h3>{trainer.name}</h3>
-                                <br></br>
+                                <br/>
                                 <img src={trainer.url} alt={trainer.name} width={"150px"} height={"150px"}/>
                                 <br></br>
                                 <br></br>
