@@ -3,6 +3,7 @@ import Schedule from "./Schedule";
 import Profile from "./Profile";
 import Courses from "./Courses";
 import Trainers from "./Trainers";
+import './style/Dashboard.css';
 
 const Dashboard = ({user, userSetter}) => {
 
@@ -12,7 +13,7 @@ const Dashboard = ({user, userSetter}) => {
     return (
         <div>
             <h2>Welcome {user.username}</h2>
-            <ul>
+            <ul className="list">
                 <li key="schedule" style={{listStyleType : "None"}}>
                     <a href={currentPage} className="App-link"
                        onClick={() => setCurrentModule(<Schedule user={user}/>)}>Schedule</a>
@@ -25,7 +26,7 @@ const Dashboard = ({user, userSetter}) => {
                     <a href={currentPage} className="App-link" onClick={() => setCurrentModule(<Courses user={user}/>)}>Courses</a>
                 </li>
                 <li key="trainers" style={{listStyleType : "None"}}>
-                    <a href={currentPage} className="App-link" onClick={() => setCurrentModule(<Trainers user={user}/>)}>Trainer</a>
+                    <a href={currentPage} className="App-link" onClick={() => setCurrentModule(<Trainers user={user}/>)}>Trainers</a>
                 </li>
                 <li key="log-out" style={{listStyleType : "None"}}>
                     <a href={currentPage} className="App-link" onClick={() => {

@@ -1,0 +1,12 @@
+#login-label {
+  position: relative;
+  right: 30px;
+}
+#login-button {
+  position: relative;
+  left: 30px;
+}
+#register-button {
+  position: relative;
+  left: 50px;
+}

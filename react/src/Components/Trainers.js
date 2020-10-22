@@ -43,25 +43,49 @@ const Trainers = ({user}) => {
 
     return (
         <React.Fragment>
-            <h2>Trainer</h2>
+            <h2>Trainers</h2>
             <p style={{color: "red"}}>{errMsg}</p>
+            <hr></hr>
             <ul>
                 {trainers.map(trainer => {
                     return (
-                        <li key={trainer.id} style={{listStyleType: "None"}}>
-                            <h3>{trainer.name}</h3>
-                            <img src={trainer.url} alt={trainer.name} width={"150px"} height={"150px"}/>
-                            <p>{trainer.description}</p>
-                            {!displays[trainer.id] ?
-                                <button onClick={() => onTrainerScheduleExpand(trainer.id)}>Expand</button>
+                        // <li key={trainer.id} style={{listStyleType: "None"}}>
+                        //     <h3>{trainer.name}</h3>
+                        //     <img src={trainer.url} alt={trainer.name} width={"150px"} height={"150px"}/>
+                        //     <p>{trainer.description}</p>
+                        //     {!displays[trainer.id] ?
+                        //         <button onClick={() => onTrainerScheduleExpand(trainer.id)}>Expand</button>
+                        //         :
+                        //         <React.Fragment>
+                        //             <button onClick={() => onTrainerScheduleCollapse(trainer.id)}>Collapse</button>
+                        //             <TrainerSchedule user={user} trainerId={trainer.id}/>
+                        //         </React.Fragment>
+
+                        //     }
+                        // </li>
+
+                        <div class="container-fluid padding">
+                        <div class="row padding">
+                            <div class="col-lg-6">
+                                <h3>{trainer.name}</h3>
+                                <br></br>
+                                <img src={trainer.url} alt={trainer.name} width={"150px"} height={"150px"}/>
+                                <br></br>
+                                <br></br>
+                                <p>{trainer.description}</p>
+                                <br></br>
+                                {!displays[trainer.id] ?
+                                <button class="btn btn-primary" onClick={() => onTrainerScheduleExpand(trainer.id)}>Expand</button>
                                 :
                                 <React.Fragment>
-                                    <button onClick={() => onTrainerScheduleCollapse(trainer.id)}>Collapse</button>
+                                    <button class="btn btn-primary" onClick={() => onTrainerScheduleCollapse(trainer.id)}>Collapse</button>
                                     <TrainerSchedule user={user} trainerId={trainer.id}/>
                                 </React.Fragment>
-
                             }
-                        </li>
+                            <hr></hr>
+                            </div>
+                        </div>
+                        </div>
                 )
                 })}
             </ul>

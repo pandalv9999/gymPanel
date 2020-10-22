@@ -11,7 +11,7 @@ const RegisterFrom = ({setRegistering}) => {
 
     return (
         <div>
-            <h2>Create Account</h2>
+            <h2 className={"title-form"}>Create Account</h2>
             <form action="/create-data" method="POST" className={"register-form"}>
                 <div className="form-group">
                     <label htmlFor="username">Username</label>
@@ -55,8 +55,8 @@ const RegisterFrom = ({setRegistering}) => {
                     <input type="text" className="form-control" name="height" id="height"/>
                 </div>
                 <button className="btn btn-primary">Create</button>
+                <button className="btn btn-primary" id={"back-button"} onClick={() => setRegistering(false)}>Login</button>
             </form>
-            <button className="btn btn-primary" onClick={() => setRegistering(false)}>Back to Login</button>
             <p>{errMsg}</p>
         </div>
     )
