@@ -70,10 +70,10 @@ const Trainers = ({user}) => {
                                         <h3>{trainer.name}</h3>
                                         <br/>
                                         <img src={trainer.url} alt={trainer.name} width={"150px"} height={"150px"}/>
-                                        <br></br>
-                                        <br></br>
+                                        <br/>
+                                        <br/>
                                         <p>{trainer.description}</p>
-                                        <br></br>
+                                        <br/>
                                         {!displays[trainer.id] ?
                                             <button className="btn btn-primary"
                                                     onClick={() => onTrainerScheduleExpand(trainer.id)}>Expand</button>
@@ -85,7 +85,7 @@ const Trainers = ({user}) => {
                                                 <TrainerSchedule user={user} trainerId={trainer.id}/>
                                             </React.Fragment>
                                         }
-                                        <hr></hr>
+                                        <hr/>
                                     </div>
                                 </div>
                             </div>

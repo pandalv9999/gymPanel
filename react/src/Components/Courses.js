@@ -92,12 +92,12 @@ const Courses = ({user}) => {
                                     <div className="col-lg-6">
                                         <h3>{course.courseName}</h3>
                                         <h4>{`${course.date} ${course.startTime}:00 -- ${course.endTime}:00`}</h4>
-                                        <br></br>
+                                        <br/>
                                         <img src={course.url} alt={course.courseName} width={"150px"} height={"150px"}/>
-                                        <br></br>
-                                        <br></br>
+                                        <br/>
+                                        <br/>
                                         <p>{course.description}</p>
-                                        <br></br>
+                                        <br/>
                                         <p>Instructor: {course.instructor}</p>
                                         <p>{`${course.enrolledMember.length}/${course.capacity} Enrolled`}</p>
                                         {!course.enrolledMember.includes(user.username) ?
@@ -108,7 +108,7 @@ const Courses = ({user}) => {
                                                     onClick={() => unregisterCourse(course.id)}>Unregister</button>
                                         }
                                         <p id={`err-${course.id}`} style={{color: "red"}}/>
-                                        <hr></hr>
+                                        <hr/>
                                     </div>
                                 </div>
                             </div>
