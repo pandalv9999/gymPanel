@@ -38,7 +38,7 @@ const Dashboard = ({user, userSetter}) => {
                 </ul>
 
             </aside>
-            <div>{currentModule}</div>
+            <div style={{paddingTop: "100px"}}>{currentModule}</div>
         </React.Fragment>
 
     )
