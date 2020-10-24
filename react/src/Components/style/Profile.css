@@ -3,18 +3,9 @@
   max-width: 400px;
   margin: auto;
   text-align: center;
+  position: relative;
+  top: 150px;
 }
 .card h3 {
   color: Black;
-}
-
-.title {
-  color: grey;
-  font-size: 18px;
-}
-
-a {
-  text-decoration: none;
-  font-size: 22px;
-  color: black;
 }
