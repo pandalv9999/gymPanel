@@ -2,6 +2,12 @@
   text-align: center;
   vertical-align: middle;
   display: inline;
+  position: relative;
+  top: 60px;
+}
+.title-form {
+  position: relative;
+  top: 50px;
 }
 .register-form input[type='text'] {
   position: relative;

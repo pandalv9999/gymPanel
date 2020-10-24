@@ -10,7 +10,7 @@ const RegisterFrom = ({setRegistering}) => {
     };
 
     return (
-        <div style={{marginTop: "100px"}}>
+        <div className={"register-form"} style={{marginTop: "100px"}}>
             <h2 className={"title-form"}>Create Account</h2>
             <form action="/create-data" method="POST" className={"register-form"}>
                 <div className="form-group">
