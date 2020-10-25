@@ -18,7 +18,7 @@ body {
 .App-header {
   background: url("https://wallpaperaccess.com/full/1633729.jpg");
   color: white;
-  height: 100px;
+  height: 120px;
   margin-top: -30px;
   padding-top: 40px;
   margin-bottom: 50px;
@@ -59,12 +59,41 @@ body {
 }
 
 .header-container {
+  padding-top: 25px;
+  padding-bottom: 25px;
   background-color: white;
   color: black;
   border-radius: 25px;
   opacity: 70%;
   margin-left: 300px;
   margin-right: 300px;
+}
+
+.header-container button {
+  display:inline-block;
+  padding:0.35em 1.2em;
+  border:0.1em solid black;
+  width: 100px;
+  border-radius:0.12em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color:black;
+  text-align:center;
+  transition: all 0.2s;
+  /*background-color: #282c34*/
+  background: none;
+}
+
+.header-container button:hover{
+  color:white;
+  background-color:black;
+}
+
+.header-container button[disabled]{
+  background-color: black;
+  pointer-events: none;
 }
 
 #login-form {

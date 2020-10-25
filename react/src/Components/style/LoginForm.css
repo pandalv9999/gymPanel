@@ -10,3 +10,11 @@
   position: relative;
   left: 50px;
 }
+
+#username {
+  border: 0;
+  outline: 0;
+  width: 300px;
+  background: transparent;
+  border-bottom: 1px solid black;
+}
