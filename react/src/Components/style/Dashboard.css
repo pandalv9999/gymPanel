@@ -12,6 +12,13 @@
   top: 90px;
   left: 0;
   overflow-x: hidden;
+
+}
+
+.side-nav ul {
+  margin-left: 0;
+  padding-inline-start: 0;
+
 }
 
 .side-nav h2 {
@@ -22,5 +29,9 @@
   padding-top: 10px;
   padding-bottom: 10px;
   border-bottom: white 1px;
+}
+
+.side-nav li:hover {
+  background-color: seagreen;
 }
 

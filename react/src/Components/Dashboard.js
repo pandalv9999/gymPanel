@@ -11,7 +11,7 @@ const Dashboard = ({user, userSetter}) => {
     const currentPage = "#";
 
     return (
-        <React.Fragment>
+        <div className={"main-container"} style={{width: "100%"}}>
             <aside className={"side-nav"}>
                 <h2>Welcome<br/> {user.username}</h2>
                 <ul className="list">
@@ -39,7 +39,7 @@ const Dashboard = ({user, userSetter}) => {
 
             </aside>
             <div style={{paddingTop: "100px"}}>{currentModule}</div>
-        </React.Fragment>
+        </div>
 
     )
 };
