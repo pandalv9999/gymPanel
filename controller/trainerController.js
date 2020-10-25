@@ -34,6 +34,7 @@ module.exports = (app, utils) => {
     // This router handles the request for a user to make a schedule to a trainer for a specific time slot.
     app.put("/trainer", (req, res) => {
         const appointment = req.body;
+        let trainer;
         console.log(`Received request for user ${appointment.username} to schedule ${appointment.startTime} 
         - ${appointment.endTime} for trainer ${appointment.trainerId} at day ${appointment.date}`);
         void client.connect((err, db) => {
@@ -55,6 +56,7 @@ module.exports = (app, utils) => {
                 }
             }, err => console.log(err)).then(result => {
                 if (!result || result.length === 0) return null;
+                appointment.trainer = result;
                 const intervals = result.scheduledTime[appointment.date];
                 intervals.push([appointment.startTime, appointment.endTime]);
                 if (utils.existOverlap(intervals)) {

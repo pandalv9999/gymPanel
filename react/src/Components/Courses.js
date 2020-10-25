@@ -76,8 +76,12 @@ const Courses = ({user}) => {
                             <div className={"list-text"}>
                                 <h3>{course.courseName}</h3>
                                 <p>{course.description}</p>
-                                <p><span style={{fontStyle: "italic", color:"#61dafb"}}>{`${course.date} ${course.startTime}:00 -- ${course.endTime}:00`}</span></p>
-                                <p id={`err-${course.id}`} style={{color: "red"}}/>
+                                <p style={{display: "flex", justifyContent: "space-between"}}>
+                                    <span style={{fontStyle: "italic", color:"#61dafb"}}>
+                                        {`${course.date} ${course.startTime}:00 -- ${course.endTime}:00`}
+                                    </span>
+                                    <span id={`err-${course.id}`} style={{color: "red"}}/>
+                                </p>
                             </div>
                             <div className={"list-ops"}>
 

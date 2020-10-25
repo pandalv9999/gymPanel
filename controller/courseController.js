@@ -16,7 +16,7 @@ module.exports = (app, utils) => {
     // This router handles the put request from the front-end in order to register a course to a user.
     app.put('/course', (req, res) => {
         console.log("receive " + req.body.username + " registering course " + req.body.courseId);
-        let courseTime;
+        let course;
         void client.connect((err, db) => {
             if (err) throw err;
 
@@ -25,11 +25,7 @@ module.exports = (app, utils) => {
                 if (result.length === 0) {
                     return null;
                 }
-                courseTime = {
-                    date: result.date,
-                    startTime: result.startTime,
-                    endTime: result.endTime
-                };
+                course = result;
 
                 // get the user's scheduled time slot and check if there is conflicts to the current inserted interval.
                 return client.db(process.env.database).collection("users").findOne({username: req.body.username});
@@ -37,8 +33,8 @@ module.exports = (app, utils) => {
                 if (!result || result.length === 0) {
                     return null;
                 }
-                const intervals = result.scheduledTime[utils.nameToDay(courseTime.date)];
-                intervals.push([courseTime.startTime, courseTime.endTime]);
+                const intervals = result.scheduledTime[utils.nameToDay(course.date)];
+                intervals.push([course.startTime, course.endTime]);
                 if (utils.existOverlap(intervals)) {
                     return null;
                 } else {
@@ -58,7 +54,7 @@ module.exports = (app, utils) => {
                     // add the current course to user's related field: registeredCourse.
                     return client.db(process.env.database).collection("users").updateOne(
                         {username: req.body.username},
-                        {$push: {registeredCourses: {courseId: req.body.courseId, courseTime: courseTime}}}
+                        {$push: {registeredCourses: course}}
                         );
                 }
             }, err => console.log(err)).then(result => {
@@ -67,10 +63,10 @@ module.exports = (app, utils) => {
                 } else {
 
                     // add the current interval to user's scheduled time table.
-                    const identifier = "scheduledTime." + utils.nameToDay(courseTime.date);
+                    const identifier = "scheduledTime." + utils.nameToDay(course.date);
                     return client.db(process.env.database).collection("users").updateOne(
                         {username: req.body.username},
-                        {$push: {[identifier]: [courseTime.startTime, courseTime.endTime]}}
+                        {$push: {[identifier]: [course.startTime, course.endTime]}}
                     );
                 }
             }, err => console.log(err)).then(result => {
@@ -89,7 +85,7 @@ module.exports = (app, utils) => {
     app.delete('/course/:username/:courseId', (req, res) => {
         const courseId = parseInt(req.params.courseId);
         console.log("receive " + req.params.username + " unregister course " + req.params.courseId);
-        let courseTime;
+        let course;
         void client.connect((err, db) => {
             if (err) throw err;
 
@@ -98,11 +94,7 @@ module.exports = (app, utils) => {
                 if (result.length === 0) {
                     return null;
                 }
-                courseTime = {
-                    date: result.date,
-                    startTime: result.startTime,
-                    endTime: result.endTime
-                };
+                course = result;
 
                 // remove current user from the course's enrollment list.
                 return client.db(process.env.database).collection("courses").updateOne(
@@ -117,7 +109,7 @@ module.exports = (app, utils) => {
                     // remove the current course from user's registeredCourse list.
                     return client.db(process.env.database).collection("users").updateOne(
                         {username: req.params.username},
-                        {$pull: {registeredCourses: {courseId: courseId}}});
+                        {$pull: {registeredCourses: {id: courseId}}});
                 }
             }, err => console.log(err)).then(result => {
                 if (!result || result.modifiedCount === 0) {
@@ -125,10 +117,10 @@ module.exports = (app, utils) => {
                 } else {
 
                     // remove the course' time interval to user's scheduled time table .
-                    const identifier = "scheduledTime." + utils.nameToDay(courseTime.date);
+                    const identifier = "scheduledTime." + utils.nameToDay(course.date);
                     return client.db(process.env.database).collection("users").updateOne(
                         {username: req.params.username},
-                        {$pull: {[identifier]: {$in: [courseTime.startTime, courseTime.endTime]}}}
+                        {$pull: {[identifier]: {$in: [course.startTime, course.endTime]}}}
                     );
                 }
             }, err => console.log(err)).then(result => {

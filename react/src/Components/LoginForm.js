@@ -21,8 +21,10 @@ const LoginForm = ({userSetter, registerSetter}) => {
         <div id="login-form">
             {/*<label id="login-label" htmlFor="username">Username:</label>*/}
             <input id="username" name="username" type="text" placeholder={"Username"}/>
-            <button id="login-button" onClick={onLoginClicked}>Login</button>
-            <button id="register-button" onClick={() => registerSetter(true)}>Register</button>
+            <div style={{display: "flex", justifyContent: "center"}}><div className={"button-placeholder"}>
+                <button id="login-button" onClick={onLoginClicked}>Login</button>
+                <button id="register-button" onClick={() => registerSetter(true)}>Register</button>
+            </div></div>
             <p id="login-error">{loginError}</p>
         </div>
 

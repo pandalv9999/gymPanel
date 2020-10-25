@@ -1,20 +1,29 @@
-#login-label {
-  position: relative;
-  right: 30px;
-}
-#login-button {
-  position: relative;
-  left: 30px;
-}
-#register-button {
-  position: relative;
-  left: 50px;
-}
+/*#login-label {*/
+/*  position: relative;*/
+/*  right: 30px;*/
+/*}*/
+/*#login-button {*/
+/*  position: relative;*/
+/*  left: 30px;*/
+/*}*/
+/*#register-button {*/
+/*  position: relative;*/
+/*  left: 50px;*/
+/*}*/
 
-#username {
+#login-form input {
   border: 0;
   outline: 0;
   width: 300px;
   background: transparent;
   border-bottom: 1px solid black;
+}
+
+#login-form .button-placeholder {
+  align-items: center;
+  width: 300px;
+  padding-top: 30px;
+
+  display: flex;
+  justify-content: space-between;
 }
