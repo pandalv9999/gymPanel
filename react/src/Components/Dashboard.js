@@ -11,7 +11,7 @@ const Dashboard = ({user, userSetter}) => {
     const currentPage = "#";
 
     return (
-        <div className={"main-container"} style={{width: "100%"}}>
+        <div className={"main-container"}>
             <aside className={"side-nav"}>
                 <h2>Welcome<br/> {user.username}</h2>
                 <ul className="list">
