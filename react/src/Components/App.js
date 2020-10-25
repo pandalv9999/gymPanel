@@ -10,13 +10,27 @@ const App = () => {
 
     return (
         <div className="App">
-            <header className="App-header">
+
+            {!loggedInUser && !registering? <header className={"App-header-main"}>
+                <div className={"header-container"} >
+                    <h2>SF-GYM</h2>
+                    <p>Welcome to SF-GYM Club</p>
+                    <LoginForm userSetter={setLoggedInUser} registerSetter={setRegistering}/>
+                </div>
+            </header> : <header className={"App-header"}>
                 <h2>SF-GYM</h2>
                 <p>Welcome to SF-GYM Club</p>
-            </header>
-            {loggedInUser ? <Dashboard user={loggedInUser} userSetter={setLoggedInUser}/> :
-                registering ? <RegisterFrom setRegistering={setRegistering}/> :
-                    <LoginForm userSetter={setLoggedInUser} registerSetter={setRegistering}/>}
+            </header> }
+            {loggedInUser && <Dashboard user={loggedInUser} userSetter={setLoggedInUser}/>}
+            {registering && <RegisterFrom setRegistering={setRegistering}/>}
+
+            {/*<header className={loggedInUser? "App-header" : "App-header-main"}>*/}
+            {/*    <h2>SF-GYM</h2>*/}
+            {/*    <p>Welcome to SF-GYM Club</p>*/}
+            {/*</header>*/}
+            {/*{loggedInUser ? <Dashboard user={loggedInUser} userSetter={setLoggedInUser}/> :*/}
+            {/*    registering ? <RegisterFrom setRegistering={setRegistering}/> :*/}
+            {/*        <LoginForm userSetter={setLoggedInUser} registerSetter={setRegistering}/>}*/}
         </div>
     );
 };

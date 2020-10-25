@@ -18,7 +18,7 @@ const LoginForm = ({userSetter, registerSetter}) => {
     };
 
     return (
-        <div id="login-form" style={{paddingTop: "100px"}}>
+        <div id="login-form">
             <label id="login-label" htmlFor="username">Username:</label>
             <input id="username" name="username" type="text"/>
             <button id="login-button" onClick={onLoginClicked}>Login</button>

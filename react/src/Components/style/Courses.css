@@ -28,8 +28,6 @@
 
 .list-container p {
   text-align: left;
-  margin-bottom: 0;
-
 }
 
 
@@ -46,7 +44,8 @@
   color:#FFFFFF;
   text-align:center;
   transition: all 0.2s;
-  background-color: #282c34
+  /*background-color: #282c34*/
+  background: none;
 }
 
 .list-container button:hover{
@@ -59,13 +58,12 @@
   pointer-events: none;
 }
 
-
-
-
 .list-ops {
   flex: 1;
-
+  margin-top: 20px;
+  padding-left: 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  border-left: 1px solid white;
 }
