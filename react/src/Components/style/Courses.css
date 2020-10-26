@@ -5,7 +5,12 @@
 
 .list-container {
   display: flex;
-  margin: 50px 50px 50px 300px;
+  margin: 20px 20px 20px 300px;
+  background: white;
+  opacity: 90%;
+  color: black;
+  padding: 10px;
+  border-radius: 15px;
 }
 
 .list-image {
@@ -14,6 +19,7 @@
   border-radius: 50%;
   overflow: hidden;
   display : flex;
+  justify-content: center;
 }
 
 .list-text {
@@ -34,14 +40,14 @@
 .list-container button {
   display:inline-block;
   padding:0.35em 1.2em;
-  border:0.1em solid #FFFFFF;
+  border:0.1em solid black;
   margin:0 0.3em 0.3em 0;
   border-radius:0.12em;
   box-sizing: border-box;
   text-decoration:none;
   font-family:'Roboto',sans-serif;
   font-weight:300;
-  color:#FFFFFF;
+  color:black;
   text-align:center;
   transition: all 0.2s;
   /*background-color: #282c34*/
@@ -49,8 +55,8 @@
 }
 
 .list-container button:hover{
-  color:#000000;
-  background-color:#FFFFFF;
+  color: white;
+  background-color:black;
 }
 
 .list-container button[disabled]{
@@ -65,5 +71,5 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  border-left: 1px solid white;
+  border-left: 1px solid black;
 }

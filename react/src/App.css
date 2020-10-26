@@ -24,6 +24,7 @@ body {
   position: fixed;
   width: 100%;
   z-index: 1;
+  padding-left: 300px;
 }
 
 /*.App-header {*/
@@ -86,7 +87,7 @@ body {
 }
 
 .header-container button:hover{
-  color:white;
+  color: white;
   background-color:black;
 }
 

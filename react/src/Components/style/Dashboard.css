@@ -4,7 +4,7 @@
 }
 
 .side-nav {
-  background: darkslategrey ;
+  background: white ;
   height: 100%;
   width: 300px;
   position: fixed;
@@ -12,7 +12,12 @@
   z-index: 1;
   left: 0;
   overflow-x: hidden;
+  color: black;
+  opacity: 90%;
+}
 
+.side-nav a {
+  color: black;
 }
 
 .side-nav ul {
@@ -31,8 +36,17 @@
   border-bottom: white 1px;
 }
 
-.side-nav li:hover {
-  background-color: seagreen;
+.side-nav li:hover, .active {
+  background-color: black;
+  color: white;
+}
+
+.side-nav li:hover a {
+  color: white;
+}
+
+.active a {
+  color: white;
 }
 
 .main-container {
