@@ -58,7 +58,7 @@ const TrainerSchedule = ({user, trainerId}) => {
     }, []);
 
     return (
-        <React.Fragment>
+        <div className={"schedule-container"}>
             <p style={{color: "red"}}>{errMsg}</p>
             <table id={`trainer-schedule`}>
                 <thead><tr><th className={"first-row"}>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th>
@@ -83,7 +83,7 @@ const TrainerSchedule = ({user, trainerId}) => {
                 })}
                 </tbody>
             </table>
-        </React.Fragment>
+        </div>
 
     )
 };

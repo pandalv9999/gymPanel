@@ -43,54 +43,56 @@ const Trainers = ({user}) => {
 
     return (
         <React.Fragment>
-            <h2>Trainers</h2>
             <p style={{color: "red"}}>{errMsg}</p>
-            <hr></hr>
             <ul>
                 {trainers.map(trainer => {
                     return (
-                        // <li key={trainer.id} style={{listStyleType: "None"}}>
-                        //     <h3>{trainer.name}</h3>
-                        //     <img src={trainer.url} alt={trainer.name} width={"150px"} height={"150px"}/>
-                        //     <p>{trainer.description}</p>
-                        //     {!displays[trainer.id] ?
-                        //         <button onClick={() => onTrainerScheduleExpand(trainer.id)}>Expand</button>
-                        //         :
-                        //         <React.Fragment>
-                        //             <button onClick={() => onTrainerScheduleCollapse(trainer.id)}>Collapse</button>
-                        //             <TrainerSchedule user={user} trainerId={trainer.id}/>
-                        //         </React.Fragment>
-
-                        //     }
-                        // </li>
-                        <li key={trainer.id} style={{listStyleType: "None"}}>
-                            <div className={"container-fluid padding"}>
-                                <div className={"row padding"}>
-                                    <div className="col-lg-6">
-                                        <h3>{trainer.name}</h3>
-                                        <br/>
-                                        <img src={trainer.url} alt={trainer.name} width={"150px"} height={"150px"}/>
-                                        <br/>
-                                        <br/>
-                                        <p>{trainer.description}</p>
-                                        <br/>
-                                        {!displays[trainer.id] ?
-                                            <button className="btn btn-primary"
-                                                    onClick={() => onTrainerScheduleExpand(trainer.id)}>Expand</button>
-                                            :
-                                            <React.Fragment>
-                                                <button className="btn btn-primary"
-                                                        onClick={() => onTrainerScheduleCollapse(trainer.id)}>Collapse
-                                                </button>
-                                                <TrainerSchedule user={user} trainerId={trainer.id}/>
-                                            </React.Fragment>
-                                        }
-                                        <hr/>
-                                    </div>
+                        <li key={trainer.id} style={{listStyleType: "None"}} className={"outer-list-container"}>
+                            <div className={"list-container"}>
+                                <img src={trainer.url} alt={trainer.name} width={"120px"} height={"120px"}/>
+                                <div className={"list-text"}>
+                                    <h3>{trainer.name}</h3>
+                                    <p>{trainer.description}</p>
                                 </div>
+                                {!displays[trainer.id] ?
+                                    <div className={"schedule-button"}>
+                                        <button onClick={() => onTrainerScheduleExpand(trainer.id)}>Expand</button>
+                                    </div> :
+                                    <div className={"schedule-button"}>
+                                        <button onClick={() => onTrainerScheduleCollapse(trainer.id)}>Collapse</button>
+                                    </div>
+                                }
                             </div>
-
+                            {displays[trainer.id] && <TrainerSchedule user={user} trainerId={trainer.id}/>}
                         </li>
+                        // <li key={trainer.id} style={{listStyleType: "None"}}>
+                        //     <div className={"container-fluid padding"}>
+                        //         <div className={"row padding"}>
+                        //             <div className="col-lg-6">
+                        //                 <h3>{trainer.name}</h3>
+                        //                 <br/>
+                        //                 <img src={trainer.url} alt={trainer.name} width={"150px"} height={"150px"}/>
+                        //                 <br/>
+                        //                 <br/>
+                        //                 <p>{trainer.description}</p>
+                        //                 <br/>
+                        //                 {!displays[trainer.id] ?
+                        //                     <button className="btn btn-primary"
+                        //                             onClick={() => onTrainerScheduleExpand(trainer.id)}>Expand</button>
+                        //                     :
+                        //                     <React.Fragment>
+                        //                         <button className="btn btn-primary"
+                        //                                 onClick={() => onTrainerScheduleCollapse(trainer.id)}>Collapse
+                        //                         </button>
+                        //                         <TrainerSchedule user={user} trainerId={trainer.id}/>
+                        //                     </React.Fragment>
+                        //                 }
+                        //                 <hr/>
+                        //             </div>
+                        //         </div>
+                        //     </div>
+                        //
+                        // </li>
                 )
                 })}
             </ul>

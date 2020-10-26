@@ -25,25 +25,29 @@ const Dashboard = ({user, userSetter}) => {
                 <ul className="list">
                     <li key="schedule" style={{listStyleType : "None"}} className={currentState[0] && "active"}>
                         <a href={currentPage} className="App-link"
-                           onClick={() => setCurrentPage(0, <Schedule user={user}/>)}>Schedule</a>
+                           onClick={() => setCurrentPage(0, <Schedule user={user}/>)}>
+                            <i className={"fa fa-calendar"}/>  Schedule</a>
                     </li>
                     <li key="profile" style={{listStyleType : "None"}} className={currentState[1] && "active"}>
                         <a href={currentPage} className="App-link"
-                           onClick={() => setCurrentPage(1, <Profile user={user}/>)}>Profile</a>
+                           onClick={() => setCurrentPage(1, <Profile user={user}/>)}>
+                            <i className={"fa fa-user"}/> Profile</a>
                     </li>
                     <li key="courses" style={{listStyleType : "None"}} className={currentState[2] && "active"}>
                         <a href={currentPage} className="App-link"
-                           onClick={() => setCurrentPage(2, <Courses user={user}/>)}>Courses</a>
+                           onClick={() => setCurrentPage(2, <Courses user={user}/>)}>
+                            <i className={"fa fa-th-list"}/> Courses</a>
                     </li>
                     <li key="trainers" style={{listStyleType : "None"}} className={currentState[3] && "active"}>
                         <a href={currentPage} className="App-link"
-                           onClick={() => setCurrentPage(3, <Trainers user={user}/>)}>Trainers</a>
+                           onClick={() => setCurrentPage(3, <Trainers user={user}/>)}>
+                            <i className={"fa fa-database"}/> Trainers</a>
                     </li>
                     <li key="log-out" style={{listStyleType : "None"}}>
                         <a href={currentPage} className="App-link" onClick={() => {
                             userSetter(null);
                             console.log(`User ${user.username} log out success`);
-                        }}>Log out</a>
+                        }}> <i className={"fa fa-sign-out"}/> Log out</a>
                     </li>
                 </ul>
 

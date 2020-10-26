@@ -5,12 +5,11 @@
 
 .list-container {
   display: flex;
-  margin: 20px 20px 20px 300px;
+  margin: 20px 30px 20px 300px;
   background: white;
   opacity: 90%;
   color: black;
   padding: 10px;
-  border-radius: 15px;
 }
 
 .list-image {
@@ -56,7 +55,7 @@
 
 .list-container button:hover{
   color: white;
-  background-color:black;
+  background-color: black;
 }
 
 .list-container button[disabled]{
@@ -72,4 +71,9 @@
   flex-direction: column;
   justify-content: space-evenly;
   border-left: 1px solid black;
+}
+
+.schedule-button {
+  margin-top: 110px;
+
 }

@@ -48,8 +48,8 @@ const Courses = ({user}) => {
             const msg = `${user.username} unregister course ${courseId} success!`;
             console.log(msg);
             document.getElementById(`err-${courseId}`).innerText = msg;
-            loadCourse();
             setTimeout(() => document.getElementById(`err-${courseId}`).innerText = "", 5000);
+            loadCourse();
         }).catch(() => {
             const msg = `${user.username} unregister course ${courseId} fail!`;
             console.log(msg);
