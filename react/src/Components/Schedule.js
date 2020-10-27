@@ -1,43 +1,51 @@
 import React from "react";
+import './style/Schedule.css';
 
 const Schedule = ({user}) => {
 
+    function getDate(num) {
+        if (num === 1) return "Monday";
+        else if (num === 2) return "Tuesday";
+        else if (num === 3) return "Wednesday";
+        else if (num === 4) return "Thursday";
+        else if (num === 5) return "Friday";
+        else if (num === 6) return "Saturday";
+        else return "Sunday";
+    }
+
     return (
         <React.Fragment>
-            <h2>Schedule of {user.username}</h2>
             <hr></hr>
             <ul>
                 {user.registeredCourses.map(course => {
                     return (
-                        <li key={course.courseId}>
-                            <div className="container-fluid padding">
-                                <div className="row padding">
-                                    <div className="col-lg-6">
-
-                                        {/* need courseName instead of courseId, but have issue add courseName into registeredCourses array  */}
-                                        <h3>{course.courseId}</h3>
-                                        <h4>{`${course.courseTime.date} ${course.courseTime.startTime}:00 -- ${course.courseTime.endTime}:00`}</h4>
-                                        <br/>
-                                    </div>
-                                </div>
-                            </div>
+                        <li key={course.courseId} className={"schedule-container"}>
+                        <div className={"schedule-text"}>
+                            <h3>{course.courseName}</h3>
+                            <p>Instructor: {course.instructor}</p>
+                            <p style={{display: "flex", justifyContent: "space-between"}}>
+                                <span style={{fontStyle: "italic", color:"#61dafb"}}>
+                                    {`${course.date} ${course.startTime}:00 -- ${course.endTime}:00`}
+                                </span>
+                            </p>
+                        </div>
                         </li>
                     );
                 })}
+            </ul>
+            <br></br>
+            <ul>
                 {user.scheduledAppointments.map(appointment => {
                     return (
-                        // does an appointment has id stored in database? temporarily use trainerId, but need change
-                        <li key={appointment.trainerId}>
-                            <div className="container-fluid padding">
-                                <div className="row padding">
-                                    <div className="col-lg-6">
-                                        <h3>{appointment.trainerId}</h3>
-                                        {/* appointment.date seems a number */}
-                                        <h4>{`${appointment.date} ${appointment.startTime}:00 -- ${appointment.endTime}:00`}</h4>
-                                        <br/>
-                                    </div>
-                                </div>
-                            </div>
+                        <li key={appointment.trainerId} className={"schedule-container"}>
+                        <div className={"schedule-text"}>
+                            <h3>Appointment</h3>
+                            <p style={{display: "flex", justifyContent: "space-between"}}>
+                                <span style={{fontStyle: "italic", color:"#61dafb"}}>
+                                    {`${getDate(appointment.date)} ${appointment.startTime}:00 -- ${appointment.endTime}:00`}
+                                </span>
+                            </p>
+                        </div>
                         </li>
                     );
                 })}

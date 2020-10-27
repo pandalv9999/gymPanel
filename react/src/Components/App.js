@@ -8,19 +8,36 @@ const App = () => {
     const [loggedInUser, setLoggedInUser] = useState();
     const [registering, setRegistering] = useState(false);
 
+    let header;
+
+    if (!loggedInUser && !registering) {
+      header = (
+        <header className={"App-header-main"}>
+          <div className={"header-container"}>
+            <h2>SF-GYM</h2>
+            <p>Welcome to SF-GYM Club</p>
+            <LoginForm
+              userSetter={setLoggedInUser}
+              registerSetter={setRegistering}
+            />
+          </div>
+        </header>
+      );
+    } else if (registering) {
+      header = null;
+    } else {
+      header = (
+        <header className={"App-header"}>
+          <h2>SF-GYM</h2>
+          <p>Welcome to SF-GYM Club</p>
+        </header>
+      );
+    }
+
     return (
         <div className="App">
 
-            {!loggedInUser && !registering? <header className={"App-header-main"}>
-                <div className={"header-container"} >
-                    <h2>SF-GYM</h2>
-                    <p>Welcome to SF-GYM Club</p>
-                    <LoginForm userSetter={setLoggedInUser} registerSetter={setRegistering}/>
-                </div>
-            </header> : <header className={"App-header"}>
-                <h2>SF-GYM</h2>
-                <p>Welcome to SF-GYM Club</p>
-            </header> }
+            {header}
             {loggedInUser && <Dashboard user={loggedInUser} userSetter={setLoggedInUser}/>}
             {registering && <RegisterFrom setRegistering={setRegistering}/>}
 
