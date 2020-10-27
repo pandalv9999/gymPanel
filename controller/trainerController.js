@@ -13,6 +13,7 @@ module.exports = (app, utils) => {
 
     // this router handle the get request for the front end to get all time slot for a specific trainer.
     app.get("/trainer/:trainerId", (req,res) => {
+
         const trainerId = req.params.trainerId;
         console.log("Receiver request to get the schedule of trainer " + trainerId);
         void client.connect((err, db) => {

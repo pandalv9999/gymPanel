@@ -1,62 +1,62 @@
 .schedule-container {
-    margin: -20px 30px 20px 300px;
-    background: white;
-    opacity: 90%;
-    color: black;
-    padding-top: -20px;
-    padding-bottom: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
+  margin: -20px 30px 20px 300px;
+  background: white;
+  opacity: 90%;
+  color: black;
+  padding-top: -20px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 #trainer-schedule {
-    margin: auto;
+  margin: auto;
 }
 
-#trainer-schedule th td{
-    width: 100px;
+#trainer-schedule th td {
+  width: 100px;
 }
 
 #trainer-schedule .first-row {
-    width: 100px;
+  width: 100px;
 }
 
 #trainer-schedule .available {
-    background: cornflowerblue;
+  background: cornflowerblue;
 }
 
 #trainer-schedule .unavailable {
-    background: indianred;
+  background: indianred;
 }
 
 #trainer-schedule button {
-    background: none;
-    //padding: 0.5em 3em;
-    font-size: 0.6em;
-    border: none;
-    box-sizing: border-box;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-family: 'Roboto', sans-serif;
-    //font-weight: 400;
-    color:cornflowerblue;
-    text-align: center;
-    transition: all 0.15s;
-    width: 100px;
-    height: 30px;
+  background: none;
+  /* padding: 0.5em 3em; */
+  font-size: 0.6em;
+  border: none;
+  box-sizing: border-box;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: 'Roboto', sans-serif;
+  /* //font-weight: 400; */
+  color: cornflowerblue;
+  text-align: center;
+  transition: all 0.15s;
+  width: 100px;
+  height: 30px;
 }
 
-#trainer-schedule button:active{
-    color:#BBBBBB;
-    border-color:#BBBBBB;
+#trainer-schedule button:active {
+  color: #bbbbbb;
+  border-color: #bbbbbb;
 }
 
 #trainer-schedule button:hover {
-    background: deepskyblue;
-    color: white;
+  background: deepskyblue;
+  color: white;
 }
 
-#trainer-schedule button:disabled{
-    background: none;
-    color: indianred;
+#trainer-schedule button:disabled {
+  background: none;
+  color: indianred;
 }
