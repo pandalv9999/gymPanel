@@ -105,5 +105,58 @@ module.exports = (app, utils) => {
         });
     });
 
-    // todo: when the schedule features is implemented, add the router to handle delete request.
+    // This route handles the request for a user to cancel a appointment with a specific trainer at a specific time
+    app.delete("/trainer/:username/:trainerId/:date/:startTime", (req, res) => {
+        const username = req.params.username;
+        const trainerId = req.params.trainerId;
+        const date = req.params.date;
+        const startTime = parseInt(req.params.startTime);
+        const endTime = startTime + 1;
+        console.log(`Received request for user ${username} to cancel appointment with ${trainerId}
+         at date ${date}, ${startTime} - ${endTime}`);
+        void client.connect((err, db) => {
+            if (err) throw err;
+
+            // remove current time slot from user's scheduled time
+            const identifier = "scheduledTime." + date;
+            client.db(process.env.database).collection("users").updateOne(
+                {username: username},
+                {$pull: {[identifier]: [startTime, endTime]}}
+            ).then(result => {
+                if (!result || result.modifiedCount === 0) {
+                    return null;
+                } else {
+
+                    // remove current time slot from trainer's scheduled time
+                    const identifier = "scheduledTime." + date;
+                    return client.db(process.env.database).collection("trainers").updateOne(
+                        {id: parseInt(trainerId)},
+                        {$pull: {[identifier]: [startTime, endTime]}}
+                    );
+                }
+            }, err => console.log(err)).then(result => {
+                if (!result || result.modifiedCount === 0) {
+                    return null;
+                } else {
+
+                    // remove current appointment from user's appointment list
+                    return client.db(process.env.database).collection("users").updateOne(
+                        {username: username},
+                        {$pull: {scheduledAppointments: {username: username,
+                                    trainerId: parseInt(trainerId),
+                                    date: parseInt(date),
+                                    startTime: startTime}}}
+                    );
+                }
+            }, err => console.log(err)).then(result => {
+                if (!result || result.modifiedCount === 0) {
+                    console.log(username + " fail cancel appointment with " + trainerId);
+                    res.sendStatus(409)
+                } else {
+                    console.log(username + " successfully cancel appointment with " + trainerId);
+                    res.sendStatus(200)
+                }
+            }, err => console.log(err));
+        });
+    });
 };
