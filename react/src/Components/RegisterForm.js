@@ -39,8 +39,8 @@ const RegisterFrom = ({setRegistering}) => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="gender">Gender:</label>
-                    <select id="gender" className="form-control" name="gender">
-                        <option selected value="Select">Select</option>
+                    <select id="gender" className="form-control" name="gender" defaultValue={"DEFAULT"} >
+                        <option value="DEFAULT" disabled>Choose an option ...</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Prefer not to say">Prefer not to say</option>
