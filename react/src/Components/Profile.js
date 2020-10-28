@@ -1,34 +1,29 @@
-import React from "react";
-import './style/Profile.css';
+import React, {useState} from "react";
+import DisplayProfile from "./DisplayProfile";
+import EditProfile from "./EditProfile";
+import "./style/Profile.css";
 
 const Profile = ({user}) => {
+
+    const [module, setModule] = useState(<DisplayProfile user={user}/>);
+    const [isDisplay, setState] = useState(true);
+
+    const handleClick = (module) => {
+      setState(false);
+      setModule(module);
+    };
+
     return (
-      <div className="card">
-        <h3>Profile of {user.username}</h3>
-        <table className="table">
-            <tbody>
-                <tr>
-                  <th scope="row">First Name:</th>
-                  <td>{ user.firstName }</td>
-                </tr>
-                <tr>
-                  <th scope="row">Last Name:</th>
-                  <td>{ user.lastName }</td>
-                </tr>
-                <tr>
-                  <th scope="row">Gender:</th>
-                  <td>{ user.gender }</td>
-                </tr>
-                <tr>
-                  <th scope="row">Weight:</th>
-                  <td>{ user.weight }</td>
-                </tr>
-                <tr>
-                  <th scope="row">Height</th>
-                  <td>{ user.height }</td>
-                </tr>
-            </tbody>
-      </table>
+      <div>
+        {isDisplay ? 
+        <div>
+          <div style={{paddingTop: "100px"}}>{module}</div>
+          <button className="btn btn-primary" id="edit-button" onClick={() => handleClick(<EditProfile user={user}/>)}>Edit Profile</button> 
+        </div> : 
+        <div>
+          <div style={{paddingTop: "100px"}}>{module}</div>
+        </div>
+      }
       </div>
   )
 };

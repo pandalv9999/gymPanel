@@ -38,6 +38,7 @@ const Schedule = ({user}) => {
             <ul>
                 {currUser.registeredCourses.map(course => {
                     return (
+
                         <li key={`course-${course.courseId}`} className={"list-container"}>
                         <div className={"schedule-text"}>
                             <h3>{course.courseName}</h3>
@@ -56,6 +57,7 @@ const Schedule = ({user}) => {
             <ul>
                 {currUser.scheduledAppointments.map(appointment => {
                     return (
+
                         <li key={`trainer-${appointment.trainerId}`} className={"list-container"}>
                         <div className={"schedule-text"}>
                             <h3>Appointment</h3>
