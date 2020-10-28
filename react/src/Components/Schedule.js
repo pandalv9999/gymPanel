@@ -16,6 +16,7 @@ const Schedule = ({user}) => {
     const getCurrentUser = () => {
         const url = "./" + user.username;
         axios.get(url).then(res => {
+            console.log("success");
             setCurrUser(res.data)
         }).catch(err => {
             console.log("error");
@@ -23,12 +24,12 @@ const Schedule = ({user}) => {
     };
 
     function getDate(num) {
-        if (num === 1) return "Monday";
-        else if (num === 2) return "Tuesday";
-        else if (num === 3) return "Wednesday";
-        else if (num === 4) return "Thursday";
-        else if (num === 5) return "Friday";
-        else if (num === 6) return "Saturday";
+        if (num === 0) return "Monday";
+        else if (num === 1) return "Tuesday";
+        else if (num === 2) return "Wednesday";
+        else if (num === 3) return "Thursday";
+        else if (num === 4) return "Friday";
+        else if (num === 5) return "Saturday";
         else return "Sunday";
     }
 
