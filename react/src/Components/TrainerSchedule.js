@@ -55,11 +55,10 @@ const TrainerSchedule = ({user, trainerId}) => {
     useEffect(() => {
         setErrMsg("Loading Schedule");
         loadTrainerSchedule()
-    }, []);
+    }, [loadTrainerSchedule]);
 
     return (
-        <div className={"schedule-container"}>
-            <p style={{color: "red"}}>{errMsg}</p>
+        <div className={"list-container"}>
             <table id={`trainer-schedule`}>
                 <thead><tr><th className={"first-row"}>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th>
                     <th>Friday</th><th>Saturday</th><th>Sunday</th></tr></thead>
@@ -83,6 +82,7 @@ const TrainerSchedule = ({user, trainerId}) => {
                 })}
                 </tbody>
             </table>
+            <p style={{color: "red"}}>{errMsg}</p>
         </div>
 
     )

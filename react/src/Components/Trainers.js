@@ -36,10 +36,11 @@ const Trainers = ({user}) => {
         console.log(displays[trainerId])
     };
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
         console.log(`Loading Trainers`);
         loadTrainer();
-    }, []);
+    }, [loadTrainer]);
 
     return (
         <React.Fragment>
