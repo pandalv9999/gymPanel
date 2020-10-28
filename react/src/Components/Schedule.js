@@ -1,7 +1,26 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import PersonalSchedule from "./PersonalSchedule";
 import './style/Schedule.css';
+import axios from "axios";
 
 const Schedule = ({user}) => {
+
+    // since each time we update the schedule, we have to load user again
+    const [currUser, setCurrUser] = useState(user);
+
+    useEffect(() => {
+        console.log("loading curr");
+        getCurrentUser();
+    },[]);
+
+    const getCurrentUser = () => {
+        const url = "./" + user.username;
+        axios.get(url).then(res => {
+            setCurrUser(res.data)
+        }).catch(err => {
+            console.log("error");
+        });
+    };
 
     function getDate(num) {
         if (num === 1) return "Monday";
@@ -15,11 +34,12 @@ const Schedule = ({user}) => {
 
     return (
         <React.Fragment>
-            <hr></hr>
+            <PersonalSchedule user={currUser}/>
             <ul>
-                {user.registeredCourses.map(course => {
+                {currUser.registeredCourses.map(course => {
                     return (
-                        <li key={course._id} className={"schedule-container"}>
+
+                        <li key={`course-${course.courseId}`} className={"list-container"}>
                         <div className={"schedule-text"}>
                             <h3>{course.courseName}</h3>
                             <p>Instructor: {course.instructor}</p>
@@ -35,9 +55,10 @@ const Schedule = ({user}) => {
             </ul>
             <br></br>
             <ul>
-                {user.scheduledAppointments.map(appointment => {
+                {currUser.scheduledAppointments.map(appointment => {
                     return (
-                        <li key={appointment._id} className={"schedule-container"}>
+
+                        <li key={`trainer-${appointment.trainerId}`} className={"list-container"}>
                         <div className={"schedule-text"}>
                             <h3>Appointment</h3>
                             <p style={{display: "flex", justifyContent: "space-between"}}>

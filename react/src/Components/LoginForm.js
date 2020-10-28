@@ -13,7 +13,7 @@ const LoginForm = ({userSetter, registerSetter}) => {
             userSetter(res.data)
         }).catch(err => {
             console.log("error");
-            setLoginError(err.response.data)
+            setLoginError("error")
          });
     };
 
