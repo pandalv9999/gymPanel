@@ -45,10 +45,10 @@ const TrainerSchedule = ({user, trainerId}) => {
         axios.put(url, data).then(() => {
             setErrMsg("Successfully make a appointment");
             loadTrainerSchedule();
-            setTimeout(() => setErrMsg(""), 5000);
+            setTimeout(() => setErrMsg(""), 1000);
         }).catch(() => {
             setErrMsg("Fail make a appointment");
-            setTimeout(() => setErrMsg(""), 5000);
+            setTimeout(() => setErrMsg(""), 1000);
         })
     };
 

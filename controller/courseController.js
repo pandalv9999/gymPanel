@@ -86,6 +86,7 @@ module.exports = (app, utils) => {
         const courseId = parseInt(req.params.courseId);
         console.log("receive " + req.params.username + " unregister course " + req.params.courseId);
         let course;
+
         void client.connect((err, db) => {
             if (err) throw err;
 
@@ -120,7 +121,7 @@ module.exports = (app, utils) => {
                     const identifier = "scheduledTime." + utils.nameToDay(course.date);
                     return client.db(process.env.database).collection("users").updateOne(
                         {username: req.params.username},
-                        {$pull: {[identifier]: {$in: [course.startTime, course.endTime]}}}
+                        {$pull: {[identifier]: [course.startTime, course.endTime]}}
                     );
                 }
             }, err => console.log(err)).then(result => {

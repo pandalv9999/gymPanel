@@ -47,6 +47,8 @@
   transition: all 0.15s;
   width: 100px;
   height: 30px;
+  margin-bottom: 0;
+  margin-right: 0;
 }
 
 #trainer-schedule button:active {
