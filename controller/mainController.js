@@ -44,7 +44,7 @@ module.exports = (app) => {
                             lastName: req.body.lastName,
                             email: req.body.email,
                             phone: req.body.phone,
-                            DOB: req.body.username,
+                            DOB: req.body.DOB,
                             gender: req.body.gender,
                             weight: req.body.weight,
                             height: req.body.height,
@@ -70,6 +70,27 @@ module.exports = (app) => {
         });
     });
 
+    // This router lets user update profile
+    app.post('/edit/:username', (req, res) => {
+        const query = { username: req.body.username };
+        const newValues = { $set: 
+            {               
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                email: req.body.email,
+                phone: req.body.phone,
+                gender: req.body.gender,
+                weight: req.body.weight,
+                height: req.body.height, 
+           } 
+        };
+
+        return client.db(process.env.database).collection("users").updateOne(query, newValues, function (err, info) {
+                if (err) throw err;
+                console.log("Successfully update the account!");
+                res.redirect('/');
+            });
+    });
 
     // This router handle the get request from the front-end to handle the log-in features
     // Note that I use get request for simplicity. Post request will be more appropriate in the current situation.
