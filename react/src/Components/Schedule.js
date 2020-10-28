@@ -59,6 +59,7 @@ const Schedule = ({user}) => {
                         <li key={`trainer-${appointment.trainerId}`} className={"list-container"}>
                         <div className={"schedule-text"}>
                             <h3>Appointment</h3>
+                            <p>with {appointment.trainer.name}</p>
                             <p style={{display: "flex", justifyContent: "space-between"}}>
                                 <span style={{fontStyle: "italic", color:"#61dafb"}}>
                                     {`${getDate(appointment.date)} ${appointment.startTime}:00 -- ${appointment.endTime}:00`}

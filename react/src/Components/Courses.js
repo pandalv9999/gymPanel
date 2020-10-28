@@ -61,7 +61,7 @@ const Courses = ({user}) => {
     useEffect(() => {
         console.log(`Loading courses `);
         loadCourse();
-    }, [loadCourse]);
+    }, []);
 
     return (
         <React.Fragment>

@@ -55,7 +55,7 @@ const TrainerSchedule = ({user, trainerId}) => {
     useEffect(() => {
         setErrMsg("Loading Schedule");
         loadTrainerSchedule()
-    }, [loadTrainerSchedule]);
+    }, []);
 
     return (
         <div className={"list-container"}>

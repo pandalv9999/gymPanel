@@ -40,7 +40,7 @@ const Trainers = ({user}) => {
     useEffect(() => {
         console.log(`Loading Trainers`);
         loadTrainer();
-    }, [loadTrainer]);
+    }, []);
 
     return (
         <React.Fragment>
