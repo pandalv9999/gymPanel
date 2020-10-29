@@ -7,6 +7,7 @@ const Schedule = ({user}) => {
 
     // since each time we update the schedule, we have to load user again
     const [currUser, setCurrUser] = useState(user);
+    const [errMsg, setErrMsg] = useState("");
 
     useEffect(() => {
         console.log("loading curr");
@@ -23,6 +24,38 @@ const Schedule = ({user}) => {
         });
     };
 
+    const unregisterCourse = (courseId) => {
+        const url = `./course/${currUser.username}/${courseId}`;
+        axios.delete(url).then(() => {
+            const msg = `${currUser.username} unregister course ${courseId} success!`;
+            console.log(msg);
+            setErrMsg(msg);
+            setTimeout(() => setErrMsg(""), 1000);
+            getCurrentUser()
+        }).catch(() => {
+            const msg = `${currUser.username} unregister course ${courseId} fail!`;
+            console.log(msg);
+            setErrMsg(msg);
+            setTimeout(() => setErrMsg(""), 1000);
+        })
+    };
+
+    const cancelAppointment = (trainerId, date, startTime) => {
+        const url = `/trainer/${currUser.username}/${trainerId}/${date}/${startTime}`;
+        axios.delete(url).then(() => {
+            const msg = `${currUser.username} cancel appoint with ${trainerId} success!`;
+            console.log(msg);
+            setErrMsg(msg);
+            setTimeout(() => setErrMsg(""), 1000);
+            getCurrentUser()
+        }).catch(() => {
+            const msg = `${currUser.username} cancel appoint with ${trainerId} success!`;
+            console.log(msg);
+            setErrMsg(msg);
+            setTimeout(() => setErrMsg(""), 1000);
+        })
+    };
+
     function getDate(num) {
         if (num === 0) return "Monday";
         else if (num === 1) return "Tuesday";
@@ -34,46 +67,53 @@ const Schedule = ({user}) => {
     }
 
     return (
-        <React.Fragment>
+        <div className={"personal-schedule-container"}>
             <PersonalSchedule user={currUser}/>
+            <br/>
+            <p style={{color: "red"}}>{errMsg}</p>
+            <br/>
             <ul>
+                {currUser.registeredCourses.length === 0 && currUser.scheduledAppointments.length === 0 &&
+                <li className={"schedule-list-container"}>
+                    <p style={{color: "red"}} >There is no courses or appointments!</p>
+                </li>}
                 {currUser.registeredCourses.map(course => {
                     return (
-
-                        <li key={`course-${course.courseId}`} className={"list-container"}>
-                        <div className={"schedule-text"}>
-                            <h3>{course.courseName}</h3>
-                            <p>Instructor: {course.instructor}</p>
+                        <li key={`course-${course.id}`} className={"schedule-list-container"}>
+                            <div className={"schedule-text"}>
+                                <h3>Course: {course.courseName}</h3>
+                                <p style={{marginLeft: "10px"}}>Instructor: {course.instructor}</p>
+                            </div>
                             <p style={{display: "flex", justifyContent: "space-between"}}>
                                 <span style={{fontStyle: "italic", color:"#61dafb"}}>
                                     {`${course.date} ${course.startTime}:00 -- ${course.endTime}:00`}
                                 </span>
                             </p>
-                        </div>
+                            <button onClick={() => unregisterCourse(course.id)}>Cancel</button>
                         </li>
                     );
                 })}
-            </ul>
-            <br></br>
-            <ul>
                 {currUser.scheduledAppointments.map(appointment => {
                     return (
-
-                        <li key={`trainer-${appointment.trainerId}`} className={"list-container"}>
-                        <div className={"schedule-text"}>
-                            <h3>Appointment</h3>
-                            <p>with {appointment.trainer.name}</p>
+                        <li key={`trainer-${appointment.trainerId}-${appointment.date}-${appointment.startTime}`}
+                            className={"schedule-list-container"}>
+                            <div className={"schedule-text"}>
+                                <h3>Appointment</h3>
+                                <p style={{marginLeft: "10px"}}>with {appointment.trainer.name}</p>
+                            </div>
                             <p style={{display: "flex", justifyContent: "space-between"}}>
                                 <span style={{fontStyle: "italic", color:"#61dafb"}}>
-                                    {`${getDate(appointment.date)} ${appointment.startTime}:00 -- ${appointment.endTime}:00`}
+                                    {`${getDate(appointment.date)} ${appointment.startTime}:00 
+                                    -- ${appointment.endTime}:00`}
                                 </span>
                             </p>
-                        </div>
+                            <button onClick={() => cancelAppointment(appointment.trainerId,
+                                appointment.date, appointment.startTime)}>Cancel</button>
                         </li>
                     );
                 })}
             </ul>
-        </React.Fragment>
+        </div>
     )
 };
 
