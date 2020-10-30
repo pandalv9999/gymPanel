@@ -34,8 +34,8 @@ const EditProfile = ({user}) => {
                     <input type="text" className="form-control" name="phone" id="phone" value={phone} onChange={(evt) => setPhone(evt.target.value)}/>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="DOB">DOB(MM-DD-YYYY):</label>
-                    <input type="text" className="form-control" name="DOB" id="DOB" value={user.dob} readOnly/>
+                    <label htmlFor="birthDate">DOB(MM-DD-YYYY):</label>
+                    <input type="text" className="form-control" name="birthDate" id="birthDate" value={user.birthDate} readOnly/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="gender">Gender:</label>
