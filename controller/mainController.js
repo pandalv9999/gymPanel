@@ -44,7 +44,7 @@ module.exports = (app) => {
                             lastName: req.body.lastName,
                             email: req.body.email,
                             phone: req.body.phone,
-                            DOB: req.body.DOB,
+                            birthDate: req.body.birthDate,
                             gender: req.body.gender,
                             weight: req.body.weight,
                             height: req.body.height,

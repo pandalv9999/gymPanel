@@ -34,8 +34,8 @@ const RegisterFrom = ({setRegistering}) => {
                     <input type="text" className="form-control" name="phone" id="phone"/>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="DOB">DOB(MM-DD-YYYY):</label>
-                    <input type="text" className="form-control" name="DOB" id="DOB"/>
+                    <label htmlFor="birthDate">DOB(MM-DD-YYYY):</label>
+                    <input type="text" className="form-control" name="birthDate" id="birthDate"/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="gender">Gender:</label>
@@ -47,11 +47,11 @@ const RegisterFrom = ({setRegistering}) => {
                     </select>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="weight">Weight:</label>
+                    <label htmlFor="weight">Weight(lbs):</label>
                     <input type="text" className="form-control" name="weight" id="weight"/>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="height">Height:</label>
+                    <label htmlFor="height">Height(cm):</label>
                     <input type="text" className="form-control" name="height" id="height"/>
                 </div>
                 <button className="btn btn-primary">Create</button>
