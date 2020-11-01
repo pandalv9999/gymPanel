@@ -1,5 +1,4 @@
 // imported requires modules for this router
-const fs = require("fs");
 const MongoClient = require("mongodb").MongoClient;
 require("dotenv").config();
 
@@ -22,7 +21,7 @@ module.exports = (app) => {
   // This router lets user send their register info in the body of the request
   app.post("/create-data", (req, res) => {
     // Sending request to create a data
-    void client.connect((err, db) => {
+    void client.connect((err) => {
       if (err) throw err;
 
       // check if the username or email has been used
@@ -70,7 +69,7 @@ module.exports = (app) => {
                   scheduledAppointments: [],
                   scheduledTime: [[], [], [], [], [], [], []],
                 },
-                function (err, info) {
+                function (err) {
                   if (err) throw err;
                   console.log("Successfully create an account!");
                   //res.send("Successfully create an account!");
@@ -106,7 +105,7 @@ module.exports = (app) => {
     return client
       .db(process.env.database)
       .collection("users")
-      .updateOne(query, newValues, function (err, info) {
+      .updateOne(query, newValues, function (err) {
         if (err) throw err;
         console.log("Successfully update the account!");
         res.redirect("/");
@@ -118,7 +117,7 @@ module.exports = (app) => {
   app.get("/:username", (req, res) => {
     const username = req.params.username;
     console.log("Received login request for " + username);
-    void client.connect((err, db) => {
+    void client.connect((err) => {
       if (err) throw err;
 
       // find whether current user is existed in the database.

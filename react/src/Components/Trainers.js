@@ -86,34 +86,6 @@ const Trainers = ({ user }) => {
                 <TrainerSchedule user={user} trainerId={trainer.id} />
               )}
             </li>
-            // <li key={trainer.id} style={{listStyleType: "None"}}>
-            //     <div className={"container-fluid padding"}>
-            //         <div className={"row padding"}>
-            //             <div className="col-lg-6">
-            //                 <h3>{trainer.name}</h3>
-            //                 <br/>
-            //                 <img src={trainer.url} alt={trainer.name} width={"150px"} height={"150px"}/>
-            //                 <br/>
-            //                 <br/>
-            //                 <p>{trainer.description}</p>
-            //                 <br/>
-            //                 {!displays[trainer.id] ?
-            //                     <button className="btn btn-primary"
-            //                             onClick={() => onTrainerScheduleExpand(trainer.id)}>Expand</button>
-            //                     :
-            //                     <React.Fragment>
-            //                         <button className="btn btn-primary"
-            //                                 onClick={() => onTrainerScheduleCollapse(trainer.id)}>Collapse
-            //                         </button>
-            //                         <TrainerSchedule user={user} trainerId={trainer.id}/>
-            //                     </React.Fragment>
-            //                 }
-            //                 <hr/>
-            //             </div>
-            //         </div>
-            //     </div>
-            //
-            // </li>
           );
         })}
       </ul>

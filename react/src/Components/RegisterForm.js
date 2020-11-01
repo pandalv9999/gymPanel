@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import "./style/RegisterForm.css";
 
 const RegisterFrom = ({ setRegistering }) => {
-  const [errMsg, setErrMsg] = useState("");
-
-  const register = () => {};
+  const [errMsg] = useState("");
 
   return (
     <div className={"register-form"} style={{ marginTop: "100px" }}>
