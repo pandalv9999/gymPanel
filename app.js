@@ -28,6 +28,6 @@ app.get('*', (req, res) => {
 });
 
 //listen to a specific port.
-app.listen(5000, () => {
-  console.log("Start listening for the port 5000.");
+app.listen(process.env.PORT || 5000, () => {
+  console.log(`Start listening for the port ${process.env.PORT}` );
 });
