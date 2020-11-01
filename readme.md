@@ -7,6 +7,16 @@ Rujun Yao, Yiman Liu
 * **Class link:**  
 <a href="https://johnguerra.co/classes/webDevelopment_fall_2020/">CS 5610 Web Development Northeastern University Bay Area</a> 
 
-* Project Objective: Creating a homepage including students' basic information and contact information by using HTML, CSS, JavaScript and other grid, either Bootstrap or flexbox. 
+* **Project Objective:**  
+Build a gym online dashboard containing the following major features:
+  - User login/logout
+  - User can see his/her current schedule for any registered courses or private training. 
+  - User can view/edit his/her profile.
+  - User can register for any public fitness courses if there is available slot.  
+    User can unregister any registered courses.
+  - User can make appointments with fitness trainer.  
+    User can see available time slots for any fitness trainer and can make an appointment.  
+    User can cancel any existing appointments.
 
-Author * Class Link * Project Objective * Screenshot * Instructions to build 
+* **Screenshot:** 
+Instructions to build 
