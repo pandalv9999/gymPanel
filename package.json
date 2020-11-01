@@ -4,7 +4,8 @@
   "description": "This is a collaborative project for NEU CS 5610 Assignment 2. The authors of the project and the instructor of the course preserve any right to the content of the project",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "cd react && npm install && npm run build"
   },
   "author": "Rujun Yao, Yiman Liu",
   "license": "MIT",
