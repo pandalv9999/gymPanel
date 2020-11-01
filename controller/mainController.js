@@ -20,10 +20,10 @@ const client = new MongoClient(url, {
 module.exports = (app) => {
 
     // create a way for the express to serve react home page
-    app.get('*', (req, res) => {
-        console.log("sending react homepage");
-        res.sendFile(path.join(__dirname+'/react/build/index.html'));
-    });
+  app.get('*', (req, res) => {
+    console.log("sending react homepage");
+    res.sendFile(__dirname+'/react/build/index.html');
+  });
 
   // This router lets user send their register info in the body of the request
   app.post("/create-data", (req, res) => {
