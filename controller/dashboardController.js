@@ -15,24 +15,9 @@ const client = new MongoClient(url, {
 });
 
 module.exports = (app) => {
-  // Here is only a test snippet that test the functionality of multiple controller.
-  app.get("/:username/schedule", (req, res) => {
-    const user = { username: req.params.username };
-    // use mongoDB to load current user's schedule
-    // Todo: This request can be handled by React.
-    res.status(200);
-  });
-
-  app.get("/:username/profile", (req, res) => {
-    const user = { username: req.params.username };
-    // use mongoDB to load current user's schedule
-    // Todo: This request can be handled completly by react.
-    res.status(200);
-  });
 
   app.get("/:username/courses", (req, res) => {
-    const user = { username: req.params.username };
-    void client.connect((err, db) => {
+    void client.connect((err) => {
       if (err) throw err;
       void client
         .db(process.env.database)
@@ -50,8 +35,7 @@ module.exports = (app) => {
   });
 
   app.get("/:username/trainers", (req, res) => {
-    const user = { username: req.params.username };
-    void client.connect((err, db) => {
+    void client.connect((err) => {
       if (err) throw err;
       void client
         .db(process.env.database)

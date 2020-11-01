@@ -27,7 +27,7 @@ module.exports = (app, utils) => {
         req.body.courseId
     );
     let course;
-    void client.connect((err, db) => {
+    void client.connect((err) => {
       if (err) throw err;
 
       // get the course detail from the database by querying. Get date, start time, end time.
@@ -149,7 +149,7 @@ module.exports = (app, utils) => {
     );
     let course;
 
-    void client.connect((err, db) => {
+    void client.connect((err) => {
       if (err) throw err;
 
       // get the detailed information of current course, including data, start time and end time.
