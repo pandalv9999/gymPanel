@@ -22,11 +22,6 @@ dashboardController(app);
 courseController(app, utils);
 trainerController(app, utils);
 
-// create a way for the express to serve react home page
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'/react/build/index.html'));
-});
-
 //listen to a specific port.
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Start listening for the port ${process.env.PORT}` );
