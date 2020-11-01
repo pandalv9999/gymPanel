@@ -15,7 +15,6 @@ app.use(
   })
 );
 app.use(bodyParser.json());
-app.set("view engine", "ejs");
 
 // initialize the routers of the app
 mainController(app);

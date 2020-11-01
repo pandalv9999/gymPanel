@@ -21,7 +21,7 @@ module.exports = (app, utils) => {
   app.get("/trainer/:trainerId", (req, res) => {
     const trainerId = req.params.trainerId;
     console.log("Receiver request to get the schedule of trainer " + trainerId);
-    void client.connect((err, db) => {
+    void client.connect((err) => {
       if (err) throw err;
 
       // get all time slot for a specific trainer.
@@ -42,10 +42,9 @@ module.exports = (app, utils) => {
   // This router handles the request for a user to make a schedule to a trainer for a specific time slot.
   app.put("/trainer", (req, res) => {
     const appointment = req.body;
-    let trainer;
     console.log(`Received request for user ${appointment.username} to schedule ${appointment.startTime} 
         - ${appointment.endTime} for trainer ${appointment.trainerId} at day ${appointment.date}`);
-    void client.connect((err, db) => {
+    void client.connect((err) => {
       if (err) throw err;
 
       // Get the scheduled times for the current user to check if there is conflict.
@@ -176,7 +175,7 @@ module.exports = (app, utils) => {
     const endTime = startTime + 1;
     console.log(`Received request for user ${username} to cancel appointment with ${trainerId}
          at date ${date}, ${startTime} - ${endTime}`);
-    void client.connect((err, db) => {
+    void client.connect((err) => {
       if (err) throw err;
 
       // remove current time slot from user's scheduled time

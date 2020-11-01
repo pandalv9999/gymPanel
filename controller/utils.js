@@ -39,11 +39,4 @@ module.exports = {
     }
     return res.length < preLen;
   },
-
-  removeInterval: function (intervals, index, interval) {
-    intervals[index] = intervals[index].filter((e) => {
-      return e[0] !== interval[0] && e[1] !== interval[1];
-    });
-    return intervals;
-  },
 };
