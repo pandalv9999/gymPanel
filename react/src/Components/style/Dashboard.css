@@ -4,7 +4,7 @@
 }
 
 .side-nav {
-  background: white ;
+  background: white;
   height: 100%;
   width: 300px;
   position: fixed;
@@ -23,7 +23,6 @@
 .side-nav ul {
   margin-left: 0;
   padding-inline-start: 0;
-
 }
 
 .side-nav h2 {
@@ -36,7 +35,8 @@
   border-bottom: white 1px;
 }
 
-.side-nav li:hover, .active {
+.side-nav li:hover,
+.active {
   background-color: black;
   color: white;
 }
@@ -54,10 +54,9 @@
   height: 100%;
   width: 100%;
   overflow: scroll;
-  background: url("https://wallpaperaccess.com/full/1633729.jpg");;
+  background: url("https://wallpaperaccess.com/full/1633729.jpg");
 }
 
 .main-container::-webkit-scrollbar {
   display: none;
 }
-

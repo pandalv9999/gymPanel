@@ -1,10 +1,9 @@
 .personal-schedule-container {
-    margin: 20px 30px 20px 340px;
-    background: white;
-    opacity: 90%;
-    color: black;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
+  margin: 20px 30px 20px 340px;
+  background: white;
+  opacity: 90%;
+  color: black;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
-

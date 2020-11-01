@@ -22,7 +22,7 @@
   position: relative;
   top: 30px;
 }
-.edit-form input[type='text'] {
+.edit-form input[type="text"] {
   position: relative;
   right: 95px;
   width: 30%;

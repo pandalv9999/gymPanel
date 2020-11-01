@@ -5,15 +5,17 @@ const dashboardController = require("./controller/dashboardController");
 const courseController = require("./controller/courseController");
 const trainerController = require("./controller/trainerController");
 const utils = require("./controller/utils");
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 
 // initialize the middleware of the app
 const app = express();
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 app.use(bodyParser.json());
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 
 // initialize the routers of the app
 mainController(app);
@@ -23,5 +25,5 @@ trainerController(app, utils);
 
 //listen to a specific port.
 app.listen(5000, () => {
-    console.log("Start listening for the port 5000.")
+  console.log("Start listening for the port 5000.");
 });
