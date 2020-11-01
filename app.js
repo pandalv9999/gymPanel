@@ -23,7 +23,7 @@ courseController(app, utils);
 trainerController(app, utils);
 
 // create a way for the express to serve react home page
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   console.log("sending react homepage");
   res.sendFile(__dirname+'/react/build/index.html');
 });

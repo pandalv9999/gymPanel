@@ -6,7 +6,7 @@ const LoginForm = ({ userSetter, registerSetter }) => {
   const [loginError, setLoginError] = useState("");
 
   const onLoginClicked = () => {
-    const url = "./" + document.getElementById("username").value;
+    const url = "./login/" + document.getElementById("username").value;
     axios
       .get(url)
       .then((res) => {

@@ -115,7 +115,7 @@ module.exports = (app) => {
 
   // This router handle the get request from the front-end to handle the log-in features
   // Note that I use get request for simplicity. Post request will be more appropriate in the current situation.
-  app.get("/:username", (req, res) => {
+  app.get("/login/:username", (req, res) => {
     const username = req.params.username;
     console.log("Received login request for " + username);
     void client.connect((err) => {
