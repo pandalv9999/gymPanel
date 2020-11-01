@@ -70,28 +70,28 @@ body {
 }
 
 .header-container button {
-  display:inline-block;
-  padding:0.35em 1.2em;
-  border:0.1em solid black;
+  display: inline-block;
+  padding: 0.35em 1.2em;
+  border: 0.1em solid black;
   width: 100px;
-  border-radius:0.12em;
+  border-radius: 0.12em;
   box-sizing: border-box;
-  text-decoration:none;
-  font-family:'Roboto',sans-serif;
-  font-weight:300;
-  color:black;
-  text-align:center;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: black;
+  text-align: center;
   transition: all 0.2s;
   /*background-color: #282c34*/
   background: none;
 }
 
-.header-container button:hover{
+.header-container button:hover {
   color: white;
-  background-color:black;
+  background-color: black;
 }
 
-.header-container button[disabled]{
+.header-container button[disabled] {
   background-color: black;
   pointer-events: none;
 }
