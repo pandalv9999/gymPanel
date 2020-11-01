@@ -14,6 +14,7 @@ app.use(
     extended: true,
   })
 );
+app.use(express.static('/react/public'));
 app.use(bodyParser.json());
 
 // initialize the routers of the app
