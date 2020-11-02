@@ -1,4 +1,6 @@
 ## SF Gym Club
+<a href="https://youtu.be/9Ul97YAKMmA">Youtube Demo</a><br/>
+<a href="https://polar-temple-47959.herokuapp.com/">Website</a>
 
 * **Author:**  
 Rujun Yao, Yiman Liu
