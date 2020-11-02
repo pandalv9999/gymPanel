@@ -14,7 +14,7 @@ app.use(
     extended: true,
   })
 );
-app.use(express.static('/react/public'));
+app.use(express.static(__dirname + '/react/build'));
 app.use(bodyParser.json());
 
 // initialize the routers of the app
@@ -26,7 +26,7 @@ trainerController(app, utils);
 // create a way for the express to serve react home page
 app.get('/', (req, res) => {
   console.log("sending react homepage");
-  res.sendFile(__dirname+'/react/build/index.html');
+  res.sendFile(__dirname +'/react/build/index.html');
 });
 
 //listen to a specific port.
