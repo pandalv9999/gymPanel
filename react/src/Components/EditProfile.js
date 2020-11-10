@@ -69,17 +69,6 @@ const EditProfile = ({ user }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="birthDate">DOB(MM-DD-YYYY):</label>
-          <input
-            type="text"
-            className="form-control"
-            name="birthDate"
-            id="birthDate"
-            value={user.birthDate}
-            readOnly
-          />
-        </div>
-        <div className="form-group">
           <label htmlFor="gender">Gender:</label>
           <input
             type="text"
