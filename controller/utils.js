@@ -1,3 +1,5 @@
+const encrypt = require("bcrypt");
+
 // this module has some useful util function for the main logic.
 module.exports = {
   // this function converts a name of a day to the index of the week. 0-indexed.
@@ -39,4 +41,8 @@ module.exports = {
     }
     return res.length < preLen;
   },
+
+  hashPassword: async function(password) {
+    return await encrypt.hash(password, 10);
+  }
 };

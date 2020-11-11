@@ -18,7 +18,7 @@ app.use(express.static(__dirname + '/react/build'));
 app.use(bodyParser.json());
 
 // initialize the routers of the app
-mainController(app);
+mainController(app, utils);
 dashboardController(app);
 courseController(app, utils);
 trainerController(app, utils);

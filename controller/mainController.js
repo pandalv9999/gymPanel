@@ -18,7 +18,7 @@ const client = new MongoClient(url, {
   useUnifiedTopology: true,
 });
 
-module.exports = (app) => {
+module.exports = (app, utils) => {
   // This router lets user send their register info in the body of the request
   // modified for adding password authentication
   app.post("/create-data", (req, res) => {
@@ -40,7 +40,7 @@ module.exports = (app) => {
             },
           ],
         })
-        .then((user) => {
+        .then(async (user) => {
           if (user) {
             let errors = {};
             if (user.username === req.body.username) {
@@ -53,6 +53,7 @@ module.exports = (app) => {
             res.status(400).json(errors);
           } else {
             // if the username or email has not been used, then create a new user
+            const hashedPassword = await encrypt.hash(req.body.password, 10);
             return client
               .db(process.env.database)
               .collection("users")
@@ -62,6 +63,7 @@ module.exports = (app) => {
                   firstName: req.body.firstName,
                   lastName: req.body.lastName,
                   email: req.body.email,
+                  password: hashedPassword,
                   phone: req.body.phone,
                   birthDate: req.body.birthDate,
                   gender: req.body.gender,
@@ -77,6 +79,7 @@ module.exports = (app) => {
                   //res.send("Successfully create an account!");
                   //res.json(info.ops)
                   res.redirect("/");
+                  //res.status(200);
                 }
               );
           }
