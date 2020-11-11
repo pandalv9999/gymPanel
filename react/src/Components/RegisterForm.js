@@ -59,6 +59,7 @@ const RegisterFrom = ({ setRegistering }) => {
             className={"form-control"}
             name={"password"}
             id={"password"}
+            pattern="[A-Za-z0-9]{6,}"
             ref={register({ required: "Password required!" })}
           />
         </div>
@@ -112,7 +113,11 @@ const RegisterFrom = ({ setRegistering }) => {
             className="form-control"
             name="email"
             id="email"
+            ref={register({ required: "Email required!" })}
           />
+          {errors.email && (
+            <p style={{ color: "red" }}>{errors.email.message}</p>
+          )}
           <small className="form-text text-muted">
             Please enter a valid email address include an "@".
           </small>
@@ -177,13 +182,12 @@ const RegisterFrom = ({ setRegistering }) => {
             ref={register}
           />
         </div>
-
         <button className="btn btn-primary" type={"submit"}>
           Create
         </button>
       </form>
+      <p style={{ color: "red" }}>{errMsg}</p>
       <a href="/">Already has an account? Login here</a>
-      <p>{errMsg}</p>
     </div>
   );
 };

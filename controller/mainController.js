@@ -76,8 +76,7 @@ module.exports = (app) => {
                   console.log("Successfully create an account!");
                   //res.send("Successfully create an account!");
                   //res.json(info.ops)
-                  // res.redirect("/");
-                  res.status(200);
+                  res.redirect("/");
                 }
               );
           }
