@@ -9,12 +9,21 @@ const EditProfile = ({ user }) => {
   const [weight, setWeight] = useState(user.weight);
   const [height, setHeight] = useState(user.height);
 
+  const resetState = () => {
+    setFirstName(user.firstName)
+    setLastName(user.lastName)
+    setEmail(user.email)
+    setPhone(user.phone)
+    setWeight(user.weight)
+    setHeight(user.height)
+}
+
   return (
     <div className={"edit-container"} style={{ marginTop: "100px" }}>
       <h2 className={"title-form"}>Edit Profile</h2>
       <form action="/edit/:username" method="POST" className={"edit-form"}>
         <div className="form-group">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">Username: </label>
           <input
             type="text"
             className="form-control"
@@ -25,7 +34,7 @@ const EditProfile = ({ user }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="firstName">First Name:</label>
+          <label htmlFor="firstName">First Name: </label>
           <input
             type="text"
             className="form-control"
@@ -36,7 +45,7 @@ const EditProfile = ({ user }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="lastName">Last Name:</label>
+          <label htmlFor="lastName">Last Name: </label>
           <input
             type="text"
             className="form-control"
@@ -47,9 +56,9 @@ const EditProfile = ({ user }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Email: </label>
           <input
-            type="text"
+            type="email"
             className="form-control"
             name="email"
             id="email"
@@ -58,18 +67,19 @@ const EditProfile = ({ user }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="phone">Phone:</label>
+          <label htmlFor="phone">Phone: </label>
           <input
             type="text"
             className="form-control"
             name="phone"
             id="phone"
             value={phone}
+            pattern="^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$"
             onChange={(evt) => setPhone(evt.target.value)}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="gender">Gender:</label>
+          <label htmlFor="gender">Gender: </label>
           <input
             type="text"
             className="form-control"
@@ -80,9 +90,9 @@ const EditProfile = ({ user }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="weight">Weight:</label>
+          <label htmlFor="weight">Weight(lbs): </label>
           <input
-            type="text"
+            type="number"
             className="form-control"
             name="weight"
             id="weight"
@@ -91,9 +101,9 @@ const EditProfile = ({ user }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="height">Height:</label>
+          <label htmlFor="height">Height(cm): </label>
           <input
-            type="text"
+            type="number"
             className="form-control"
             name="height"
             id="height"
@@ -105,6 +115,11 @@ const EditProfile = ({ user }) => {
           Update
         </button>
       </form>
+      <button 
+          className="btn btn-primary"
+          id="reset-button"
+          onClick={resetState}>Reset
+        </button>
     </div>
   );
 };

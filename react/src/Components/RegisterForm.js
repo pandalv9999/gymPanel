@@ -63,12 +63,6 @@ const RegisterFrom = ({ setRegistering }) => {
         </div>
         <div className="form-group">
           <label htmlFor="birthDate">DOB:</label>
-          {/* <input
-            type="text"
-            className="form-control"
-            name="birthDate"
-            id="birthDate"
-          /> */}
             <DatePicker 
               id="date"
               selected={startDate} 
@@ -94,7 +88,7 @@ const RegisterFrom = ({ setRegistering }) => {
         <div className="form-group">
           <label htmlFor="weight">Weight(lbs):</label>
           <input
-            type="text"
+            type="number"
             className="form-control"
             name="weight"
             id="weight"
@@ -103,7 +97,7 @@ const RegisterFrom = ({ setRegistering }) => {
         <div className="form-group">
           <label htmlFor="height">Height(cm):</label>
           <input
-            type="text"
+            type="number"
             className="form-control"
             name="height"
             id="height"
