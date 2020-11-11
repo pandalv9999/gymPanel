@@ -14,7 +14,7 @@ const Schedule = ({ user }) => {
   }, []);
 
   const getCurrentUser = () => {
-    const url = "./login/" + user.username;
+    const url = "./user/" + user.username;
     axios
       .get(url)
       .then((res) => {

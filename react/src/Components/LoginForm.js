@@ -6,27 +6,44 @@ const LoginForm = ({ userSetter, registerSetter }) => {
   const [loginError, setLoginError] = useState("");
 
   const onLoginClicked = () => {
-    const url = "./login/" + document.getElementById("username").value;
+    const url = "./login";
+    const body = {
+      username: document.getElementById("username").value,
+      password: document.getElementById("password").value,
+    };
     axios
-      .get(url)
+      .post(url, body)
       .then((res) => {
         console.log(`User ${res.data.username} Log in success!`);
         userSetter(res.data);
       })
-      .catch((err) => {
-        console.log("error");
-        setLoginError("error");
+      .catch((error) => {
+        if (error.response.data.message) {
+          console.log(error.response.data.message);
+          setLoginError(error.response.data.message);
+        } else {
+          const msg = "Unexpected Exception occurs";
+          console.log(msg);
+          setLoginError(msg);
+        }
       });
   };
 
   return (
     <div id="login-form">
-      {/*<label id="login-label" htmlFor="username">Username:</label>*/}
       <input
         id="username"
         name="username"
         type="text"
         placeholder={"Username"}
+      />
+      <br />
+      <br />
+      <input
+        id="password"
+        name="password"
+        type="password"
+        placeholder={"Password"}
       />
       <div style={{ display: "flex", justifyContent: "center" }}>
         <div className={"button-placeholder"}>
