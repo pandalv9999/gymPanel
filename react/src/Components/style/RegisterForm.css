@@ -9,7 +9,7 @@
   position: relative;
   top: 50px;
 }
-.register-form input[type="text"] {
+.register-form input {
   position: relative;
   right: 95px;
   width: 20%;

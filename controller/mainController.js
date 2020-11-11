@@ -1,5 +1,6 @@
 // imported requires modules for this router
 const MongoClient = require("mongodb").MongoClient;
+const encrypt = require("bcrypt");
 require("dotenv").config();
 
 // initialize the database connecting criteria.
@@ -18,8 +19,8 @@ const client = new MongoClient(url, {
 });
 
 module.exports = (app) => {
-
   // This router lets user send their register info in the body of the request
+  // modified for adding password authentication
   app.post("/create-data", (req, res) => {
     // Sending request to create a data
     void client.connect((err) => {
@@ -75,7 +76,8 @@ module.exports = (app) => {
                   console.log("Successfully create an account!");
                   //res.send("Successfully create an account!");
                   //res.json(info.ops)
-                  res.redirect("/");
+                  // res.redirect("/");
+                  res.status(200);
                 }
               );
           }
@@ -113,9 +115,8 @@ module.exports = (app) => {
       });
   });
 
-  // This router handle the get request from the front-end to handle the log-in features
-  // Note that I use get request for simplicity. Post request will be more appropriate in the current situation.
-  app.get("/login/:username", (req, res) => {
+  // This router handle the get get user's request
+  app.get("/user/:username", (req, res) => {
     const username = req.params.username;
     console.log("Received login request for " + username);
     void client.connect((err) => {
@@ -140,5 +141,11 @@ module.exports = (app) => {
           }
         });
     });
+  });
+
+  // This router handle the
+  app.post("/login", (req, res) => {
+    console.log(req.body);
+    res.status(403);
   });
 };

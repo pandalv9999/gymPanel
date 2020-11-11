@@ -11,6 +11,7 @@
   "author": "Rujun Yao, Yiman Liu",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "body-parser": "latest",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
