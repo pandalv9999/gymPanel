@@ -1,32 +1,38 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import DatePicker from "react-datepicker";
+
 import "./style/RegisterForm.css";
+import "react-datepicker/dist/react-datepicker.css";
 
 // rewritten the code as react hook form
 const RegisterFrom = ({ setRegistering }) => {
   const [errMsg, setErrMsg] = useState("");
   const { register, handleSubmit, errors, watch } = useForm();
+  const [startDate, setBirthdate] = useState(new Date());
 
   const onSubmit = (data) => {
     console.log(data);
     const url = "/create-data";
     axios
-        .post(url, data)
-        .then((res) => {
-            console.log("Register Success");
-            setErrMsg("Register Success")
-        })
-        .catch((error) => {
-          if (error.response.data) {
-            console.log(error.response.data.email || error.response.data.username);
-            setErrMsg(error.response.data.email || error.response.data.username);
-          } else {
-            const msg = "Unexpected Exception occurs";
-            console.log(msg);
-            setErrMsg(msg);
-          }
-        });
+      .post(url, data)
+      .then((res) => {
+        console.log("Register Success");
+        setErrMsg("Register Success");
+      })
+      .catch((error) => {
+        if (error.response.data) {
+          console.log(
+            error.response.data.email || error.response.data.username
+          );
+          setErrMsg(error.response.data.email || error.response.data.username);
+        } else {
+          const msg = "Unexpected Exception occurs";
+          console.log(msg);
+          setErrMsg(msg);
+        }
+      });
   };
 
   return (
@@ -40,9 +46,11 @@ const RegisterFrom = ({ setRegistering }) => {
             className="form-control"
             name="username"
             id="username"
-            ref={register({required: "Username required!"})}
+            ref={register({ required: "Username required!" })}
           />
-          {errors.username && <p style={{color: "red"}}>{errors.username.message}</p>}
+          {errors.username && (
+            <p style={{ color: "red" }}>{errors.username.message}</p>
+          )}
         </div>
         <div className={"form-group"}>
           <label htmlFor={"password"}>Password:</label>
@@ -51,10 +59,12 @@ const RegisterFrom = ({ setRegistering }) => {
             className={"form-control"}
             name={"password"}
             id={"password"}
-            ref={register({required: "Password required!"})}
+            ref={register({ required: "Password required!" })}
           />
         </div>
-        {errors.password && <p style={{color: "red"}}>{errors.password.message}</p>}
+        {errors.password && (
+          <p style={{ color: "red" }}>{errors.password.message}</p>
+        )}
         <div className={"form-group"}>
           <label htmlFor={"confirm_password"}>Confirm Password:</label>
           <input
@@ -62,11 +72,18 @@ const RegisterFrom = ({ setRegistering }) => {
             className={"form-control"}
             name={"confirm_password"}
             id={"confirm-password"}
+            pattern="[A-Za-z0-9]{6,}"
             ref={register({
-              validate: value => value === watch("password") || "Passwords does not match!"
+              validate: (value) =>
+                value === watch("password") || "Passwords does not match!",
             })}
           />
-          {errors.confirm_password && <p style={{color: "red"}}>{errors.confirm_password.message}</p>}
+          {errors.confirm_password && (
+            <p style={{ color: "red" }}>{errors.confirm_password.message}</p>
+          )}
+          <small className="form-text text-muted">
+            Please enter 6 or more characters (no special characters).
+          </small>
         </div>
         <div className="form-group">
           <label htmlFor="firstName">First Name:</label>
@@ -90,19 +107,36 @@ const RegisterFrom = ({ setRegistering }) => {
         </div>
         <div className="form-group">
           <label htmlFor="email">Email</label>
-          <input type="text" className="form-control" name="email" id="email" ref={register} />
+          <input
+            type="email"
+            className="form-control"
+            name="email"
+            id="email"
+          />
+          <small className="form-text text-muted">
+            Please enter a valid email address include an "@".
+          </small>
         </div>
         <div className="form-group">
           <label htmlFor="phone">Phone:</label>
-          <input type="text" className="form-control" name="phone" id="phone" ref={register} />
+          <input
+            type="tel"
+            className="form-control"
+            name="phone"
+            id="phone"
+            ref={register}
+            pattern="^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$"
+          />
+          <small className="form-text text-muted">
+            Please enter a valid US phone number (123) 123-1234.
+          </small>
         </div>
         <div className="form-group">
-          <label htmlFor="birthDate">DOB(MM-DD-YYYY):</label>
-          <input
-            type="text"
-            className="form-control"
-            name="birthDate"
-            id="birthDate"
+          <label htmlFor="birthDate">DOB:</label>
+          <DatePicker
+            id="date"
+            selected={startDate}
+            onChange={(date) => setBirthdate(date)}
             ref={register}
           />
         </div>
@@ -126,7 +160,7 @@ const RegisterFrom = ({ setRegistering }) => {
         <div className="form-group">
           <label htmlFor="weight">Weight(lbs):</label>
           <input
-            type="text"
+            type="number"
             className="form-control"
             name="weight"
             id="weight"
@@ -136,22 +170,19 @@ const RegisterFrom = ({ setRegistering }) => {
         <div className="form-group">
           <label htmlFor="height">Height(cm):</label>
           <input
-            type="text"
+            type="number"
             className="form-control"
             name="height"
             id="height"
             ref={register}
           />
         </div>
-        <button className="btn btn-primary" type={"submit"}>Create</button>
-        <button
-          className="btn btn-primary"
-          id={"back-button"}
-          onClick={() => setRegistering(false)}
-        >
-          Login
+
+        <button className="btn btn-primary" type={"submit"}>
+          Create
         </button>
       </form>
+      <a href="/">Already has an account? Login here</a>
       <p>{errMsg}</p>
     </div>
   );

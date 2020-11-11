@@ -102,7 +102,7 @@ const Schedule = ({ user }) => {
                 </p>
               </div>
               <p style={{ display: "flex", justifyContent: "space-between" }}>
-                <span style={{ fontStyle: "italic", color: "#61dafb" }}>
+                <span style={{ fontStyle: "italic" }}>
                   {`${course.date} ${course.startTime}:00 -- ${course.endTime}:00`}
                 </span>
               </p>
@@ -125,7 +125,7 @@ const Schedule = ({ user }) => {
                 </p>
               </div>
               <p style={{ display: "flex", justifyContent: "space-between" }}>
-                <span style={{ fontStyle: "italic", color: "#61dafb" }}>
+                <span style={{ fontStyle: "italic" }}>
                   {`${getDate(appointment.date)} ${appointment.startTime}:00 
                                     -- ${appointment.endTime}:00`}
                 </span>

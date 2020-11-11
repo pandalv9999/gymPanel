@@ -1,14 +1,13 @@
+.register-form h3 {
+  position: relative;
+  bottom: 50%;
+}
 .register-form {
-  text-align: center;
-  vertical-align: middle;
-  display: inline;
   position: relative;
-  top: 60px;
+  top: 30px;
+  line-height: 30%;
 }
-.title-form {
-  position: relative;
-  top: 50px;
-}
+
 .register-form input {
   position: relative;
   right: 95px;
@@ -19,6 +18,7 @@
   cursor: pointer;
   display: inline-block;
 }
+
 .register-form label {
   position: relative;
   right: 95px;
@@ -26,6 +26,12 @@
   display: inline-block;
   padding: 8px;
 }
+
+#date {
+  width: 378px;
+  height: 36px;
+}
+
 #gender {
   position: relative;
   right: 95px;
@@ -36,11 +42,12 @@
   cursor: pointer;
   display: inline-block;
 }
-.register-form button {
-  margin: -20px -50px;
-  position: relative;
-  right: 80px;
-}
-#back-button {
+
+/* #back-button {
   left: 80px;
+} */
+
+.register-form a {
+  position: relative;
+  top: 50px;
 }
