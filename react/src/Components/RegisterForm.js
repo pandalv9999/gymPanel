@@ -163,7 +163,7 @@ const RegisterFrom = ({ setRegistering }) => {
           </select>
         </div>
         <div className="form-group">
-          <label htmlFor="weight">Weight(lbs):</label>
+          <label htmlFor="weight">Weight(lbs): </label>
           <input
             type="number"
             className="form-control"
@@ -173,7 +173,7 @@ const RegisterFrom = ({ setRegistering }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="height">Height(cm):</label>
+          <label htmlFor="height">Height(cm): </label>
           <input
             type="number"
             className="form-control"
