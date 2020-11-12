@@ -78,14 +78,7 @@ const Dashboard = ({ user, userSetter }) => {
             </a>
           </li>
           <li key="log-out" style={{ listStyleType: "None" }}>
-            <a
-              href={currentPage}
-              className="App-link"
-              onClick={() => {
-                userSetter(null);
-                console.log(`User ${user.username} log out success`);
-              }}
-            >
+            <a href={"/logout"} className="App-link">
               {" "}
               <i className={"fa fa-sign-out"} /> Log out
             </a>

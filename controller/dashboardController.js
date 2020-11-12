@@ -14,9 +14,9 @@ const client = new MongoClient(url, {
   useUnifiedTopology: true,
 });
 
-module.exports = (app) => {
+module.exports = (app, utils) => {
 
-  app.get("/:username/courses", (req, res) => {
+  app.get("/:username/courses", utils.checkAuthenticated, (req, res) => {
     void client.connect((err) => {
       if (err) throw err;
       void client
@@ -34,7 +34,7 @@ module.exports = (app) => {
     });
   });
 
-  app.get("/:username/trainers", (req, res) => {
+  app.get("/:username/trainers",  utils.checkAuthenticated, (req, res) => {
     void client.connect((err) => {
       if (err) throw err;
       void client

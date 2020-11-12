@@ -3,7 +3,7 @@ const encrypt = require("bcrypt");
 // this module has some useful util function for the main logic.
 module.exports = {
   // this function converts a name of a day to the index of the week. 0-indexed.
-  nameToDay: function (name) {
+  nameToDay: (name) => {
     switch (name) {
       case "Monday":
         return 0;
@@ -25,7 +25,7 @@ module.exports = {
   },
 
   // check if there is overlap in a given list of intervals.
-  existOverlap: function (intervals) {
+  existOverlap: (intervals) => {
     if (!intervals.length) return false;
     const preLen = intervals.length;
     intervals.sort((a, b) => (a[0] !== b[0] ? a[0] - b[0] : a[1] - b[1]));
@@ -42,7 +42,10 @@ module.exports = {
     return res.length < preLen;
   },
 
-  hashPassword: async function(password) {
-    return await encrypt.hash(password, 10);
-  }
+  checkAuthenticated: (req, res, next) => {
+    if (req.isAuthenticated()) {
+      return next();
+    }
+    res.redirect("/");
+  },
 };

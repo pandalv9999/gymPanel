@@ -40,7 +40,7 @@ module.exports = (app, utils) => {
   });
 
   // This router handles the request for a user to make a schedule to a trainer for a specific time slot.
-  app.put("/trainer", (req, res) => {
+  app.put("/trainer", utils.checkAuthenticated, (req, res) => {
     const appointment = req.body;
     console.log(`Received request for user ${appointment.username} to schedule ${appointment.startTime} 
         - ${appointment.endTime} for trainer ${appointment.trainerId} at day ${appointment.date}`);
@@ -167,86 +167,92 @@ module.exports = (app, utils) => {
   });
 
   // This route handles the request for a user to cancel a appointment with a specific trainer at a specific time
-  app.delete("/trainer/:username/:trainerId/:date/:startTime", (req, res) => {
-    const username = req.params.username;
-    const trainerId = req.params.trainerId;
-    const date = req.params.date;
-    const startTime = parseInt(req.params.startTime);
-    const endTime = startTime + 1;
-    console.log(`Received request for user ${username} to cancel appointment with ${trainerId}
+  app.delete(
+    "/trainer/:username/:trainerId/:date/:startTime",
+    utils.checkAuthenticated,
+    (req, res) => {
+      const username = req.params.username;
+      const trainerId = req.params.trainerId;
+      const date = req.params.date;
+      const startTime = parseInt(req.params.startTime);
+      const endTime = startTime + 1;
+      console.log(`Received request for user ${username} to cancel appointment with ${trainerId}
          at date ${date}, ${startTime} - ${endTime}`);
-    void client.connect((err) => {
-      if (err) throw err;
+      void client.connect((err) => {
+        if (err) throw err;
 
-      // remove current time slot from user's scheduled time
-      const identifier = "scheduledTime." + date;
-      client
-        .db(process.env.database)
-        .collection("users")
-        .updateOne(
-          { username: username },
-          { $pull: { [identifier]: [startTime, endTime] } }
-        )
-        .then(
-          (result) => {
-            if (!result || result.modifiedCount === 0) {
-              return null;
-            } else {
-              // remove current time slot from trainer's scheduled time
-              const identifier = "scheduledTime." + date;
-              return client
-                .db(process.env.database)
-                .collection("trainers")
-                .updateOne(
-                  { id: parseInt(trainerId) },
-                  { $pull: { [identifier]: [startTime, endTime] } }
-                );
-            }
-          },
-          (err) => console.log(err)
-        )
-        .then(
-          (result) => {
-            if (!result || result.modifiedCount === 0) {
-              return null;
-            } else {
-              // remove current appointment from user's appointment list
-              return client
-                .db(process.env.database)
-                .collection("users")
-                .updateOne(
-                  { username: username },
-                  {
-                    $pull: {
-                      scheduledAppointments: {
-                        username: username,
-                        trainerId: parseInt(trainerId),
-                        date: parseInt(date),
-                        startTime: startTime,
+        // remove current time slot from user's scheduled time
+        const identifier = "scheduledTime." + date;
+        client
+          .db(process.env.database)
+          .collection("users")
+          .updateOne(
+            { username: username },
+            { $pull: { [identifier]: [startTime, endTime] } }
+          )
+          .then(
+            (result) => {
+              if (!result || result.modifiedCount === 0) {
+                return null;
+              } else {
+                // remove current time slot from trainer's scheduled time
+                const identifier = "scheduledTime." + date;
+                return client
+                  .db(process.env.database)
+                  .collection("trainers")
+                  .updateOne(
+                    { id: parseInt(trainerId) },
+                    { $pull: { [identifier]: [startTime, endTime] } }
+                  );
+              }
+            },
+            (err) => console.log(err)
+          )
+          .then(
+            (result) => {
+              if (!result || result.modifiedCount === 0) {
+                return null;
+              } else {
+                // remove current appointment from user's appointment list
+                return client
+                  .db(process.env.database)
+                  .collection("users")
+                  .updateOne(
+                    { username: username },
+                    {
+                      $pull: {
+                        scheduledAppointments: {
+                          username: username,
+                          trainerId: parseInt(trainerId),
+                          date: parseInt(date),
+                          startTime: startTime,
+                        },
                       },
-                    },
-                  }
+                    }
+                  );
+              }
+            },
+            (err) => console.log(err)
+          )
+          .then(
+            (result) => {
+              if (!result || result.modifiedCount === 0) {
+                console.log(
+                  username + " fail cancel appointment with " + trainerId
                 );
-            }
-          },
-          (err) => console.log(err)
-        )
-        .then(
-          (result) => {
-            if (!result || result.modifiedCount === 0) {
-              console.log(
-                username + " fail cancel appointment with " + trainerId
-              );
-              res.sendStatus(409);
-            } else {
-              console.log(
-                username + " successfully cancel appointment with " + trainerId
-              );
-              res.sendStatus(200);
-            }
-          },
-          (err) => console.log(err)
-        );
-    });
-  });
+                res.sendStatus(409);
+              } else {
+                console.log(
+                  username +
+                    " successfully cancel appointment with " +
+                    trainerId
+                );
+                res.sendStatus(200);
+              }
+            },
+            (err) => console.log(err)
+          );
+      });
+    }
+  );
 };

@@ -19,7 +19,7 @@ const client = new MongoClient(url, {
 // exported module for the main router.
 module.exports = (app, utils) => {
   // This router handles the put request from the front-end in order to register a course to a user.
-  app.put("/course", (req, res) => {
+  app.put("/course", utils.checkAuthenticated, (req, res) => {
     console.log(
       "receive " +
         req.body.username +
@@ -139,98 +139,104 @@ module.exports = (app, utils) => {
   });
 
   // This router handles the delete request from the front end to unregister a user to a course.
-  app.delete("/course/:username/:courseId", (req, res) => {
-    const courseId = parseInt(req.params.courseId);
-    console.log(
-      "receive " +
-        req.params.username +
-        " unregister course " +
-        req.params.courseId
-    );
-    let course;
+  app.delete(
+    "/course/:username/:courseId",
+    utils.checkAuthenticated,
+    (req, res) => {
+      const courseId = parseInt(req.params.courseId);
+      console.log(
+        "receive " +
+          req.params.username +
+          " unregister course " +
+          req.params.courseId
+      );
+      let course;
 
-    void client.connect((err) => {
-      if (err) throw err;
+      void client.connect((err) => {
+        if (err) throw err;
 
-      // get the detailed information of current course, including data, start time and end time.
-      client
-        .db(process.env.database)
-        .collection("courses")
-        .findOne({ id: courseId })
-        .then(
-          (result) => {
-            if (result.length === 0) {
-              return null;
-            }
-            course = result;
+        // get the detailed information of current course, including data, start time and end time.
+        client
+          .db(process.env.database)
+          .collection("courses")
+          .findOne({ id: courseId })
+          .then(
+            (result) => {
+              if (result.length === 0) {
+                return null;
+              }
+              course = result;
 
-            // remove current user from the course's enrollment list.
-            return client
-              .db(process.env.database)
-              .collection("courses")
-              .updateOne(
-                { id: courseId, enrolledMember: req.params.username },
-                { $pull: { enrolledMember: req.params.username } }
-              );
-          },
-          (err) => console.log(err)
-        )
-        .then(
-          (result) => {
-            if (result.modifiedCount === 0) {
-              return null;
-            } else {
-              // remove the current course from user's registeredCourse list.
+              // remove current user from the course's enrollment list.
               return client
                 .db(process.env.database)
-                .collection("users")
+                .collection("courses")
                 .updateOne(
-                  { username: req.params.username },
-                  { $pull: { registeredCourses: { id: courseId } } }
+                  { id: courseId, enrolledMember: req.params.username },
+                  { $pull: { enrolledMember: req.params.username } }
                 );
-            }
-          },
-          (err) => console.log(err)
-        )
-        .then(
-          (result) => {
-            if (!result || result.modifiedCount === 0) {
-              return null;
-            } else {
-              // remove the course' time interval to user's scheduled time table .
-              const identifier =
-                "scheduledTime." + utils.nameToDay(course.date);
-              return client
-                .db(process.env.database)
-                .collection("users")
-                .updateOne(
-                  { username: req.params.username },
-                  {
-                    $pull: { [identifier]: [course.startTime, course.endTime] },
-                  }
+            },
+            (err) => console.log(err)
+          )
+          .then(
+            (result) => {
+              if (result.modifiedCount === 0) {
+                return null;
+              } else {
+                // remove the current course from user's registeredCourse list.
+                return client
+                  .db(process.env.database)
+                  .collection("users")
+                  .updateOne(
+                    { username: req.params.username },
+                    { $pull: { registeredCourses: { id: courseId } } }
+                  );
+              }
+            },
+            (err) => console.log(err)
+          )
+          .then(
+            (result) => {
+              if (!result || result.modifiedCount === 0) {
+                return null;
+              } else {
+                // remove the course' time interval to user's scheduled time table .
+                const identifier =
+                  "scheduledTime." + utils.nameToDay(course.date);
+                return client
+                  .db(process.env.database)
+                  .collection("users")
+                  .updateOne(
+                    { username: req.params.username },
+                    {
+                      $pull: {
+                        [identifier]: [course.startTime, course.endTime],
+                      },
+                    }
+                  );
+              }
+            },
+            (err) => console.log(err)
+          )
+          .then(
+            (result) => {
+              if (!result) {
+                res.sendStatus(409);
+                console.log(
+                  req.params.username + " fail unregistered course " + courseId
                 );
-            }
-          },
-          (err) => console.log(err)
-        )
-        .then(
-          (result) => {
-            if (!result) {
-              res.sendStatus(409);
-              console.log(
-                req.params.username + " fail unregistered course " + courseId
-              );
-            } else {
-              console.log(
-                req.params.username +
-                  " successfully unregistered course " +
-                  courseId
-              );
-              res.sendStatus(200);
-            }
-          },
-          (err) => console.log(err)
-        );
-    });
-  });
+              } else {
+                console.log(
+                  req.params.username +
+                    " successfully unregistered course " +
+                    courseId
+                );
+                res.sendStatus(200);
+              }
+            },
+            (err) => console.log(err)
+          );
+      });
+    }
+  );
 };
