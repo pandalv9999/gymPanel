@@ -18,7 +18,7 @@ const client = new MongoClient(url, {
   useUnifiedTopology: true,
 });
 
-module.exports = (app, utils) => {
+module.exports = (app, passport) => {
   // This router lets user send their register info in the body of the request
   // modified for adding password authentication
   app.post("/create-data", (req, res) => {
@@ -145,8 +145,12 @@ module.exports = (app, utils) => {
     });
   });
 
-  // This router handle the
-  app.post("/login", (req, res) => {
+  // This router handle the login request. Note that we have change the get request to actual post request.
+  app.post("/login", passport.authenticate('local', {
+
+  }),
+
+      (req, res) => {
     console.log(req.body);
     res.status(403);
   });
