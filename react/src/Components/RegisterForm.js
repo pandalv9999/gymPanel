@@ -36,7 +36,7 @@ const RegisterFrom = ({ setRegistering }) => {
   };
 
   return (
-    <div className={"register-form"} style={{ marginTop: "100px" }}>
+    <div className={"register-form"} style={{ marginBottom: "80px" }}>
       <h2 className={"title-form"}>Create Account</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={"register-form"}>
         <div className="form-group">
@@ -46,11 +46,15 @@ const RegisterFrom = ({ setRegistering }) => {
             className="form-control"
             name="username"
             id="username"
+            pattern="[A-Za-z0-9]{6,}"
             ref={register({ required: "Username required!" })}
           />
           {errors.username && (
-            <p style={{ color: "red" }}>{errors.username.message}</p>
+            <p id="usernameError" style={{ color: "red"}}>{errors.username.message}</p>
           )}
+          <small className="form-text text-muted">
+            Please enter 6 or more characters (no special characters).
+          </small>
         </div>
         <div className={"form-group"}>
           <label htmlFor={"password"}>Password:</label>
@@ -59,12 +63,15 @@ const RegisterFrom = ({ setRegistering }) => {
             className={"form-control"}
             name={"password"}
             id={"password"}
-            pattern="[A-Za-z0-9]{6,}"
+            pattern=".{8,}"
             ref={register({ required: "Password required!" })}
           />
+          <small className="form-text text-muted">
+            Please enter 8 or more characters.
+          </small>
         </div>
         {errors.password && (
-          <p style={{ color: "red" }}>{errors.password.message}</p>
+          <p id="passwordError" style={{ color: "red" }}>{errors.password.message}</p>
         )}
         <div className={"form-group"}>
           <label htmlFor={"confirm_password"}>Confirm Password:</label>
@@ -73,7 +80,7 @@ const RegisterFrom = ({ setRegistering }) => {
             className={"form-control"}
             name={"confirm_password"}
             id={"confirm-password"}
-            pattern="[A-Za-z0-9]{6,}"
+            pattern=".{8,}"
             ref={register({
               validate: (value) =>
                 value === watch("password") || "Passwords does not match!",
@@ -82,9 +89,6 @@ const RegisterFrom = ({ setRegistering }) => {
           {errors.confirm_password && (
             <p style={{ color: "red" }}>{errors.confirm_password.message}</p>
           )}
-          <small className="form-text text-muted">
-            Please enter 6 or more characters (no special characters).
-          </small>
         </div>
         <div className="form-group">
           <label htmlFor="firstName">First Name:</label>
@@ -116,7 +120,7 @@ const RegisterFrom = ({ setRegistering }) => {
             ref={register({ required: "Email required!" })}
           />
           {errors.email && (
-            <p style={{ color: "red" }}>{errors.email.message}</p>
+            <p id="emailError" style={{ color: "red" }}>{errors.email.message}</p>
           )}
           <small className="form-text text-muted">
             Please enter a valid email address include an "@".
@@ -163,7 +167,7 @@ const RegisterFrom = ({ setRegistering }) => {
           </select>
         </div>
         <div className="form-group">
-          <label htmlFor="weight">Weight(lbs): </label>
+          <label htmlFor="weight">Weight(lbs):</label>
           <input
             type="number"
             className="form-control"
@@ -173,7 +177,7 @@ const RegisterFrom = ({ setRegistering }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="height">Height(cm): </label>
+          <label htmlFor="height">Height(cm):</label>
           <input
             type="number"
             className="form-control"
@@ -186,7 +190,7 @@ const RegisterFrom = ({ setRegistering }) => {
           Create
         </button>
       </form>
-      <p style={{ color: "red" }}>{errMsg}</p>
+      <p id="duplicatesError" style={{ color: "red"}}>{errMsg}</p>
       <a href="/">Already has an account? Login here</a>
     </div>
   );
