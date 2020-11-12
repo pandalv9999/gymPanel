@@ -42,7 +42,7 @@ const App = () => {
     <div className={"App"}>
       {setHeader()}
       {loggedInUser && (
-        <Dashboard user={loggedInUser} userSetter={setLoggedInUser} />
+        <Dashboard user={loggedInUser} />
       )}
       {registering && <RegisterFrom setRegistering={setRegistering} />}
     </div>

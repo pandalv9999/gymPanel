@@ -1,5 +1,3 @@
-const encrypt = require("bcrypt");
-
 // this module has some useful util function for the main logic.
 module.exports = {
 
@@ -54,4 +52,16 @@ module.exports = {
     }
     res.redirect("/");
   },
+
+  checkRole: (role) => {
+    return (req, res, next) => {
+      if (req.user.role !== role) {
+        console.log("Role check fail");
+        res.status(401);
+        return res.send(`User ${req.user.username} is not allowed to view this content`);
+      }
+      console.log("role check success");
+      next();
+    }
+  }
 };

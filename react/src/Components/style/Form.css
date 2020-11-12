@@ -1,0 +1,40 @@
+.add-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 200px;
+    padding-right: 200px;
+
+}
+
+.form-row {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.button-row {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.form-row > label {
+    flex: 1;
+    display: block;
+    text-align: left;
+}
+
+.form-row > input, .form-row > select {
+    flex: 6;
+    border: 0;
+    border-bottom: 1px solid black;
+    outline: 0;
+}
+
+.form-row > textarea {
+    flex: 6;
+}
+
+

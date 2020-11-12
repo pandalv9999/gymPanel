@@ -3,11 +3,18 @@ import Schedule from "./Schedule";
 import Profile from "./Profile";
 import Courses from "./Courses";
 import Trainers from "./Trainers";
+import AdminDashboard from "./AdminDashboard";
 import "./style/Dashboard.css";
 
-const Dashboard = ({ user, userSetter }) => {
+const Dashboard = ({ user }) => {
   const [currentModule, setCurrentModule] = useState(<Schedule user={user} />);
-  const [currentState, setCurrentState] = useState([true, false, false, false]);
+  const [currentState, setCurrentState] = useState([
+    true,
+    false,
+    false,
+    false,
+    false,
+  ]);
   const currentPage = "#";
 
   const setCurrentPage = (index, module) => {
@@ -77,6 +84,22 @@ const Dashboard = ({ user, userSetter }) => {
               <i className={"fa fa-database"} /> Trainers
             </a>
           </li>
+          {user.role === "admin" && (
+            <li
+              key={"admin"}
+              style={{ listStyle: "none" }}
+              className={currentState[4] ? "active" : ""}
+            >
+              <a
+                href={currentPage}
+                className={"App-link"}
+                onClick={() => setCurrentPage(4, <AdminDashboard user={user} />)}
+              >
+                <i className={"fa fa-unlock"} /> Manage Site
+              </a>
+            </li>
+          )}
+
           <li key="log-out" style={{ listStyleType: "None" }}>
             <a href={"/logout"} className="App-link">
               {" "}
