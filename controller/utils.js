@@ -2,6 +2,12 @@ const encrypt = require("bcrypt");
 
 // this module has some useful util function for the main logic.
 module.exports = {
+
+  ROLE: {
+    ADMIN: 'admin',
+    BASIC: 'basic'
+  },
+
   // this function converts a name of a day to the index of the week. 0-indexed.
   nameToDay: (name) => {
     switch (name) {
