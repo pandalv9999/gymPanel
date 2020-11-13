@@ -49,6 +49,18 @@ const AdminDashboard = ({ user }) => {
       });
   };
 
+  const deleteTrainer = (trainer) => {
+    const url = "admin/trainer/delete";
+    trainer.user = user;
+    axios.post(url, trainer).then((res) => {
+      console.log(`Successfully remove trainer ${trainer.id}`);
+      setErrMsg(`Successfully remove trainer ${trainer.id}`);
+      refresh();
+    }).catch((err) => {
+      setErrMsg(err);
+    })
+  };
+
   const onModifyCourseExpand = (courseId) => {
     const curr = [...displayUpdateCourse];
     curr[courseId] = true;
@@ -131,6 +143,7 @@ const AdminDashboard = ({ user }) => {
         </ul>
       </div>
       <div className={"personal-schedule-container"}>
+        <p style={{ color: "red" }}>{errMsg}</p>
         <AddTrainerForm trainer={null} refresh={refresh} user={user} />
         <ul>
           {trainers.map((trainer) => {
@@ -143,15 +156,19 @@ const AdminDashboard = ({ user }) => {
                   <div className={"schedule-text"}>
                     <h3>Trainer: {trainer.name}</h3>
                   </div>
-                  {displayUpdateTrainer[trainer.id] ? (
-                    <button onClick={() => onModifyTrainerCollapse(trainer.id)}>
-                      Cancel
-                    </button>
-                  ) : (
-                    <button onClick={() => onModifyTrainerExpand(trainer.id)}>
-                      Update
-                    </button>
-                  )}
+                  <div style={{display: "flex"}}>
+                    <button style={{marginRight: "20px"}} onClick={() => deleteTrainer(trainer)}>Remove</button>
+                    {displayUpdateTrainer[trainer.id] ? (
+                        <button onClick={() => onModifyTrainerCollapse(trainer.id)}>
+                          Cancel
+                        </button>
+                    ) : (
+                        <button onClick={() => onModifyTrainerExpand(trainer.id)}>
+                          Update
+                        </button>
+                    )}
+                  </div>
+
                 </li>
                 {displayUpdateTrainer[trainer.id] && (
                     <AddTrainerForm trainer={trainer} refresh={refresh} user={user} />

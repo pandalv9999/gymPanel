@@ -64,5 +64,14 @@ module.exports = {
       console.log("role check success");
       next();
     }
+  },
+
+  existsScheduledTime: (intervals) => {
+    for (const interval of intervals) {
+      if (interval.length !== 0) {
+        return true;
+      }
+    }
+    return false;
   }
 };

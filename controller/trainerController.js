@@ -317,4 +317,34 @@ module.exports = (app, utils) => {
             }, (err) => console.log(err));
         })
     });
+
+    // this router handles the request to remove a certain trainer from database.
+    app.post("/admin/trainer/delete", utils.checkAuthenticated, utils.checkRole(utils.ROLE.ADMIN), (req, res) => {
+        const trainer = req.body;
+        console.log(`Deleting trainer with trainer Id ${trainer.id}`);
+        void client.connect((err) => {
+            if (err) throw err;
+
+            // get Trainer from database to get the newest version of the trainer
+            client.db(process.env.database).collection("trainers").findOne({id: trainer.id}).then((result) => {
+                if (!result) {
+                    return null;
+
+                    // check if current trainers has appointments or registered course.
+                } else if (utils.existsScheduledTime(result.scheduledTime)) {
+                    return null;
+                } else {
+                    return client.db(process.env.database).collection("trainers").deleteOne({id: trainer.id});
+                }
+            }, (err) => console.log(err)).then((result) => {
+                if (!result || result.deletedCount === 0) {
+                    console.log(`Fail Deleting trainer with trainer Id ${trainer.id}`);
+                    res.sendStatus(409);
+                } else {
+                    console.log(`Successfully Deleting trainer with trainer Id ${trainer.id}`);
+                    res.sendStatus(200);
+                }
+            }, (err) => console.log(err));
+        })
+    })
 };

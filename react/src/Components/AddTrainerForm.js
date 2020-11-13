@@ -26,7 +26,7 @@ const AddTrainerForm = ({ trainer, refresh, user }) => {
           refresh();
       }).catch((err) => {
           console.log("Fail to update trainer!");
-          setErrMsg(err.response.data);
+          setErrMsg(err);
       })
   };
 
@@ -38,7 +38,7 @@ const AddTrainerForm = ({ trainer, refresh, user }) => {
         refresh();
     }).catch((err) => {
         console.log("Fail to insert trainer!");
-        setErrMsg(err.response.data);
+        setErrMsg(err);
     })
   };
 

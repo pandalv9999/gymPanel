@@ -10,13 +10,13 @@ const EditProfile = ({ user }) => {
   const [height, setHeight] = useState(user.height);
 
   const resetState = () => {
-    setFirstName(user.firstName)
-    setLastName(user.lastName)
-    setEmail(user.email)
-    setPhone(user.phone)
-    setWeight(user.weight)
-    setHeight(user.height)
-}
+    setFirstName(user.firstName);
+    setLastName(user.lastName);
+    setEmail(user.email);
+    setPhone(user.phone);
+    setWeight(user.weight);
+    setHeight(user.height);
+};
 
   return (
     <div className={"edit-container"} style={{ marginTop: "100px" }}>
