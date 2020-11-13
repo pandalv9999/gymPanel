@@ -3,41 +3,16 @@ import "./style/Form.css";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 
-const AddCourseForm = ({ user }) => {
+const AddCourseForm = ({ trainers, course }) => {
   const { register, handleSubmit, errors, reset } = useForm();
-  const [trainers, setTrainers] = useState([]);
-  const [errMsg, setErrMsg] = useState("");
-
-  const loadTrainer = () => {
-    const url = `./${user.username}/trainers`;
-    axios
-      .get(url)
-      .then((res) => {
-        const data = res.data;
-        if (data.length === 0) {
-          setErrMsg("There is no course loaded!");
-        } else {
-          setTrainers(data);
-        }
-      })
-      .catch((err) => {
-        setErrMsg(err);
-      });
-  };
 
   const onSubmit = (data) => {
     console.log(data);
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    console.log(`Loading Trainers`);
-    loadTrainer();
-  }, []);
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={"add-form"}>
-      <h3>Add Course</h3>
+      <h3>{course ? "Update" : "Add"} Course</h3>
       <div className={"form-row"}>
         <label htmlFor="courseName">Course Name:</label>
         <input
@@ -45,6 +20,7 @@ const AddCourseForm = ({ user }) => {
           name="courseName"
           id="course-name"
           ref={register({ required: "Course Name required!" })}
+          defaultValue={course ? course.courseName : ""}
         />
       </div>
       {errors.courseName && (
@@ -57,12 +33,18 @@ const AddCourseForm = ({ user }) => {
           name="url"
           id="url"
           ref={register({ required: "Image url required!" })}
+          defaultValue={course ? course.url : ""}
         />
       </div>
       {errors.url && <p style={{ color: "red" }}>{errors.url.message}</p>}
       <div className={"form-row"}>
         <label htmlFor="date">Date: </label>
-        <select name={"date"} id={"date"} ref={register}>
+        <select
+          name={"date"}
+          id={"date"}
+          ref={register}
+          defaultValue={course ? course.date : "Monday"}
+        >
           <option value={"Monday"}>Monday</option>
           <option value={"Tuesday"}>Tuesday</option>
           <option value={"Wednesday"}>Wednesday</option>
@@ -74,7 +56,14 @@ const AddCourseForm = ({ user }) => {
       </div>
       <div className={"form-row"}>
         <label htmlFor={"time"}>Time: </label>
-        <select name={"time"} id={"time"} ref={register}>
+        <select
+          name={"time"}
+          id={"time"}
+          ref={register}
+          defaultValue={
+            course ? `${course.startTime}-${course.endTime}` : "8-9"
+          }
+        >
           <option key={"8-9"} value={"8-9"}>
             8:00 -- 9:00
           </option>
@@ -123,6 +112,7 @@ const AddCourseForm = ({ user }) => {
             validate: (value) => value >= 0 || "Minimum Capacity is 0!",
             required: "Capacity must not be empty!",
           })}
+          defaultValue={course ? course.capacity : ""}
         />
       </div>
       {errors.capacity && (
@@ -130,7 +120,18 @@ const AddCourseForm = ({ user }) => {
       )}
       <div className={"form-row"}>
         <label htmlFor={"instructor"}>Instructor</label>
-        <select name={"instructor"} id={"instructor"} ref={register}>
+        <select
+          name={"instructor"}
+          id={"instructor"}
+          ref={register}
+          defaultValue={
+            course
+              ? course.instructor
+              : trainers.length !== 0
+              ? trainers[0].name
+              : ""
+          }
+        >
           {trainers.map((trainer) => {
             return (
               <option key={trainer.id} value={trainer.id}>
@@ -148,6 +149,7 @@ const AddCourseForm = ({ user }) => {
           ref={register({ required: "Description must not be empty!" })}
           rows={5}
           placeholder={" Please enter description to the course!"}
+          defaultValue={course ? course.description : ""}
         />
       </div>
       {errors.description && (
@@ -158,7 +160,6 @@ const AddCourseForm = ({ user }) => {
           Add
         </button>
       </div>
-      <p style={{ color: "red" }}>{errMsg}</p>
     </form>
   );
 };
