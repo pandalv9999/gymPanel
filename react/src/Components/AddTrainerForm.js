@@ -1,12 +1,43 @@
-import React from "react";
+import React, {useState} from "react";
+import axios from "axios"
 import "./style/Form.css";
 import { useForm } from "react-hook-form";
 
-const AddTrainerForm = ({ trainer }) => {
+const AddTrainerForm = ({ trainer, refresh }) => {
   const { register, handleSubmit, errors, reset } = useForm();
+  const [errMsg, setErrMsg] = useState("");
 
   const onSubmit = (data) => {
-    console.log(data);
+    if (trainer) {
+        insertTrainer(data);
+    } else {
+        updateTrainer(trainer);
+    }
+  };
+
+  const updateTrainer = (trainer) => {
+      const url = "/admin/trainer";
+      axios.put(url, trainer).then((res) => {
+          console.log("Success to insert trainer!");
+          setErrMsg("Insert Success!");
+          refresh();
+      }).catch((err) => {
+          console.log("Fail to insert trainer!");
+          setErrMsg(err.response.data);
+      })
+  };
+
+  const insertTrainer = (trainer) => {
+    const url = "/admin/trainer";
+    console.log(trainer);
+    axios.post(url, trainer).then((res) => {
+        console.log("Success to update trainer!");
+        setErrMsg("Update Success!");
+        refresh();
+    }).catch((err) => {
+        console.log("Fail to update trainer!");
+        setErrMsg(err);
+    })
   };
 
   return (
@@ -54,6 +85,7 @@ const AddTrainerForm = ({ trainer }) => {
           Add
         </button>
       </div>
+        <div className={"form-row"}><p style={{color: "red"}}>{errMsg}</p></div>
     </form>
   );
 };

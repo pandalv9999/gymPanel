@@ -255,4 +255,66 @@ module.exports = (app, utils) => {
       });
     }
   );
+
+  // This router handles admin request that modify existing trainer
+  app.put("/admin/trainer", utils.checkAuthenticated, utils.checkRole(utils.ROLE.ADMIN), (req, res) => {
+      const modifiedTrainer = req.body;
+     console.log(`Modifying trainer information of id ${modifiedTrainer.id}`);
+     void client.connect((err) => {
+         if (err) throw err;
+
+         // Find the trainer from database then give it new values.
+         client.db(process.env.database).collection("trainers").updateOne({
+             id: modifiedTrainer.id
+         }, {
+             $set: {
+                 url: modifiedTrainer.url,
+                 name: modifiedTrainer.name,
+                 description: modifiedTrainer.description
+             },
+         }).then((result) => {
+             if (!result || result.modifiedCount === 0) {
+                 console.log(`Fail to modify specific trainer with id ${modifiedTrainer.id}`);
+                 res.sendStatus(409);
+             } else {
+                 console.log(`Success modify specific trainer with id ${modifiedTrainer.id}`);
+                 res.sendStatus(200);
+             }
+         }, (err) => console.log(err));
+     })
+  });
+
+  // this router handles the add new request from the front end
+    app.post("/admin/trainer", utils.checkAuthenticated, utils.checkRole(utils.ROLE.ADMIN), (req, res) => {
+        const newTrainer = req.body;
+        console.log(`Adding new trainer to database`);
+        void client.connect((err) => {
+            if (err) throw err;
+
+            // get all trainers from database to see the total number of trainer
+            client.db(process.env.database).collection("trainers").find({}).toArray().then((result => {
+                if (!result) {
+                    return null;
+                }
+
+                // insert the new document into database
+                return client.db(process.env.database).collection("trainers").insertOne({
+                    id: result.length + 1,
+                    url: newTrainer.url,
+                    name: newTrainer.name,
+                    description: newTrainer.description,
+                    comments: [],
+                    scheduledTime: [[], [], [], [], [], [], []],
+                })
+            }), (err) => console.log(err)).then((result) => {
+                if (!result) {
+                    console.log(`Adding new trainer failed`);
+                    res.status(400);
+                } else {
+                    console.log(`Adding new trainer success`);
+                    res.sendStatus(200);
+                }
+            }, (err) => console.log(err));
+        })
+    });
 };

@@ -10,6 +10,11 @@ const AdminDashboard = ({ user }) => {
   const [displayUpdateCourse, setDisplayUpdateCourse] = useState([]);
   const [errMsg, setErrMsg] = useState("");
 
+  const refresh = () => {
+    loadCourse();
+    loadTrainer();
+  };
+
   const loadTrainer = () => {
     const url = `./${user.username}/trainers`;
     axios
@@ -107,21 +112,18 @@ const AdminDashboard = ({ user }) => {
                       {`${course.date} ${course.startTime}:00 -- ${course.endTime}:00`}
                     </span>
                   </p>
-                  <div style={{ display: "flex" }}>
-                    <button style={{ marginRight: "20px" }}>Remove</button>
-                    {displayUpdateCourse[course.id] ? (
-                      <button onClick={() => onModifyCourseCollapse(course.id)}>
-                        Cancel
-                      </button>
-                    ) : (
-                      <button onClick={() => onModifyCourseExpand(course.id)}>
-                        Update
-                      </button>
-                    )}
-                  </div>
+                  {displayUpdateCourse[course.id] ? (
+                    <button onClick={() => onModifyCourseCollapse(course.id)}>
+                      Cancel
+                    </button>
+                  ) : (
+                    <button onClick={() => onModifyCourseExpand(course.id)}>
+                      Update
+                    </button>
+                  )}
                 </li>
                 {displayUpdateCourse[course.id] && (
-                  <li>
+                  <li key={`edit-course-${course.id}`}>
                     <AddCourseForm trainers={trainers} course={course} />
                   </li>
                 )}
@@ -143,24 +145,19 @@ const AdminDashboard = ({ user }) => {
                   <div className={"schedule-text"}>
                     <h3>Trainer: {trainer.name}</h3>
                   </div>
-                  <div style={{ display: "flex" }}>
-                    <button style={{ marginRight: "20px" }}>Remove</button>
-                    {displayUpdateCourse[trainer.id] ? (
-                      <button
-                        onClick={() => onModifyTrainerCollapse(trainer.id)}
-                      >
-                        Cancel
-                      </button>
-                    ) : (
-                      <button onClick={() => onModifyTrainerExpand(trainer.id)}>
-                        Update
-                      </button>
-                    )}
-                  </div>
+                  {displayUpdateCourse[trainer.id] ? (
+                    <button onClick={() => onModifyTrainerCollapse(trainer.id)}>
+                      Cancel
+                    </button>
+                  ) : (
+                    <button onClick={() => onModifyTrainerExpand(trainer.id)}>
+                      Update
+                    </button>
+                  )}
                 </li>
                 {displayUpdateTrainer[trainer.id] && (
-                  <li>
-                    <AddTrainerForm trainer={trainer} />
+                  <li key={`edit-trainer-${trainer.id}`}>
+                    <AddTrainerForm trainer={trainer} refresh={refresh} />
                   </li>
                 )}
               </React.Fragment>
