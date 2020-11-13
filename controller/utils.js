@@ -1,9 +1,8 @@
 // this module has some useful util function for the main logic.
 module.exports = {
-
   ROLE: {
-    ADMIN: 'admin',
-    BASIC: 'basic'
+    ADMIN: "admin",
+    BASIC: "basic",
   },
 
   // this function converts a name of a day to the index of the week. 0-indexed.
@@ -55,15 +54,16 @@ module.exports = {
 
   checkRole: (role) => {
     return (req, res, next) => {
-
       if (req.body.user.role !== role) {
         console.log("Role check fail");
         res.status(401);
-        return res.send(`User ${req.user.username} is not allowed to view this content`);
+        return res.send(
+          `User ${req.user.username} is not allowed to view this content`
+        );
       }
       console.log("role check success");
       next();
-    }
+    };
   },
 
   existsScheduledTime: (intervals) => {
@@ -73,5 +73,5 @@ module.exports = {
       }
     }
     return false;
-  }
+  },
 };

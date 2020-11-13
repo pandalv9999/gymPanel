@@ -52,13 +52,16 @@ const AdminDashboard = ({ user }) => {
   const deleteTrainer = (trainer) => {
     const url = "admin/trainer/delete";
     trainer.user = user;
-    axios.post(url, trainer).then((res) => {
-      console.log(`Successfully remove trainer ${trainer.id}`);
-      setErrMsg(`Successfully remove trainer ${trainer.id}`);
-      refresh();
-    }).catch((err) => {
-      setErrMsg(err);
-    })
+    axios
+      .post(url, trainer)
+      .then((res) => {
+        console.log(`Successfully remove trainer ${trainer.id}`);
+        setErrMsg(`Successfully remove trainer ${trainer.id}`);
+        refresh();
+      })
+      .catch((err) => {
+        setErrMsg(err);
+      });
   };
 
   const onModifyCourseExpand = (courseId) => {
@@ -135,7 +138,7 @@ const AdminDashboard = ({ user }) => {
                   )}
                 </li>
                 {displayUpdateCourse[course.id] && (
-                    <AddCourseForm trainers={trainers} course={course} />
+                  <AddCourseForm trainers={trainers} course={course} />
                 )}
               </React.Fragment>
             );
@@ -156,22 +159,32 @@ const AdminDashboard = ({ user }) => {
                   <div className={"schedule-text"}>
                     <h3>Trainer: {trainer.name}</h3>
                   </div>
-                  <div style={{display: "flex"}}>
-                    <button style={{marginRight: "20px"}} onClick={() => deleteTrainer(trainer)}>Remove</button>
+                  <div style={{ display: "flex" }}>
+                    <button
+                      style={{ marginRight: "20px" }}
+                      onClick={() => deleteTrainer(trainer)}
+                    >
+                      Remove
+                    </button>
                     {displayUpdateTrainer[trainer.id] ? (
-                        <button onClick={() => onModifyTrainerCollapse(trainer.id)}>
-                          Cancel
-                        </button>
+                      <button
+                        onClick={() => onModifyTrainerCollapse(trainer.id)}
+                      >
+                        Cancel
+                      </button>
                     ) : (
-                        <button onClick={() => onModifyTrainerExpand(trainer.id)}>
-                          Update
-                        </button>
+                      <button onClick={() => onModifyTrainerExpand(trainer.id)}>
+                        Update
+                      </button>
                     )}
                   </div>
-
                 </li>
                 {displayUpdateTrainer[trainer.id] && (
-                    <AddTrainerForm trainer={trainer} refresh={refresh} user={user} />
+                  <AddTrainerForm
+                    trainer={trainer}
+                    refresh={refresh}
+                    user={user}
+                  />
                 )}
               </React.Fragment>
             );

@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import axios from "axios"
+import React, { useState } from "react";
+import axios from "axios";
 import "./style/Form.css";
 import { useForm } from "react-hook-form";
 
@@ -8,38 +8,43 @@ const AddTrainerForm = ({ trainer, refresh, user }) => {
   const [errMsg, setErrMsg] = useState("");
 
   const onSubmit = (data) => {
-
-      data.user = user;
+    data.user = user;
     if (!trainer) {
-        insertTrainer(data);
+      insertTrainer(data);
     } else {
-        updateTrainer(data);
+      updateTrainer(data);
     }
   };
 
   const updateTrainer = (data) => {
-      const url = "/admin/trainer";
-      data.id = trainer.id;
-      axios.put(url, data).then((res) => {
-          console.log("Success to update trainer!");
-          setErrMsg("Update Success!");
-          refresh();
-      }).catch((err) => {
-          console.log("Fail to update trainer!");
-          setErrMsg(err);
+    const url = "/admin/trainer";
+    data.id = trainer.id;
+    axios
+      .put(url, data)
+      .then((res) => {
+        console.log("Success to update trainer!");
+        setErrMsg("Update Success!");
+        refresh();
       })
+      .catch((err) => {
+        console.log("Fail to update trainer!");
+        setErrMsg(err);
+      });
   };
 
   const insertTrainer = (data) => {
     const url = "/admin/trainer";
-    axios.post(url, data).then((res) => {
+    axios
+      .post(url, data)
+      .then((res) => {
         console.log("Success to insert trainer!");
         setErrMsg("Insert Success!");
         refresh();
-    }).catch((err) => {
+      })
+      .catch((err) => {
         console.log("Fail to insert trainer!");
         setErrMsg(err);
-    })
+      });
   };
 
   return (
@@ -84,10 +89,12 @@ const AddTrainerForm = ({ trainer, refresh, user }) => {
       )}
       <div className={"button-row"}>
         <button type={"submit"} style={{ width: "100px" }}>
-            {trainer ? "Update" : "Add"}
+          {trainer ? "Update" : "Add"}
         </button>
       </div>
-        <div className={"form-row"}><p style={{color: "red"}}>{errMsg}</p></div>
+      <div className={"form-row"}>
+        <p style={{ color: "red" }}>{errMsg}</p>
+      </div>
     </form>
   );
 };
