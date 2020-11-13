@@ -57,6 +57,18 @@ const AdminDashboard = ({ user }) => {
     setDisplayUpdateCourse(curr);
   };
 
+  const onModifyTrainerExpand = (trainerId) => {
+    const curr = [...displayUpdateTrainer];
+    curr[trainerId] = true;
+    setDisplayUpdateTrainer(curr);
+  };
+
+  const onModifyTrainerCollapse = (trainerId) => {
+    const curr = [...displayUpdateTrainer];
+    curr[trainerId] = false;
+    setDisplayUpdateTrainer(curr);
+  };
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     console.log(`Loading Trainers`);
@@ -119,7 +131,42 @@ const AdminDashboard = ({ user }) => {
         </ul>
       </div>
       <div className={"personal-schedule-container"}>
-        <AddTrainerForm />
+        <AddTrainerForm trainer={null} />
+        <ul>
+          {trainers.map((trainer) => {
+            return (
+              <React.Fragment>
+                <li
+                  className={"schedule-list-container"}
+                  key={`trainer-${trainer.id}`}
+                >
+                  <div className={"schedule-text"}>
+                    <h3>Trainer: {trainer.name}</h3>
+                  </div>
+                  <div style={{ display: "flex" }}>
+                    <button style={{ marginRight: "20px" }}>Remove</button>
+                    {displayUpdateCourse[trainer.id] ? (
+                      <button
+                        onClick={() => onModifyTrainerCollapse(trainer.id)}
+                      >
+                        Cancel
+                      </button>
+                    ) : (
+                      <button onClick={() => onModifyTrainerExpand(trainer.id)}>
+                        Update
+                      </button>
+                    )}
+                  </div>
+                </li>
+                {displayUpdateTrainer[trainer.id] && (
+                  <li>
+                    <AddTrainerForm trainer={trainer} />
+                  </li>
+                )}
+              </React.Fragment>
+            );
+          })}
+        </ul>
       </div>
     </React.Fragment>
   );
