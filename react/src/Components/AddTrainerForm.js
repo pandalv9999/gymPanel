@@ -3,40 +3,42 @@ import axios from "axios"
 import "./style/Form.css";
 import { useForm } from "react-hook-form";
 
-const AddTrainerForm = ({ trainer, refresh }) => {
+const AddTrainerForm = ({ trainer, refresh, user }) => {
   const { register, handleSubmit, errors, reset } = useForm();
   const [errMsg, setErrMsg] = useState("");
 
   const onSubmit = (data) => {
-    if (trainer) {
+
+      data.user = user;
+    if (!trainer) {
         insertTrainer(data);
     } else {
-        updateTrainer(trainer);
+        updateTrainer(data);
     }
   };
 
-  const updateTrainer = (trainer) => {
+  const updateTrainer = (data) => {
       const url = "/admin/trainer";
-      axios.put(url, trainer).then((res) => {
-          console.log("Success to insert trainer!");
-          setErrMsg("Insert Success!");
+      data.id = trainer.id;
+      axios.put(url, data).then((res) => {
+          console.log("Success to update trainer!");
+          setErrMsg("Update Success!");
           refresh();
       }).catch((err) => {
-          console.log("Fail to insert trainer!");
+          console.log("Fail to update trainer!");
           setErrMsg(err.response.data);
       })
   };
 
-  const insertTrainer = (trainer) => {
+  const insertTrainer = (data) => {
     const url = "/admin/trainer";
-    console.log(trainer);
-    axios.post(url, trainer).then((res) => {
-        console.log("Success to update trainer!");
-        setErrMsg("Update Success!");
+    axios.post(url, data).then((res) => {
+        console.log("Success to insert trainer!");
+        setErrMsg("Insert Success!");
         refresh();
     }).catch((err) => {
-        console.log("Fail to update trainer!");
-        setErrMsg(err);
+        console.log("Fail to insert trainer!");
+        setErrMsg(err.response.data);
     })
   };
 
@@ -82,7 +84,7 @@ const AddTrainerForm = ({ trainer, refresh }) => {
       )}
       <div className={"button-row"}>
         <button type={"submit"} style={{ width: "100px" }}>
-          Add
+            {trainer ? "Update" : "Add"}
         </button>
       </div>
         <div className={"form-row"}><p style={{color: "red"}}>{errMsg}</p></div>

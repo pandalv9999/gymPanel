@@ -97,7 +97,7 @@ const AdminDashboard = ({ user }) => {
               <React.Fragment>
                 <li
                   className={"schedule-list-container"}
-                  key={`course-${course.id}`}
+                  key={`course-list-${course.id}-${Math.random() * 10000}`}
                 >
                   <div className={"schedule-text"}>
                     <h3>Course: {course.courseName}</h3>
@@ -123,9 +123,7 @@ const AdminDashboard = ({ user }) => {
                   )}
                 </li>
                 {displayUpdateCourse[course.id] && (
-                  <li key={`edit-course-${course.id}`}>
                     <AddCourseForm trainers={trainers} course={course} />
-                  </li>
                 )}
               </React.Fragment>
             );
@@ -133,19 +131,19 @@ const AdminDashboard = ({ user }) => {
         </ul>
       </div>
       <div className={"personal-schedule-container"}>
-        <AddTrainerForm trainer={null} />
+        <AddTrainerForm trainer={null} refresh={refresh} user={user} />
         <ul>
           {trainers.map((trainer) => {
             return (
               <React.Fragment>
                 <li
                   className={"schedule-list-container"}
-                  key={`trainer-${trainer.id}`}
+                  key={`trainer-list-${trainer.id}-${Math.random() * 10000}`}
                 >
                   <div className={"schedule-text"}>
                     <h3>Trainer: {trainer.name}</h3>
                   </div>
-                  {displayUpdateCourse[trainer.id] ? (
+                  {displayUpdateTrainer[trainer.id] ? (
                     <button onClick={() => onModifyTrainerCollapse(trainer.id)}>
                       Cancel
                     </button>
@@ -156,9 +154,7 @@ const AdminDashboard = ({ user }) => {
                   )}
                 </li>
                 {displayUpdateTrainer[trainer.id] && (
-                  <li key={`edit-trainer-${trainer.id}`}>
-                    <AddTrainerForm trainer={trainer} refresh={refresh} />
-                  </li>
+                    <AddTrainerForm trainer={trainer} refresh={refresh} user={user} />
                 )}
               </React.Fragment>
             );

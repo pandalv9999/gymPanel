@@ -56,7 +56,7 @@ module.exports = {
   checkRole: (role) => {
     return (req, res, next) => {
 
-      if (req.user.role !== role) {
+      if (req.body.user.role !== role) {
         console.log("Role check fail");
         res.status(401);
         return res.send(`User ${req.user.username} is not allowed to view this content`);
