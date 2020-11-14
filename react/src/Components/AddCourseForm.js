@@ -3,11 +3,53 @@ import "./style/Form.css";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 
-const AddCourseForm = ({ trainers, course }) => {
+const AddCourseForm = ({ trainers, course, user, refresh }) => {
   const { register, handleSubmit, errors, reset } = useForm();
+    const [errMsg, setErrMsg] = useState("");
 
+  // assign id to data
   const onSubmit = (data) => {
-    console.log(data);
+    data.user = user;
+    if (course) {
+        updateCourse(data);
+    } else {
+        insertCourse(data);
+    }
+  };
+
+  const updateCourse = (data) => {
+      data.id = course.id;
+      data.prevCourse = course;
+      console.log(data);
+      const url = "/admin/course";
+      axios.put(url, data).then((result) => {
+        console.log("Successfully modify course info");
+        setErrMsg("Successfully modify course info");
+        refresh()
+      }).catch((err) => {
+          setErrMsg(err);
+      });
+  };
+
+  const findTrainerById = (trainerId) => {
+      for (const trainer of trainers) {
+          if (trainer.id === trainerId) {
+              return trainer;
+          }
+      }
+      return null;
+    };
+
+  const insertCourse = (data) => {
+      data.instructor = findTrainerById(parseInt(data.instructor));
+        const url = "/admin/course";
+        axios.post(url, data).then((result) => {
+            console.log("Successfully add course");
+            setErrMsg("Successfully add course");
+            refresh()
+        }).catch((err) => {
+            setErrMsg(err)
+        })
   };
 
   return (
@@ -134,7 +176,7 @@ const AddCourseForm = ({ trainers, course }) => {
         >
           {trainers.map((trainer) => {
             return (
-              <option key={trainer.id} value={trainer.id}>
+              <option key={`trainer-detail-${trainer.id}`} value={trainer.id}>
                 {trainer.name}
               </option>
             );
@@ -157,7 +199,7 @@ const AddCourseForm = ({ trainers, course }) => {
       )}
       <div className={"button-row"}>
         <button type={"submit"} style={{ width: "100px" }}>
-          Add
+            {course ? "Update" : "Add"}
         </button>
       </div>
     </form>

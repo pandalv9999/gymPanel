@@ -74,4 +74,21 @@ module.exports = {
     }
     return false;
   },
+
+  smallestMissingId: (objects) => {
+    const ids = [];
+    for (const object of objects) {
+      ids.push(object.id);
+    }
+    ids.sort();
+    let result = 1;
+    for (const id of ids) {
+      if (result === id) {
+        result++;
+      } else {
+        return result;
+      }
+    }
+    return result;
+  }
 };

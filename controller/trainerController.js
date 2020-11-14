@@ -331,7 +331,7 @@ module.exports = (app, utils) => {
                 .db(process.env.database)
                 .collection("trainers")
                 .insertOne({
-                  id: result.length + 1,
+                  id: utils.smallestMissingId(result),
                   url: newTrainer.url,
                   name: newTrainer.name,
                   description: newTrainer.description,

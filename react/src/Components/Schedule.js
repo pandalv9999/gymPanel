@@ -98,7 +98,7 @@ const Schedule = ({ user }) => {
               <div className={"schedule-text"}>
                 <h3>Course: {course.courseName}</h3>
                 <p style={{ marginLeft: "10px" }}>
-                  Instructor: {course.instructor}
+                  Instructor: {course.instructor.name}
                 </p>
               </div>
               <p style={{ display: "flex", justifyContent: "space-between" }}>

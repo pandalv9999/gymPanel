@@ -115,7 +115,7 @@ const Courses = ({ user }) => {
               <div className={"list-ops"}>
                 <p>
                   Instructor:
-                  <br /> {course.instructor}
+                  <br /> {course.instructor.name}
                 </p>
                 <p>{`${course.enrolledMember.length}/${course.capacity} Enrolled`}</p>
                 {!course.enrolledMember.includes(user.username) ? (

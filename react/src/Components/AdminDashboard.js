@@ -64,6 +64,21 @@ const AdminDashboard = ({ user }) => {
       });
   };
 
+  const deleteCourse = (course) => {
+    const url = "admin/course/delete";
+    course.user = user;
+    axios
+        .post(url, course)
+        .then((res) => {
+          console.log(`Successfully remove trainer ${course.id}`);
+          setErrMsg(`Successfully remove trainer ${course.id}`);
+          refresh();
+        })
+        .catch((err) => {
+          setErrMsg(err);
+        });
+  };
+
   const onModifyCourseExpand = (courseId) => {
     const curr = [...displayUpdateCourse];
     curr[courseId] = true;
@@ -105,7 +120,7 @@ const AdminDashboard = ({ user }) => {
     <React.Fragment>
       <div className={"personal-schedule-container"}>
         <p style={{ color: "red" }}>{errMsg}</p>
-        <AddCourseForm trainers={trainers} course={null} />
+        <AddCourseForm trainers={trainers} course={null} user={user} refresh={refresh} />
         <ul>
           {courses.map((course) => {
             return (
@@ -117,7 +132,7 @@ const AdminDashboard = ({ user }) => {
                   <div className={"schedule-text"}>
                     <h3>Course: {course.courseName}</h3>
                     <p style={{ marginLeft: "10px" }}>
-                      Instructor: {course.instructor}
+                      Instructor: {course.instructor.name}
                     </p>
                   </div>
                   <p
@@ -127,18 +142,27 @@ const AdminDashboard = ({ user }) => {
                       {`${course.date} ${course.startTime}:00 -- ${course.endTime}:00`}
                     </span>
                   </p>
-                  {displayUpdateCourse[course.id] ? (
-                    <button onClick={() => onModifyCourseCollapse(course.id)}>
-                      Cancel
+                  <div style={{ display: "flex" }}>
+                    <button
+                        style={{ marginRight: "20px" }}
+                        onClick={() => deleteCourse(course)}
+                    >
+                      Remove
                     </button>
-                  ) : (
-                    <button onClick={() => onModifyCourseExpand(course.id)}>
-                      Update
-                    </button>
-                  )}
+                    {displayUpdateCourse[course.id] ? (
+                        <button onClick={() => onModifyCourseCollapse(course.id)}>
+                          Cancel
+                        </button>
+                    ) : (
+                        <button onClick={() => onModifyCourseExpand(course.id)}>
+                          Update
+                        </button>
+                    )}
+                  </div>
+
                 </li>
                 {displayUpdateCourse[course.id] && (
-                  <AddCourseForm trainers={trainers} course={course} />
+                  <AddCourseForm trainers={trainers} course={course} user={user} refresh={refresh} />
                 )}
               </React.Fragment>
             );

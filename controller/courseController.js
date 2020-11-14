@@ -240,5 +240,191 @@ module.exports = (app, utils) => {
     }
   );
 
+  // This router handles the requests to modify information of existing courses
+  app.put(
+    "/admin/course",
+    utils.checkAuthenticated,
+    utils.checkRole(utils.ROLE.ADMIN),
+    (req, res) => {
+      const modifiedCourse = req.body;
+      let newInstructor;
+      const time = modifiedCourse.time.split("-");
+      console.log(`Modifying the information of course ${modifiedCourse.id}`);
+      void client.connect((err) => {
+        if (err) throw err;
 
+        // get the trainer from database to see if there is time conflict for the course's start time and end time
+        client
+          .db(process.env.database)
+          .collection("trainers")
+          .findOne({ id: parseInt(modifiedCourse.instructor) })
+          .then(
+            (result) => {
+              if (!result || result.length === 0) {
+                return null;
+              }
+              newInstructor = result;
+              const intervals = result.scheduledTime[
+                utils.nameToDay(modifiedCourse.date)
+              ].push([parseInt(time[0]), parseInt(time[1])]);
+              if (utils.existOverlap(intervals)) {
+                return null;
+              } else {
+                // remove the schedule time of previous instructor
+                const identifier =
+                  "scheduledTime." +  utils.nameToDay(modifiedCourse.prevCourse.date);
+                return client
+                  .db(process.env.database)
+                  .collection("trainers")
+                  .updateOne(
+                    { name: modifiedCourse.prevCourse.instructor },
+                    {
+                      $pull: {
+                        [identifier]: [
+                          modifiedCourse.prevCourse.startTime,
+                          modifiedCourse.prevCourse.endTime
+                        ],
+                      },
+                    }
+                  );
+              }
+            },
+            (err) => console.log(err)
+          )
+          .then(
+            (result) => {
+              if (!result || result.modifiedCount === 0) {
+                return null;
+              }
+
+              // push the new time interval to the newly assigned instructor
+              const identifier = "scheduledTime." + utils.nameToDay(modifiedCourse.date);
+              return client
+                .db(process.env.database)
+                .collection("trainers")
+                .updateOne(
+                  { id: parseInt(modifiedCourse.instructor)},
+                  {
+                    $push: {
+                      [identifier]: [parseInt(time[0]), parseInt(time[1])],
+                    },
+                  }
+                );
+            },
+            (err) => console.log(err)
+          )
+          .then(
+            (result) => {
+              if (!result || result.modifiedCount === 0) {
+                return null;
+              }
+
+              // finally modify courses
+              return client
+                .db(process.env.database)
+                .collection("courses")
+                .updateOne(
+                  { id: modifiedCourse.id },
+                  {
+                    $set: {
+                      courseName: modifiedCourse.courseName,
+                      url: modifiedCourse.url,
+                      date: modifiedCourse.date,
+                      startTime: parseInt(time[0]),
+                      endTime: parseInt(time[1]),
+                      description: modifiedCourse.description,
+                      capacity: modifiedCourse.capacity,
+                    },
+                  }
+                );
+            },
+            (err) => console.log(err)
+          )
+          .then(
+            (result) => {
+              if (!result || result.modifiedCount === 0) {
+                console.log("fail modifying course information");
+                res.sendStatus(409);
+              } else {
+                console.log("Success modifying course information");
+                res.sendStatus(200);
+              }
+            },
+            (err) => console.log(err)
+          );
+      });
+    }
+  );
+
+    app.post("/admin/course", utils.checkAuthenticated, utils.checkRole(utils.ROLE.ADMIN),(req, res) => {
+        const course = req.body;
+        const time = course.time.split("-"); // string
+        console.log(`Adding course ${course.courseName}`);
+
+        void client.connect((err) => {
+            if (err) throw err;
+
+            // find if there is time conflict for the instructor
+            client
+                .db(process.env.database)
+                .collection("trainers")
+                .findOne({ id: course.instructor.id }).then((result) => {
+                    if (!result) {
+                        return null;
+                    }
+                const intervals = result.scheduledTime[
+                    utils.nameToDay(course.date)
+                    ].push([parseInt(time[0]), parseInt(time[1])]);
+                if (utils.existOverlap(intervals)) {
+                    return null;
+                } else {
+
+                    // insert the time interval to the assigned trainer
+                    const identifier = "scheduledTime." + utils.nameToDay(course.date);
+                    return client.db(process.env.database).collection("trainers").updateOne({id: course.instructor.id}, {
+                        $push: {
+                            [identifier]: [parseInt(time[0]), parseInt(time[1])],
+                        },
+                    });
+                }
+            }, (err) => console.log(err)).then((result) => {
+               if (!result || result.modifiedCount === 0) {
+                   return null;
+               }
+
+                // find how many courses are there
+                return client.db(process.env.database).collection("courses").find({}).toArray();
+
+            }, (err) => {
+
+            }).then((result) => {
+                if (!result) {
+                    return null;
+                }
+
+                // insert the new course to database
+                return client.db(process.env.database).collection("courses").insertOne({
+                    id: utils.smallestMissingId(result),
+                    courseName: course.courseName,
+                    url: course.url,
+                    date: course.date,
+                    startTime: parseInt(time[0]),
+                    endTime: parseInt(time[1]),
+                    description: course.description,
+                    capacity: course.capacity,
+                    instructor: course.instructor,
+                    enrolledMember: []
+                })
+            }, (err) => console.log(err)).then((result) => {
+                if (!result) {
+                    console.log(`Adding new course ${course.courseName} Fail!`);
+                    res.sendStatus(409);
+                } else {
+                    console.log(`Adding new course ${course.courseName} Success!`);
+                    res.sendStatus(200);
+                }
+            });
+
+        });
+    });
 };
