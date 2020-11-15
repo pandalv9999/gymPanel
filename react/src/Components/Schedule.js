@@ -7,6 +7,7 @@ const Schedule = ({ user }) => {
   // since each time we update the schedule, we have to load user again
   const [currUser, setCurrUser] = useState(user);
   const [errMsg, setErrMsg] = useState("");
+  const [msg, setMsg] = useState("");
 
   useEffect(() => {
     console.log("loading curr");
@@ -33,8 +34,8 @@ const Schedule = ({ user }) => {
       .then(() => {
         const msg = `${currUser.username} unregister course ${courseId} success!`;
         console.log(msg);
-        setErrMsg(msg);
-        setTimeout(() => setErrMsg(""), 1000);
+        setMsg(msg);
+        setTimeout(() => setMsg(""), 1000);
         getCurrentUser();
       })
       .catch(() => {
@@ -52,8 +53,8 @@ const Schedule = ({ user }) => {
       .then(() => {
         const msg = `${currUser.username} cancel appoint with ${trainerId} success!`;
         console.log(msg);
-        setErrMsg(msg);
-        setTimeout(() => setErrMsg(""), 1000);
+        setMsg(msg);
+        setTimeout(() => setMsg(""), 1000);
         getCurrentUser();
       })
       .catch(() => {
@@ -79,6 +80,7 @@ const Schedule = ({ user }) => {
       <PersonalSchedule user={currUser} />
       <br />
       <p style={{ color: "red" }}>{errMsg}</p>
+        <p style={{color: "green"}}>{msg}</p>
       <br />
       <ul>
         {currUser.registeredCourses.length === 0 &&

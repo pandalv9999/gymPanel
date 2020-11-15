@@ -13,6 +13,7 @@ const TrainerSchedule = ({ user, trainerId }) => {
     [],
   ]);
   const [errMsg, setErrMsg] = useState("");
+  const [msg, setMsg] = useState("");
   const dates = [0, 1, 2, 3, 4, 5, 6];
   const startTimes = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
 
@@ -55,9 +56,9 @@ const TrainerSchedule = ({ user, trainerId }) => {
     axios
       .put(url, data)
       .then(() => {
-        setErrMsg("Successfully make a appointment");
+        setMsg("Successfully make a appointment");
         loadTrainerSchedule();
-        setTimeout(() => setErrMsg(""), 1000);
+        setTimeout(() => setMsg(""), 1000);
       })
       .catch(() => {
         setErrMsg("Fail make a appointment");
@@ -117,6 +118,7 @@ const TrainerSchedule = ({ user, trainerId }) => {
         </tbody>
       </table>
       <p style={{ color: "red" }}>{errMsg}</p>
+      <p style={{color:"green"}}>{msg}</p>
     </div>
   );
 };

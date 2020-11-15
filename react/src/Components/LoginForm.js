@@ -18,8 +18,8 @@ const LoginForm = ({ userSetter, registerSetter }) => {
         userSetter(res.data);
       })
       .catch((error) => {
-        if (error) {
-          setLoginError(error);
+        if (error.response.data) {
+          setLoginError(error.response.data);
         } else {
           const msg = "Unexpected Exception occurs";
           console.log(msg);
