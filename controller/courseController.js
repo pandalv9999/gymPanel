@@ -257,7 +257,7 @@ module.exports = (app, utils) => {
         client
           .db(process.env.database)
           .collection("trainers")
-          .findOne({ id: parseInt(modifiedCourse.instructor) })
+          .findOne({ id: parseInt(modifiedCourse.instructor.id) })
           .then(
             (result) => {
               if (!result || result.length === 0) {
@@ -272,17 +272,18 @@ module.exports = (app, utils) => {
               } else {
                 // remove the schedule time of previous instructor
                 const identifier =
-                  "scheduledTime." +  utils.nameToDay(modifiedCourse.prevCourse.date);
+                  "scheduledTime." +
+                  utils.nameToDay(modifiedCourse.prevCourse.date);
                 return client
                   .db(process.env.database)
                   .collection("trainers")
                   .updateOne(
-                    { name: modifiedCourse.prevCourse.instructor },
+                    { id: modifiedCourse.prevCourse.instructor.id },
                     {
                       $pull: {
                         [identifier]: [
                           modifiedCourse.prevCourse.startTime,
-                          modifiedCourse.prevCourse.endTime
+                          modifiedCourse.prevCourse.endTime,
                         ],
                       },
                     }
@@ -298,12 +299,13 @@ module.exports = (app, utils) => {
               }
 
               // push the new time interval to the newly assigned instructor
-              const identifier = "scheduledTime." + utils.nameToDay(modifiedCourse.date);
+              const identifier =
+                "scheduledTime." + utils.nameToDay(modifiedCourse.date);
               return client
                 .db(process.env.database)
                 .collection("trainers")
                 .updateOne(
-                  { id: parseInt(modifiedCourse.instructor)},
+                  { id: newInstructor.id },
                   {
                     $push: {
                       [identifier]: [parseInt(time[0]), parseInt(time[1])],
@@ -334,6 +336,7 @@ module.exports = (app, utils) => {
                       endTime: parseInt(time[1]),
                       description: modifiedCourse.description,
                       capacity: modifiedCourse.capacity,
+                      instructor: newInstructor,
                     },
                   }
                 );
@@ -356,75 +359,175 @@ module.exports = (app, utils) => {
     }
   );
 
-    app.post("/admin/course", utils.checkAuthenticated, utils.checkRole(utils.ROLE.ADMIN),(req, res) => {
-        const course = req.body;
-        const time = course.time.split("-"); // string
-        console.log(`Adding course ${course.courseName}`);
+  app.post(
+    "/admin/course",
+    utils.checkAuthenticated,
+    utils.checkRole(utils.ROLE.ADMIN),
+    (req, res) => {
+      const course = req.body;
+      const time = course.time.split("-"); // string
+      console.log(`Adding course ${course.courseName}`);
 
-        void client.connect((err) => {
-            if (err) throw err;
+      void client.connect((err) => {
+        if (err) throw err;
 
-            // find if there is time conflict for the instructor
-            client
+        // find if there is time conflict for the instructor
+        client
+          .db(process.env.database)
+          .collection("trainers")
+          .findOne({ id: course.instructor.id })
+          .then(
+            (result) => {
+              if (!result) {
+                return null;
+              }
+              const intervals = result.scheduledTime[
+                utils.nameToDay(course.date)
+              ].push([parseInt(time[0]), parseInt(time[1])]);
+              if (utils.existOverlap(intervals)) {
+                return null;
+              } else {
+                // insert the time interval to the assigned trainer
+                const identifier =
+                  "scheduledTime." + utils.nameToDay(course.date);
+                return client
+                  .db(process.env.database)
+                  .collection("trainers")
+                  .updateOne(
+                    { id: course.instructor.id },
+                    {
+                      $push: {
+                        [identifier]: [parseInt(time[0]), parseInt(time[1])],
+                      },
+                    }
+                  );
+              }
+            },
+            (err) => console.log(err)
+          )
+          .then(
+            (result) => {
+              if (!result || result.modifiedCount === 0) {
+                return null;
+              }
+
+              // find how many courses are there
+              return client
+                .db(process.env.database)
+                .collection("courses")
+                .find({})
+                .toArray();
+            },
+            (err) => {}
+          )
+          .then(
+            (result) => {
+              if (!result) {
+                return null;
+              }
+
+              // insert the new course to database
+              return client
+                .db(process.env.database)
+                .collection("courses")
+                .insertOne({
+                  id: utils.smallestMissingId(result),
+                  courseName: course.courseName,
+                  url: course.url,
+                  date: course.date,
+                  startTime: parseInt(time[0]),
+                  endTime: parseInt(time[1]),
+                  description: course.description,
+                  capacity: course.capacity,
+                  instructor: course.instructor,
+                  enrolledMember: [],
+                });
+            },
+            (err) => console.log(err)
+          )
+          .then((result) => {
+            if (!result) {
+              console.log(`Adding new course ${course.courseName} Fail!`);
+              res.sendStatus(409);
+            } else {
+              console.log(`Adding new course ${course.courseName} Success!`);
+              res.sendStatus(200);
+            }
+          });
+      });
+    }
+  );
+
+  app.post(
+    "/admin/course/delete",
+    utils.checkAuthenticated,
+    utils.checkRole(utils.ROLE.ADMIN),
+    (req, res) => {
+      let course = req.body;
+      console.log(`Deleting course ${course.courseName}`);
+      void client.connect((err) => {
+        if (err) throw err;
+
+        // check if current course has registered member:
+        client
+          .db(process.env.database)
+          .collection("courses")
+          .findOne({ id: course.id })
+          .then(
+            (result) => {
+              if (!result) {
+                return null;
+              } else if (result.enrolledMember.length > 0) {
+                return null;
+              }
+
+              // remove the scheduled time of current assigned instructor
+              course = result;
+              const identifier =
+                "scheduledTime." + utils.nameToDay(course.date);
+              return client
                 .db(process.env.database)
                 .collection("trainers")
-                .findOne({ id: course.instructor.id }).then((result) => {
-                    if (!result) {
-                        return null;
-                    }
-                const intervals = result.scheduledTime[
-                    utils.nameToDay(course.date)
-                    ].push([parseInt(time[0]), parseInt(time[1])]);
-                if (utils.existOverlap(intervals)) {
-                    return null;
-                } else {
+                .updateOne(
+                  {
+                    id: course.instructor.id,
+                  },
+                  {
+                    $pull: {
+                      [identifier]: [course.startTime, course.endTime],
+                    },
+                  }
+                );
+            },
+            (err) => console.log(err)
+          )
+          .then(
+            (result) => {
+              if (!result || result.modifiedCount === 0) {
+                return null;
+              }
 
-                    // insert the time interval to the assigned trainer
-                    const identifier = "scheduledTime." + utils.nameToDay(course.date);
-                    return client.db(process.env.database).collection("trainers").updateOne({id: course.instructor.id}, {
-                        $push: {
-                            [identifier]: [parseInt(time[0]), parseInt(time[1])],
-                        },
-                    });
-                }
-            }, (err) => console.log(err)).then((result) => {
-               if (!result || result.modifiedCount === 0) {
-                   return null;
-               }
-
-                // find how many courses are there
-                return client.db(process.env.database).collection("courses").find({}).toArray();
-
-            }, (err) => {
-
-            }).then((result) => {
-                if (!result) {
-                    return null;
-                }
-
-                // insert the new course to database
-                return client.db(process.env.database).collection("courses").insertOne({
-                    id: utils.smallestMissingId(result),
-                    courseName: course.courseName,
-                    url: course.url,
-                    date: course.date,
-                    startTime: parseInt(time[0]),
-                    endTime: parseInt(time[1]),
-                    description: course.description,
-                    capacity: course.capacity,
-                    instructor: course.instructor,
-                    enrolledMember: []
-                })
-            }, (err) => console.log(err)).then((result) => {
-                if (!result) {
-                    console.log(`Adding new course ${course.courseName} Fail!`);
-                    res.sendStatus(409);
-                } else {
-                    console.log(`Adding new course ${course.courseName} Success!`);
-                    res.sendStatus(200);
-                }
-            });
-
-        });
-    });
+              // remove the course from database
+              return client
+                .db(process.env.database)
+                .collection("courses")
+                .deleteOne({ id: course.id });
+            },
+            (err) => console.log(err)
+          )
+          .then(
+            (result) => {
+              if (!result || result.deletedCount === 0) {
+                console.log(`Deleting course ${course.id} fail`);
+                res.sendStatus(409);
+              } else {
+                console.log(`Deleting course ${course.id} success`);
+                res.sendStatus(200);
+              }
+            },
+            (err) => console.log(err)
+          );
+      });
+    }
+  );
 };
