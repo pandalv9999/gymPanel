@@ -418,7 +418,6 @@ module.exports = (app, utils) => {
                 .find({})
                 .toArray();
             },
-            (err) => {}
           )
           .then(
             (result) => {

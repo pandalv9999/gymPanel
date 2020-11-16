@@ -310,7 +310,7 @@ module.exports = (app, utils) => {
     utils.checkRole(utils.ROLE.ADMIN),
     (req, res) => {
       const newTrainer = req.body;
-      console.log(`Adding new trainer to database`);
+      console.log("Adding new trainer to database");
       void client.connect((err) => {
         if (err) throw err;
 
@@ -344,10 +344,10 @@ module.exports = (app, utils) => {
           .then(
             (result) => {
               if (!result) {
-                console.log(`Adding new trainer failed`);
+                console.log("Adding new trainer failed");
                 res.status(400);
               } else {
-                console.log(`Adding new trainer success`);
+                console.log("Adding new trainer success");
                 res.sendStatus(200);
               }
             },
