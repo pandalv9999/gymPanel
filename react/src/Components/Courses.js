@@ -111,15 +111,15 @@ const Courses = ({ user }) => {
                 <h3>{course.courseName}</h3>
                 <p>{course.description}</p>
                 <p style={{ display: "flex", justifyContent: "space-between" }}>
-                  <span style={{ fontStyle: "italic", color: "#61dafb" }}>
-                    {`${course.date} ${course.startTime}:00 -- ${course.endTime}:00`}
+                  <span style={{ fontStyle: "italic", color: "#4d1a7f" }}>
+                    <b>{`${course.date} ${course.startTime}:00 -- ${course.endTime}:00`}</b>
                   </span>
                   <span id={`err-${course.id}`} style={{ color: "red" }} />
                 </p>
               </div>
               <div className={"list-ops"}>
                 <p>
-                  Instructor:
+                  <b>Instructor: </b>
                   <br /> {course.instructor.name}
                 </p>
                 <p>{`${course.enrolledMember.length}/${course.capacity} Enrolled`}</p>

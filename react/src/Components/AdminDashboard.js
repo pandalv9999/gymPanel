@@ -135,16 +135,16 @@ const AdminDashboard = ({ user }) => {
                   key={`course-list-${course.id}-${Math.random() * 10000}`}
                 >
                   <div className={"schedule-text"}>
-                    <h3>Course: {course.courseName}</h3>
+                    <h4>Course: {course.courseName}</h4>
                     <p style={{ marginLeft: "10px" }}>
-                      Instructor: {course.instructor.name}
+                      <b>Instructor: {course.instructor.name}</b>
                     </p>
                   </div>
                   <p
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
-                    <span style={{ fontStyle: "italic" }}>
-                      {`${course.date} ${course.startTime}:00 -- ${course.endTime}:00`}
+                    <span style={{ color: "#4d1a7f" }}>
+                      <b>{`${course.date} ${course.startTime}:00 -- ${course.endTime}:00`}</b>
                     </span>
                   </p>
                   <div style={{ display: "flex" }}>
@@ -190,7 +190,7 @@ const AdminDashboard = ({ user }) => {
                   key={`trainer-list-${trainer.id}-${Math.random() * 10000}`}
                 >
                   <div className={"schedule-text"}>
-                    <h3>Trainer: {trainer.name}</h3>
+                    <h4>Trainer: {trainer.name}</h4>
                   </div>
                   <div style={{ display: "flex" }}>
                     <button

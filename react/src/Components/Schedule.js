@@ -98,14 +98,14 @@ const Schedule = ({ user }) => {
               className={"schedule-list-container"}
             >
               <div className={"schedule-text"}>
-                <h3>Course: {course.courseName}</h3>
+                <h4>Course: {course.courseName}</h4>
                 <p style={{ marginLeft: "10px" }}>
-                  Instructor: {course.instructor.name}
+                  <b>Instructor: {course.instructor.name}</b>
                 </p>
               </div>
               <p style={{ display: "flex", justifyContent: "space-between" }}>
-                <span style={{ fontStyle: "italic" }}>
-                  {`${course.date} ${course.startTime}:00 -- ${course.endTime}:00`}
+                <span style={{ color: "#4d1a7f" }}>
+                  <b>{`${course.date} ${course.startTime}:00 -- ${course.endTime}:00`}</b>
                 </span>
               </p>
               <button onClick={() => unregisterCourse(course.id)}>
