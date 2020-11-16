@@ -37,7 +37,7 @@ const Courses = ({ user }) => {
         const msg = `${user.username} register course ${courseId} success!`;
         console.log(msg);
         document.getElementById(`err-${courseId}`).innerText = msg;
-          document.getElementById(`err-${courseId}`).style.color = "green";
+        document.getElementById(`err-${courseId}`).style.color = "green";
         loadCourse();
         setTimeout(
           () => (document.getElementById(`err-${courseId}`).innerText = ""),
@@ -48,7 +48,7 @@ const Courses = ({ user }) => {
         const msg = `${user.username} register course ${courseId} fail!`;
         console.log(msg);
         document.getElementById(`err-${courseId}`).innerText = msg;
-          document.getElementById(`err-${courseId}`).style.color = "red";
+        document.getElementById(`err-${courseId}`).style.color = "red";
         setTimeout(
           () => (document.getElementById(`err-${courseId}`).innerText = ""),
           1000
@@ -64,7 +64,7 @@ const Courses = ({ user }) => {
         const msg = `${user.username} unregister course ${courseId} success!`;
         console.log(msg);
         document.getElementById(`err-${courseId}`).innerText = msg;
-          document.getElementById(`err-${courseId}`).style.color = "green";
+        document.getElementById(`err-${courseId}`).style.color = "green";
         setTimeout(
           () => (document.getElementById(`err-${courseId}`).innerText = ""),
           1000
@@ -75,7 +75,7 @@ const Courses = ({ user }) => {
         const msg = `${user.username} unregister course ${courseId} fail!`;
         console.log(msg);
         document.getElementById(`err-${courseId}`).innerText = msg;
-          document.getElementById(`err-${courseId}`).style.color = "red";
+        document.getElementById(`err-${courseId}`).style.color = "red";
         setTimeout(
           () => (document.getElementById(`err-${courseId}`).innerText = ""),
           1000

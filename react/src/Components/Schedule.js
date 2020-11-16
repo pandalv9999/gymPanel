@@ -80,7 +80,7 @@ const Schedule = ({ user }) => {
       <PersonalSchedule user={currUser} />
       <br />
       <p style={{ color: "red" }}>{errMsg}</p>
-        <p style={{color: "green"}}>{msg}</p>
+      <p style={{ color: "green" }}>{msg}</p>
       <br />
       <ul>
         {currUser.registeredCourses.length === 0 &&

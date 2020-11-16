@@ -50,7 +50,9 @@ const RegisterFrom = () => {
             ref={register({ required: "Username required!" })}
           />
           {errors.username && (
-            <p id="usernameError" style={{ color: "red"}}>{errors.username.message}</p>
+            <p id="usernameError" style={{ color: "red" }}>
+              {errors.username.message}
+            </p>
           )}
           <small className="form-text text-muted">
             Please enter 6 or more characters (no special characters).
@@ -71,7 +73,9 @@ const RegisterFrom = () => {
           </small>
         </div>
         {errors.password && (
-          <p id="passwordError" style={{ color: "red" }}>{errors.password.message}</p>
+          <p id="passwordError" style={{ color: "red" }}>
+            {errors.password.message}
+          </p>
         )}
         <div className={"form-group"}>
           <input
@@ -120,7 +124,9 @@ const RegisterFrom = () => {
             ref={register({ required: "Email required!" })}
           />
           {errors.email && (
-            <p id="emailError" style={{ color: "red" }}>{errors.email.message}</p>
+            <p id="emailError" style={{ color: "red" }}>
+              {errors.email.message}
+            </p>
           )}
           <small className="form-text text-muted">
             Please enter a valid email address include an "@".
@@ -191,7 +197,9 @@ const RegisterFrom = () => {
           C R E A T E
         </button>
       </form>
-      <p id="duplicatesError" style={{ color: "red"}}>{errMsg}</p>
+      <p id="duplicatesError" style={{ color: "red" }}>
+        {errMsg}
+      </p>
       <a href="/">Already has an account? Log in</a>
     </div>
   );

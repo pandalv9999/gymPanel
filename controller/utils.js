@@ -90,5 +90,5 @@ module.exports = {
       }
     }
     return result;
-  }
+  },
 };

@@ -15,7 +15,6 @@ const client = new MongoClient(url, {
 });
 
 module.exports = (app, utils) => {
-
   app.get("/:username/courses", utils.checkAuthenticated, (req, res) => {
     void client.connect((err) => {
       if (err) throw err;
@@ -34,7 +33,7 @@ module.exports = (app, utils) => {
     });
   });
 
-  app.get("/:username/trainers",  utils.checkAuthenticated, (req, res) => {
+  app.get("/:username/trainers", utils.checkAuthenticated, (req, res) => {
     void client.connect((err) => {
       if (err) throw err;
       void client

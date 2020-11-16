@@ -1,67 +1,64 @@
 .add-form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 200px;
 }
 
 .add-form button {
-    display: inline-block;
-    padding: 0.35em 1.2em;
-    border: 0.1em solid black;
-    margin: 0 0.3em 0.3em 0;
-    border-radius: 0.12em;
-    box-sizing: border-box;
-    text-decoration: none;
-    font-family: "Roboto", sans-serif;
-    font-weight: 300;
-    color: black;
-    text-align: center;
-    transition: all 0.2s;
-    /*background-color: #282c34*/
-    background: none;
+  display: inline-block;
+  padding: 0.35em 1.2em;
+  border: 0.1em solid black;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: black;
+  text-align: center;
+  transition: all 0.2s;
+  /*background-color: #282c34*/
+  background: none;
 }
 
 .add-form button:hover {
-    color: white;
-    background-color: black;
+  color: white;
+  background-color: black;
 }
 
 .add-form button[disabled] {
-    background-color: #bbbbbb;
-    pointer-events: none;
+  background-color: #bbbbbb;
+  pointer-events: none;
 }
 
 .form-row {
-    display: flex;
-    width: 100%;
-    margin-bottom: 10px;
+  display: flex;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 .button-row {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }
 
 .form-row > label {
-    flex: 1;
-    display: block;
-    text-align: left;
+  flex: 1;
+  display: block;
+  text-align: left;
 }
 
-.form-row > input, .form-row > select {
-    flex: 6;
-    border: 0;
-    border-bottom: 1px solid black;
-    outline: 0;
+.form-row > input,
+.form-row > select {
+  flex: 6;
+  border: 0;
+  border-bottom: 1px solid black;
+  outline: 0;
 }
 
 .form-row > textarea {
-    flex: 6;
+  flex: 6;
 }
-
-
-
-

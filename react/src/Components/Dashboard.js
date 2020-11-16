@@ -93,7 +93,9 @@ const Dashboard = ({ user }) => {
               <a
                 href={currentPage}
                 className={"App-link"}
-                onClick={() => setCurrentPage(4, <AdminDashboard user={user} />)}
+                onClick={() =>
+                  setCurrentPage(4, <AdminDashboard user={user} />)
+                }
               >
                 <i className={"fa fa-unlock"} /> Manage Site
               </a>
