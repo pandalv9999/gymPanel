@@ -16,7 +16,7 @@ const EditProfile = ({ user }) => {
     setPhone(user.phone);
     setWeight(user.weight);
     setHeight(user.height);
-};
+  };
 
   return (
     <div className={"edit-container"} style={{ marginTop: "100px" }}>
@@ -115,11 +115,13 @@ const EditProfile = ({ user }) => {
           Update
         </button>
       </form>
-      <button 
-          className="btn btn-primary"
-          id="reset-button"
-          onClick={resetState}>Reset
-        </button>
+      <button
+        className="btn btn-primary"
+        id="reset-button"
+        onClick={resetState}
+      >
+        Reset
+      </button>
     </div>
   );
 };

@@ -69,7 +69,7 @@ module.exports = (app, passport, utils) => {
                   gender: req.body.gender,
                   weight: req.body.weight,
                   height: req.body.height,
-                  role: utils.ROLE.BASIC,  // assign basic role to user
+                  role: utils.ROLE.BASIC, // assign basic role to user
                   registeredCourses: [],
                   scheduledAppointments: [],
                   scheduledTime: [[], [], [], [], [], [], []],

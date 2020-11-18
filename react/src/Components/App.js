@@ -17,7 +17,10 @@ const App = () => {
           <div className={"header-container"}>
             <h2>SF-GYM</h2>
             <p>Welcome to SF-GYM Club</p>
-            <p>A online application developed for a gym for its user to make appointments online.</p>
+            <p>
+              A online application developed for a gym for its user to make
+              appointments online.
+            </p>
             <LoginForm
               userSetter={setLoggedInUser}
               registerSetter={setRegistering}
@@ -41,9 +44,7 @@ const App = () => {
   return (
     <div className={"App"}>
       {setHeader()}
-      {loggedInUser && (
-        <Dashboard user={loggedInUser} />
-      )}
+      {loggedInUser && <Dashboard user={loggedInUser} />}
       {registering && <RegisterFrom setRegistering={setRegistering} />}
     </div>
   );

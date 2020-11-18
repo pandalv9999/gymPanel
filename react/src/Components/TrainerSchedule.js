@@ -118,7 +118,7 @@ const TrainerSchedule = ({ user, trainerId }) => {
         </tbody>
       </table>
       <p style={{ color: "red" }}>{errMsg}</p>
-      <p style={{color:"green"}}>{msg}</p>
+      <p style={{ color: "green" }}>{msg}</p>
     </div>
   );
 };
