@@ -14,3 +14,23 @@
   display: flex;
   justify-content: space-between;
 }
+
+#login-button {
+  border: none;
+  border-radius: 18px;
+  width: 80%;
+  color: white;
+  font-weight: 500;
+  background-color: #40bfff;
+  position: relative;
+  left: 35px;
+  height: 35px;
+}
+
+#login-button:hover {
+  background-color: #39ace6;
+}
+
+.ml-2 {
+  color: #40bfff;
+}

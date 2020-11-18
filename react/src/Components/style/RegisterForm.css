@@ -33,11 +33,18 @@
   border: none;
   border-radius: 18px;
   width: 20%;
+  background-color: #40bfff;
+  font-weight: bold;
+}
+
+.register-form button:hover {
+  background-color: #39ace6;
 }
 
 .register-form a {
   position: relative;
   top: 30px;
+  color: #40bfff;
 }
 
 #usernameError {

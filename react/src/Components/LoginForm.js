@@ -49,11 +49,15 @@ const LoginForm = ({ userSetter, registerSetter }) => {
           <button id="login-button" onClick={onLoginClicked}>
             Login
           </button>
-          <button id="register-button" onClick={() => registerSetter(true)}>
-            Register
-          </button>
         </div>
       </div>
+      <div className="mt-4">
+					<div className="d-flex justify-content-center links">
+						Don't have an account? <a href="#" className="ml-2" onClick={() => registerSetter(true)}> Sign Up</a>
+					</div>
+					<div className="d-flex justify-content-center links">
+					</div>
+				</div>
       <p id="login-error">{loginError}</p>
     </div>
   );

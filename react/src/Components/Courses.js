@@ -111,7 +111,7 @@ const Courses = ({ user }) => {
                 <h3>{course.courseName}</h3>
                 <p>{course.description}</p>
                 <p style={{ display: "flex", justifyContent: "space-between" }}>
-                  <span style={{ fontStyle: "italic", color: "#4d1a7f" }}>
+                  <span style={{ fontStyle: "italic", color: "black" }}>
                     <b>{`${course.date} ${course.startTime}:00 -- ${course.endTime}:00`}</b>
                   </span>
                   <span id={`err-${course.id}`} style={{ color: "red" }} />

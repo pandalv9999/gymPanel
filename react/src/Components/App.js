@@ -21,11 +21,13 @@ const App = () => {
               A online application developed for a gym for its user to make
               appointments online.
             </p>
+          </div>
+          <div className={"app-login"}>
             <LoginForm
               userSetter={setLoggedInUser}
               registerSetter={setRegistering}
             />
-          </div>
+            </div>
         </header>
       );
     } else if (registering) {

@@ -3,4 +3,7 @@
   width: 400px;
   top: 50%;
   left: 150px;
+  border: none;
+  background-color: #40bfff;
+  font-weight: 500;
 }

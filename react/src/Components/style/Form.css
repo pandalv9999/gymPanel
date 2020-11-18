@@ -7,30 +7,22 @@
 }
 
 .add-form button {
-  display: inline-block;
-  padding: 0.35em 1.2em;
-  border: 0.1em solid black;
-  margin: 0 0.3em 0.3em 0;
-  border-radius: 0.12em;
-  box-sizing: border-box;
-  text-decoration: none;
-  font-family: "Roboto", sans-serif;
-  font-weight: 300;
-  color: black;
-  text-align: center;
-  transition: all 0.2s;
-  /*background-color: #282c34*/
-  background: none;
+  border: none;
+  border-radius: 18px;
+  width: 20%;
+  background-color: #40bfff;
+  font-weight: 500;
+  color: white;
+  height: 40px;
 }
 
 .add-form button:hover {
-  color: white;
-  background-color: black;
+  background-color: #39ace6;
 }
 
-.add-form button[disabled] {
-  background-color: #bbbbbb;
-  pointer-events: none;
+.personal-schedule-container button {
+  width: 100px;
+  font-weight: 500;
 }
 
 .form-row {

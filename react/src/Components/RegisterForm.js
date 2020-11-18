@@ -37,6 +37,7 @@ const RegisterFrom = () => {
 
   return (
     <div className={"register-form"} style={{ marginBottom: "80px" }}>
+      <div></div>
       <h2 className={"title-form"}>Create Account</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={"register-form"}>
         <div className="form-group">

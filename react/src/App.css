@@ -37,7 +37,7 @@ body {
 }
 
 .App-header-main {
-  background: url("https://wallpaperaccess.com/full/1633729.jpg");
+  background: url('https://wallpaperaccess.com/full/1633729.jpg');
   color: white;
   height: 100%;
   width: 100%;
@@ -58,6 +58,24 @@ body {
   opacity: 0.7;
   margin-left: 300px;
   margin-right: 300px;
+  height: 140px;
+  position: relative;
+  bottom: 150px;
+}
+
+.app-login {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 18px;
+  margin-left: 300px;
+  margin-right: 300px;
+  width: 450px;
+  position: relative;
+  left: 430px;
+  bottom: 80px;
 }
 
 .header-container button {
@@ -68,7 +86,7 @@ body {
   border-radius: 0.12em;
   box-sizing: border-box;
   text-decoration: none;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 300;
   color: black;
   text-align: center;

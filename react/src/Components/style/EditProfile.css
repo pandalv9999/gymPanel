@@ -43,9 +43,27 @@
   position: relative;
   left: 320px;
   bottom: 60px;
+  border: none;
+  border-radius: 18px;
+  background-color: #40bfff;
+  font-weight: 500;
 }
+
+#update-button button:hover {
+  background-color: #39ace6;
+}
+
 #reset-button {
   position: relative;
   left: 150px;
   bottom: 10px;
+  width: 10%;
+  border: none;
+  border-radius: 18px;
+  background-color: #40bfff;
+  font-weight: 500;
+}
+
+#reset-button button:hover {
+  background-color: #39ace6;
 }

@@ -140,13 +140,13 @@ const AdminDashboard = ({ user }) => {
                       <b>Instructor: {course.instructor.name}</b>
                     </p>
                   </div>
-                  <p
+                  {/* <p
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
                     <span style={{ color: "#4d1a7f" }}>
                       <b>{`${course.date} ${course.startTime}:00 -- ${course.endTime}:00`}</b>
                     </span>
-                  </p>
+                  </p> */}
                   <div style={{ display: "flex" }}>
                     <button
                       style={{ marginRight: "20px" }}

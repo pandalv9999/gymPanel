@@ -43,18 +43,21 @@
   border-radius: 0.12em;
   box-sizing: border-box;
   text-decoration: none;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 300;
   color: black;
   text-align: center;
   transition: all 0.2s;
-  /*background-color: #282c34*/
-  background: none;
+  border: none;
+  border-radius: 18px;
+  color: white;
+  font-weight: 500;
+  background-color: #40bfff;
 }
 
 .list-container button:hover {
   color: white;
-  background-color: black;
+  background-color: #39ace6;
 }
 
 .list-container button[disabled] {

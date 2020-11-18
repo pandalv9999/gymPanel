@@ -37,7 +37,7 @@
 
 .side-nav li:hover,
 .active {
-  background-color: black;
+  background-color: #39ace6;
   color: white;
 }
 
@@ -54,7 +54,7 @@
   height: 100%;
   width: 100%;
   overflow: scroll;
-  background: url("https://wallpaperaccess.com/full/1633729.jpg");
+  background: url('https://wallpaperaccess.com/full/1633729.jpg');
 }
 
 .main-container::-webkit-scrollbar {
