@@ -64,18 +64,15 @@ body {
 }
 
 .app-login {
+  margin-left: auto;
+  margin-right: auto;
   padding-top: 25px;
   padding-bottom: 25px;
   background-color: white;
   color: black;
   border: none;
   border-radius: 18px;
-  margin-left: 300px;
-  margin-right: 300px;
   width: 450px;
-  position: relative;
-  left: 430px;
-  bottom: 80px;
 }
 
 .header-container button {
