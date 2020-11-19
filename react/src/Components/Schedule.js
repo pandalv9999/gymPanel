@@ -98,9 +98,9 @@ const Schedule = ({ user }) => {
               className={"schedule-list-container"}
             >
               <div className={"schedule-text"}>
-                <h4>Course: {course.courseName}</h4>
+                <h1>Course: {course.courseName}</h1>
                 <p style={{ marginLeft: "10px" }}>
-                  <b>Instructor: {course.instructor.name}</b>
+                  <h2>Instructor: {course.instructor.name}</h2>
                 </p>
               </div>
               {/* <p style={{ display: "flex", justifyContent: "space-between" }}>
@@ -121,17 +121,11 @@ const Schedule = ({ user }) => {
               className={"schedule-list-container"}
             >
               <div className={"schedule-text"}>
-                <h4>Appointment</h4>
+                <h1>Appointment</h1>
                 <p style={{ marginLeft: "10px" }}>
-                <b>with {appointment.trainer.name}</b>
+                <h2>with {appointment.trainer.name}</h2>
                 </p>
               </div>
-              {/* <p style={{ display: "flex", justifyContent: "space-between" }}>
-                <span style={{ fontStyle: "italic" }}>
-                  {`${getDate(appointment.date)} ${appointment.startTime}:00 
-                                    -- ${appointment.endTime}:00`}
-                </span>
-              </p> */}
               <button
                 onClick={() =>
                   cancelAppointment(

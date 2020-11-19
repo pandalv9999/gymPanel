@@ -10,14 +10,14 @@
   border: none;
   border-radius: 18px;
   width: 20%;
-  background-color: #40bfff;
+  background-color: #007ab8;
   font-weight: 500;
   color: white;
   height: 40px;
 }
 
 .add-form button:hover {
-  background-color: #39ace6;
+  background-color: #00699e;
 }
 
 .personal-schedule-container button {

@@ -1,6 +1,4 @@
 .schedule-text {
-  /*position: relative;*/
-  /*left: 44%;*/
   display: flex;
   flex-direction: row;
 }
@@ -26,31 +24,15 @@
   padding-bottom: 0;
 }
 
-.schedule-list-container button {
-  display: inline-block;
-  padding: 0.35em 1.2em;
-  border: 0.1em solid black;
-  border-radius: 0.12em;
-  box-sizing: border-box;
-  text-decoration: none;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-  color: black;
-  text-align: center;
-  transition: all 0.2s;
-  /*background-color: #282c34*/
-  background: none;
-}
-
 .schedule-list-container button:hover {
-  background-color: #39ace6;
+  background-color: #00699e;
 }
 
 .schedule-list-container button {
   border: none;
   border-radius: 18px;
   width: 15%;
-  background-color: #40bfff;
+  background-color: #007ab8;
   font-weight: bold;
   color: white;
 }

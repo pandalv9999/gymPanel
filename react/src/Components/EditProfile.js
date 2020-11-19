@@ -26,6 +26,7 @@ const EditProfile = ({ user }) => {
           <label htmlFor="username">Username: </label>
           <input
             type="text"
+            aria-label="username"
             className="form-control"
             name="username"
             id="username"
@@ -37,6 +38,7 @@ const EditProfile = ({ user }) => {
           <label htmlFor="firstName">First Name: </label>
           <input
             type="text"
+            aria-label="firstname"
             className="form-control"
             name="firstName"
             id="firstName"
@@ -48,6 +50,7 @@ const EditProfile = ({ user }) => {
           <label htmlFor="lastName">Last Name: </label>
           <input
             type="text"
+            aria-label="lastname"
             className="form-control"
             name="lastName"
             id="lastName"
@@ -59,6 +62,7 @@ const EditProfile = ({ user }) => {
           <label htmlFor="email">Email: </label>
           <input
             type="email"
+            aria-label="email"
             className="form-control"
             name="email"
             id="email"
@@ -70,6 +74,7 @@ const EditProfile = ({ user }) => {
           <label htmlFor="phone">Phone: </label>
           <input
             type="text"
+            aria-label="phone"
             className="form-control"
             name="phone"
             id="phone"
@@ -82,6 +87,7 @@ const EditProfile = ({ user }) => {
           <label htmlFor="gender">Gender: </label>
           <input
             type="text"
+            aria-label="gender"
             className="form-control"
             name="gender"
             id="DgenderOB"
@@ -93,6 +99,7 @@ const EditProfile = ({ user }) => {
           <label htmlFor="weight">Weight(lbs): </label>
           <input
             type="number"
+            aria-label="weight"
             className="form-control"
             name="weight"
             id="weight"
@@ -104,6 +111,7 @@ const EditProfile = ({ user }) => {
           <label htmlFor="height">Height(cm): </label>
           <input
             type="number"
+            aria-label="height"
             className="form-control"
             name="height"
             id="height"
@@ -118,9 +126,8 @@ const EditProfile = ({ user }) => {
       <button
         className="btn btn-primary"
         id="reset-button"
-        onClick={resetState}
-      >
-        Reset
+        onClick={resetState}>
+          Reset
       </button>
     </div>
   );

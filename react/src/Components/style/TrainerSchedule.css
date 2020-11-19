@@ -1,7 +1,7 @@
 .schedule-container {
   margin: -20px 30px 20px 300px;
   background: white;
-  opacity: 0.9;
+  /* opacity: 0.9; */
   color: black;
   padding-top: -20px;
   padding-bottom: 20px;
@@ -25,11 +25,11 @@
 }
 
 #trainer-schedule .available {
-  background: #40bfff;
+  background: #007ab8;
 }
 
 #trainer-schedule .unavailable {
-  background: #ffcf33;
+  background: #b88f09;
 }
 
 #trainer-schedule button {

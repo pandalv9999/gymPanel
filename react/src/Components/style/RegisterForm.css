@@ -1,12 +1,17 @@
 .register-form {
   position: relative;
-  top: 25px;
+  top: 20px;
   line-height: 5%;
 }
 
-.register-form input {
+#title-form {
   position: relative;
-  width: 20%;
+  bottom: 10px;
+}
+
+.form-group input {
+  position: relative;
+  width: 378px;
   margin: 8px 0;
   border: none;
   border-radius: 18px;
@@ -15,13 +20,14 @@
 }
 
 #date {
+  position: relative;
   width: 378px;
   height: 36px;
 }
 
 #gender {
   position: relative;
-  width: 20%;
+  width: 378px;
   margin: 8px 0;
   border: none;
   border-radius: 18px;
@@ -32,13 +38,13 @@
 .register-form button {
   border: none;
   border-radius: 18px;
-  width: 20%;
-  background-color: #40bfff;
+  width: 378px;
+  background-color: #007ab8;
   font-weight: bold;
 }
 
 .register-form button:hover {
-  background-color: #39ace6;
+  background-color: #00699e;
 }
 
 .register-form a {

@@ -46,7 +46,7 @@ const PersonalSchedule = ({ user }) => {
                     key={`${date}-${startTime}`}
                     className={isAvailable ? "available" : "unavailable"}
                   >
-                    <button disabled={true} />
+                    <button aria-label="Choose" disabled={true} />
                   </td>
                 );
               })}

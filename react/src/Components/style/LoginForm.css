@@ -10,7 +10,6 @@
   align-items: center;
   width: 300px;
   padding-top: 30px;
-
   display: flex;
   justify-content: space-between;
 }
@@ -21,16 +20,16 @@
   width: 80%;
   color: white;
   font-weight: 500;
-  background-color: #40bfff;
+  background-color: #007ab8;
   position: relative;
   left: 35px;
   height: 35px;
 }
 
 #login-button:hover {
-  background-color: #39ace6;
+  background-color: #00699e;
 }
 
 .ml-2 {
-  color: #40bfff;
+  color: #007ab8;
 }

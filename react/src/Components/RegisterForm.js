@@ -37,8 +37,6 @@ const RegisterFrom = () => {
 
   return (
     <div className={"register-form"} style={{ marginBottom: "80px" }}>
-      <div></div>
-      <h2 className={"title-form"}>Create Account</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={"register-form"}>
         <div className="form-group">
           <input
@@ -46,6 +44,7 @@ const RegisterFrom = () => {
             className="form-control"
             name="username"
             id="username"
+            aria-label="Username"
             placeholder="Username"
             pattern="[A-Za-z0-9]{6,}"
             ref={register({ required: "Username required!" })}
@@ -65,6 +64,7 @@ const RegisterFrom = () => {
             className={"form-control"}
             name={"password"}
             id={"password"}
+            aria-label="Password"
             placeholder="Password"
             pattern=".{8,}"
             ref={register({ required: "Password required!" })}
@@ -84,6 +84,7 @@ const RegisterFrom = () => {
             className={"form-control"}
             name={"confirm_password"}
             id={"confirm-password"}
+            aria-label="confirm-password"
             placeholder="Confirm Password"
             pattern=".{8,}"
             ref={register({
@@ -101,6 +102,7 @@ const RegisterFrom = () => {
             className="form-control"
             name="firstName"
             id="firstName"
+            aria-label="First Name"
             placeholder="First Name"
             ref={register}
           />
@@ -111,6 +113,7 @@ const RegisterFrom = () => {
             className="form-control"
             name="lastName"
             id="lastName"
+            aria-label="Last Name"
             placeholder="Last Name"
             ref={register}
           />
@@ -121,6 +124,7 @@ const RegisterFrom = () => {
             className="form-control"
             name="email"
             id="email"
+            aria-label="Email"
             placeholder="Email"
             ref={register({ required: "Email required!" })}
           />
@@ -139,6 +143,7 @@ const RegisterFrom = () => {
             className="form-control"
             name="phone"
             id="phone"
+            aria-label="Phone"
             placeholder="Phone"
             ref={register}
             pattern="^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$"
@@ -148,12 +153,14 @@ const RegisterFrom = () => {
           </small>
         </div>
         <div className="form-group">
+        <label for="Datebirth">
           <DatePicker
             id="date"
             selected={startDate}
             onChange={(date) => setBirthdate(date)}
             ref={register}
           />
+          </label>
           <small className="form-text text-muted">
             Please choose your Date Of Birth.
           </small>
@@ -161,17 +168,18 @@ const RegisterFrom = () => {
         <div className="form-group">
           <select
             id="gender"
+            aria-label="gender"
             className="form-control"
             name="gender"
             defaultValue={"DEFAULT"}
             ref={register}
           >
-            <option value="DEFAULT" disabled>
+            <option aria-label="Choose your gender ..." value="DEFAULT" disabled>
               Choose your gender ...
             </option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Prefer not to say">Prefer not to say</option>
+            <option aria-label="Male" value="Male">Male</option>
+            <option aria-label="Female" value="Female">Female</option>
+            <option aria-label="Prefer not to say" value="Prefer not to say">Prefer not to say</option>
           </select>
         </div>
         <div className="form-group">
@@ -180,6 +188,7 @@ const RegisterFrom = () => {
             className="form-control"
             name="weight"
             id="weight"
+            aria-label="Weight(lbs)"
             placeholder="Weight(lbs)"
             ref={register}
           />
@@ -190,6 +199,7 @@ const RegisterFrom = () => {
             className="form-control"
             name="height"
             id="height"
+            aria-label="Height(cm)"
             placeholder="Height(cm)"
             ref={register}
           />

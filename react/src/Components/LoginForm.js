@@ -34,14 +34,17 @@ const LoginForm = ({ userSetter, registerSetter }) => {
         id="username"
         name="username"
         type="text"
+        aria-label="Username"
         placeholder={"Username"}
       />
       <br />
       <br />
       <input
         id="password"
+        aria-labelledby="password"
         name="password"
         type="password"
+        aria-label="Password"
         placeholder={"Password"}
       />
       <div style={{ display: "flex", justifyContent: "center" }}>

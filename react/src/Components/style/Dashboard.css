@@ -13,7 +13,6 @@
   left: 0;
   overflow-x: hidden;
   color: black;
-  opacity: 0.9;
 }
 
 .side-nav a {
@@ -37,7 +36,7 @@
 
 .side-nav li:hover,
 .active {
-  background-color: #39ace6;
+  background-color: #00699e;
   color: white;
 }
 

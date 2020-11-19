@@ -66,6 +66,7 @@ const AddCourseForm = ({ trainers, course, user, refresh }) => {
         <label htmlFor="courseName">Course Name:</label>
         <input
           type="text"
+          aria-label="courseName"
           name="courseName"
           id="course-name"
           ref={register({ required: "Course Name required!" })}
@@ -76,7 +77,7 @@ const AddCourseForm = ({ trainers, course, user, refresh }) => {
         <p style={{ color: "red" }}>{errors.courseName.message}</p>
       )}
       <div className={"form-row"}>
-        <label htmlFor="url">Image url:</label>
+        <label htmlFor="Image url required!">Image url:</label>
         <input
           type="text"
           name="url"
@@ -91,16 +92,17 @@ const AddCourseForm = ({ trainers, course, user, refresh }) => {
         <select
           name={"date"}
           id={"date"}
+          aria-label="date"
           ref={register}
           defaultValue={course ? course.date : "Monday"}
         >
-          <option value={"Monday"}>Monday</option>
-          <option value={"Tuesday"}>Tuesday</option>
-          <option value={"Wednesday"}>Wednesday</option>
-          <option value={"Thursday"}>Thursday</option>
-          <option value={"Friday"}>Friday</option>
-          <option value={"Saturday"}>Saturday</option>
-          <option value={"Sunday"}>Sunday</option>
+          <option aria-label="Monday" value={"Monday"}>Monday</option>
+          <option aria-label="Tuesday" value={"Tuesday"}>Tuesday</option>
+          <option aria-label="Wednesday" value={"Wednesday"}>Wednesday</option>
+          <option aria-label="Thursday" value={"Thursday"}>Thursday</option>
+          <option aria-label="Friday" value={"Friday"}>Friday</option>
+          <option aria-label="Saturday" value={"Saturday"}>Saturday</option>
+          <option aria-label="Sunday" value={"Sunday"}>Sunday</option>
         </select>
       </div>
       <div className={"form-row"}>
@@ -108,45 +110,46 @@ const AddCourseForm = ({ trainers, course, user, refresh }) => {
         <select
           name={"time"}
           id={"time"}
+          aria-label="time"
           ref={register}
           defaultValue={
             course ? `${course.startTime}-${course.endTime}` : "8-9"
           }
         >
-          <option key={"8-9"} value={"8-9"}>
+          <option aria-label="8-9" key={"8-9"} value={"8-9"}>
             8:00 -- 9:00
           </option>
-          <option key={"9-10"} value={"9-10"}>
+          <option aria-label="9-10" key={"9-10"} value={"9-10"}>
             9:00 -- 10:00
           </option>
-          <option key={"10-11"} value={"10-11"}>
+          <option aria-label="10-11" key={"10-11"} value={"10-11"}>
             10:00 -- 11:00
           </option>
-          <option key={"11-12"} value={"11-12"}>
+          <option aria-label="11-12" key={"11-12"} value={"11-12"}>
             11:00 -- 12:00
           </option>
-          <option key={"12-13"} value={"12-13"}>
+          <option aria-label="12-13" key={"12-13"} value={"12-13"}>
             12:00 -- 13:00
           </option>
-          <option key={"13-14"} value={"13-14"}>
+          <option aria-label="13-14" key={"13-14"} value={"13-14"}>
             13:00 -- 14:00
           </option>
-          <option key={"14-15"} value={"14-15"}>
+          <option aria-label="14-15" key={"14-15"} value={"14-15"}>
             14:00 -- 15:00
           </option>
-          <option key={"15-16"} value={"15-16"}>
+          <option aria-label="15-16" key={"15-16"} value={"15-16"}>
             15:00 -- 16:00
           </option>
-          <option key={"16-17"} value={"16-17"}>
+          <option aria-label="16-17" key={"16-17"} value={"16-17"}>
             16:00 -- 17:00
           </option>
-          <option key={"17-18"} value={"17-18"}>
+          <option aria-label="17-18" key={"17-18"} value={"17-18"}>
             17:00 -- 18:00
           </option>
-          <option key={"18-19"} value={"18-19"}>
+          <option aria-label="18-19" key={"18-19"} value={"18-19"}>
             18:00 -- 19:00
           </option>
-          <option key={"19-20"} value={"19-20"}>
+          <option aria-label="19-20" key={"19-20"} value={"19-20"}>
             19:00 -- 20:00
           </option>
         </select>
@@ -155,6 +158,7 @@ const AddCourseForm = ({ trainers, course, user, refresh }) => {
         <label htmlFor={"capacity"}>Capacity: </label>
         <input
           type={"number"}
+          aria-label="number"
           name={"capacity"}
           id={"capacity"}
           ref={register({
@@ -172,6 +176,7 @@ const AddCourseForm = ({ trainers, course, user, refresh }) => {
         <select
           name={"instructor"}
           id={"instructor"}
+          aria-label="instructor"
           ref={register}
           defaultValue={
             course
@@ -183,7 +188,7 @@ const AddCourseForm = ({ trainers, course, user, refresh }) => {
         >
           {trainers.map((trainer) => {
             return (
-              <option key={`trainer-detail-${trainer.id}`} value={trainer.id}>
+              <option aria-label="instructor" key={`trainer-detail-${trainer.id}`} value={trainer.id}>
                 {trainer.name}
               </option>
             );
@@ -191,7 +196,7 @@ const AddCourseForm = ({ trainers, course, user, refresh }) => {
         </select>
       </div>
       <div className={"form-row"}>
-        <label htmlFor={"description"}>Description:</label>
+        <label htmlFor={"Please enter description to the course!"}>Description:</label>
         <textarea
           id={"description"}
           name={"description"}

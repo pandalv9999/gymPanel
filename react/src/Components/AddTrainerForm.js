@@ -54,6 +54,7 @@ const AddTrainerForm = ({ trainer, refresh, user }) => {
         <label htmlFor="name">Trainer Name:</label>
         <input
           type="text"
+          aria-label="name"
           name="name"
           id="name"
           ref={register({ required: "Trainer Name required!" })}
@@ -65,6 +66,7 @@ const AddTrainerForm = ({ trainer, refresh, user }) => {
         <label htmlFor="url">Image url:</label>
         <input
           type="text"
+          aria-label="url"
           name="url"
           id="trainer-url"
           ref={register({ required: "Image url required!" })}
@@ -77,6 +79,7 @@ const AddTrainerForm = ({ trainer, refresh, user }) => {
         <label htmlFor={"description"}>Description:</label>
         <textarea
           id={"trainer-description"}
+          aria-label="description"
           name={"description"}
           ref={register({ required: "Description must not be empty!" })}
           rows={5}
