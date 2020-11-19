@@ -3,10 +3,7 @@
   background: white;
   /* opacity: 0.9; */
   color: black;
-  padding-top: -20px;
-  padding-bottom: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: -20px 10px 20px;
   display: flex;
   flex-direction: column;
 }
@@ -42,7 +39,7 @@
   text-transform: uppercase;
   font-family: 'Roboto', sans-serif;
   /* //font-weight: 400; */
-  color: cornflowerblue;
+  color:  #007ab8;
   text-align: center;
   transition: all 0.15s;
   width: 100px;
@@ -63,5 +60,5 @@
 
 #trainer-schedule button:disabled {
   background: none;
-  color: indianred;
+  color: #b88f09;
 }
