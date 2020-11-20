@@ -17,6 +17,8 @@
   border-radius: 18px;
   cursor: pointer;
   display: inline-block;
+  background-color: white;
+  color: black;
 }
 
 #date {

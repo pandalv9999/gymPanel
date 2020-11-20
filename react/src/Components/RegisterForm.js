@@ -36,7 +36,7 @@ const RegisterFrom = () => {
   };
 
   return (
-    <div className={"register-form"} style={{ marginBottom: "80px" }}>
+    <div className={"register-form"} style={{ marginBottom: "180px" }}>
       <form onSubmit={handleSubmit(onSubmit)} className={"register-form"}>
         <div className="form-group">
           <input
@@ -153,7 +153,7 @@ const RegisterFrom = () => {
           </small>
         </div>
         <div className="form-group">
-        <label for="Datebirth">
+        <label htmlFor="Datebirth">
           <DatePicker
             id="date"
             selected={startDate}

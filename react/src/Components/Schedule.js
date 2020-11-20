@@ -99,9 +99,9 @@ const Schedule = ({ user }) => {
             >
               <div className={"schedule-text"}>
                 <h1>Course: {course.courseName}</h1>
-                <p style={{ marginLeft: "10px" }}>
-                  <h2>Instructor: {course.instructor.name}</h2>
-                </p>
+                <h2 style={{ marginLeft: "10px" }}>
+                  Instructor: {course.instructor.name}
+                </h2>
               </div>
               {/* <p style={{ display: "flex", justifyContent: "space-between" }}>
                 <span style={{ color: "#4d1a7f" }}>
@@ -122,9 +122,9 @@ const Schedule = ({ user }) => {
             >
               <div className={"schedule-text"}>
                 <h1>Appointment</h1>
-                <p style={{ marginLeft: "10px" }}>
-                <h2>with {appointment.trainer.name}</h2>
-                </p>
+                <h2 style={{ marginLeft: "10px" }}>
+                  with {appointment.trainer.name}
+                </h2>
               </div>
               <button
                 onClick={() =>

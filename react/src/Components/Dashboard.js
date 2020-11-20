@@ -26,7 +26,7 @@ const Dashboard = ({ user }) => {
 
   return (
     <div className={"main-container"}>
-      <aside className={"side-nav"}>
+      <div className={"side-nav"}>
         <h2>
           Welcome
           <br /> {user.username}
@@ -109,7 +109,7 @@ const Dashboard = ({ user }) => {
             </a>
           </li>
         </ul>
-      </aside>
+      </div>
       <div style={{ paddingTop: "100px" }}>{currentModule}</div>
     </div>
   );
