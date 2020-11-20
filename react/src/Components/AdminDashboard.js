@@ -104,6 +104,10 @@ const AdminDashboard = ({ user }) => {
     setDisplayUpdateTrainer(curr);
   };
 
+  const generateKey = (pre) => {
+    return `${ pre }_${ new Date().getTime() }`;
+  }
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     console.log(`Loading Trainers`);
@@ -129,7 +133,7 @@ const AdminDashboard = ({ user }) => {
         <ul>
           {courses.map((course) => {
             return (
-              <React.Fragment>
+              <React.Fragment key={ generateKey(course.id) }>
                 <li
                   className={"schedule-list-container"}
                   key={`course-list-${course.id}-${Math.random() * 10000}`}
@@ -177,7 +181,7 @@ const AdminDashboard = ({ user }) => {
         <ul>
           {trainers.map((trainer) => {
             return (
-              <React.Fragment>
+              <React.Fragment key={ generateKey(trainer.id) }>
                 <li
                   className={"schedule-list-container"}
                   key={`trainer-list-${trainer.id}-${Math.random() * 10000}`}
