@@ -2,7 +2,8 @@
 <a href="https://youtu.be/9Ul97YAKMmA">Youtube Demo for assignment 2</a><br/>
 <a href="https://youtu.be/xgSCvyJn590">Youtube Demo for assignment 3</a><br/>
 <a href="https://polar-temple-47959.herokuapp.com/">Website</a><br/>
-<a href="https://docs.google.com/presentation/d/1aLgb-3wJHX8IDEnb9rr-5JSSapzeFSYZ8bLq8nqbzNY/edit?usp=sharing">Presentation slides</a>
+<a href="https://docs.google.com/presentation/d/12jzmi9MDKyzHReXDkdLZHQwHZ_FId4hDvtCnQypBjBM/edit?usp=sharing">Presentation slides - version 1</a>  
+<a href="https://docs.google.com/presentation/d/1aLgb-3wJHX8IDEnb9rr-5JSSapzeFSYZ8bLq8nqbzNY/edit?usp=sharing">Presentation slides - version 2</a>
 
 * **Author:**  
 Rujun Yao, Yiman Liu
@@ -36,17 +37,23 @@ Build a gym online dashboard containing the following major features:
     <li>Modified some of the text color and extinguish colors of success method calls and fail ones</li>
 </ul>
 
+**Update project with the addition of accessibility, design and usability concepts.**  
+Pick basic color (#007ab8) and contrast color (#b88f09) for this project. 
+<img src="https://raw.githubusercontent.com/yimanliu0/yimanliu0.github.io/master/images/loginchangeColor.png">
+Validate user input. 
+<img src="https://raw.githubusercontent.com/yimanliu0/yimanliu0.github.io/master/images/validate.png">
+Add admin privilege for adding courses and trainers. 
+<img src="https://raw.githubusercontent.com/yimanliu0/yimanliu0.github.io/master/images/addCourse.png">
+
 ## Instructions to build  
 _node and npm installed_
-* Eslint and prettier config:
-  - npm init -y npm install —save-dev live-server
-  - npm install —save-dev eslint prettier eslint-config-prettier
-  - eslint—init
-* Create express app
-  - npx express-generator
-* Create react app
-  - npx create-react-app 
-  
+* Config:
+  - npm install 
+  - go to 'react' folder - npm install 
+* Start the program:
+  - under gymPanel folder - nodemon start  
+  - under react folder - npm/yarn start
+
 ## Test account
 In Order to see the admin page to modify existing courses and trainers in database, please use the following credential to login:
 username: testaccount
