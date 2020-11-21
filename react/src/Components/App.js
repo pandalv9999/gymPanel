@@ -14,14 +14,14 @@ const App = () => {
     if (!loggedInUser && !registering) {
       header = (
         <header className={"App-header-main"}>
-          <div className={"header-container"}>
+          {/* <div className={"header-container"}>
             <h2>SF-GYM</h2>
             <p>Welcome to SF-GYM Club</p>
             <p>
               A online application developed for a gym for its user to make
               appointments online.
             </p>
-          </div>
+          </div> */}
           <div className={"app-login"}>
             <LoginForm
               userSetter={setLoggedInUser}
@@ -30,21 +30,29 @@ const App = () => {
             </div>
         </header>
       );
-    } else if (registering) {
-      header = null;
-    } else {
-      header = (
-        <header className={"App-header"}>
-          <h2>SF-GYM</h2>
-          <p>Welcome to SF-GYM Club</p>
-        </header>
-      );
-    }
+    } 
+    // else if (registering) {
+    //   header = null;
+    // } else {
+    //   header = (
+    //     <header className={"App-header"}>
+    //       <h2>SF-GYM</h2>
+    //       <p>Welcome to SF-GYM Club</p>
+    //     </header>
+    //   );
+    // }
     return header;
   };
 
   return (
     <div className={"App"}>
+      <div className={"header-title"}>
+      <h1>SF-Gym</h1>
+      <p>
+        A online application developed for a gym for its user to make
+        appointments online.
+      </p>
+      </div>
       {setHeader()}
       {loggedInUser && <Dashboard user={loggedInUser} />}
       {registering && <RegisterFrom setRegistering={setRegistering} />}

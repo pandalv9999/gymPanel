@@ -1,7 +1,6 @@
 .schedule-container {
   margin: -20px 30px 20px 300px;
   background: white;
-  /* opacity: 0.9; */
   color: black;
   padding: -20px 10px 20px;
   display: flex;
@@ -21,9 +20,9 @@
   width: 100px;
 }
 
-#trainer-schedule .available {
+/* #trainer-schedule .available {
   background: #007ab8;
-}
+} */
 
 #trainer-schedule .unavailable {
   background: #b88f09;
@@ -39,7 +38,7 @@
   text-transform: uppercase;
   font-family: 'Roboto', sans-serif;
   /* //font-weight: 400; */
-  color:  #007ab8;
+  color: #007ab8;
   text-align: center;
   transition: all 0.15s;
   width: 100px;
@@ -54,7 +53,7 @@
 }
 
 #trainer-schedule button:hover {
-  background: deepskyblue;
+  background: #b88f09;
   color: white;
 }
 
