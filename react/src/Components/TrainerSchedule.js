@@ -73,7 +73,7 @@ const TrainerSchedule = ({ user, trainerId }) => {
 
   return (
     <div className={"schedule-container"}>
-      <table id={`trainer-schedule`}>
+      <table className={`trainer-schedule`} >
         <thead>
           <tr>
             <th className={"first-row"}>Time</th>

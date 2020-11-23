@@ -8,28 +8,28 @@
   flex-direction: column;
 }
 
-#trainer-schedule {
+.trainer-schedule {
   margin: auto;
 }
 
-#trainer-schedule th td {
+.trainer-schedule th td {
   width: 100px;
   height: 30px;
 }
 
-#trainer-schedule .first-row {
+.trainer-schedule .first-row {
   width: 100px;
 }
 
-#trainer-schedule .available {
+.trainer-schedule .available {
   background: #007ab8;
 }
 
-#trainer-schedule .unavailable {
+.trainer-schedule .unavailable {
   background: #b88f09;
 }
 
-#trainer-schedule button {
+.trainer-schedule button {
   background: none;
   /* padding: 0.5em 3em; */
   font-size: 0.6em;
@@ -48,17 +48,17 @@
   margin-right: 0;
 }
 
-#trainer-schedule button:active {
+.trainer-schedule button:active {
   color: #bbbbbb;
   border-color: #bbbbbb;
 }
 
-#trainer-schedule button:hover {
+.trainer-schedule button:hover {
   background: deepskyblue;
   color: white;
 }
 
-#trainer-schedule button:disabled {
+.trainer-schedule button:disabled {
   background: none;
   color: #b88f09;
 }
