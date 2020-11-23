@@ -55,7 +55,7 @@
   border-color: #bbbbbb;
 }
 
-#trainer-schedule button:hover {
+.trainer-schedule button:hover {
   background: #b88f09;
 
   color: white;
