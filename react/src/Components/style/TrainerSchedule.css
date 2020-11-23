@@ -20,11 +20,8 @@
   width: 100px;
 }
 
-
 .trainer-schedule .available {
-
-
-  background: #007ab8;
+  /* background: #007ab8; */
 }
 
 .trainer-schedule .unavailable {
