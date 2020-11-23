@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import DatePicker from "react-datepicker";
 
 import "./style/RegisterForm.css";
-import "react-datepicker/dist/react-datepicker.css";
 
 // rewritten the code as react hook form
 const RegisterFrom = () => {
@@ -37,6 +35,7 @@ const RegisterFrom = () => {
 
   return (
     <div className={"register-form"} style={{ marginBottom: "180px" }}>
+      <h1>Create Account</h1>
       <form onSubmit={handleSubmit(onSubmit)} className={"register-form"}>
         <div className="form-group">
           <input
@@ -45,7 +44,7 @@ const RegisterFrom = () => {
             name="username"
             id="username"
             aria-label="Username"
-            placeholder="Username"
+            placeholder="Username (6 or more characters)"
             pattern="[A-Za-z0-9]{6,}"
             ref={register({ required: "Username required!" })}
           />
@@ -54,9 +53,6 @@ const RegisterFrom = () => {
               {errors.username.message}
             </p>
           )}
-          <small className="form-text text-muted">
-            Please enter 6 or more characters (no special characters).
-          </small>
         </div>
         <div className={"form-group"}>
           <input
@@ -65,13 +61,10 @@ const RegisterFrom = () => {
             name={"password"}
             id={"password"}
             aria-label="Password"
-            placeholder="Password"
+            placeholder="Password (8 or more characters)"
             pattern=".{8,}"
             ref={register({ required: "Password required!" })}
           />
-          <small className="form-text text-muted">
-            Please enter 8 or more characters.
-          </small>
         </div>
         {errors.password && (
           <p id="passwordError" style={{ color: "red" }}>
@@ -133,9 +126,6 @@ const RegisterFrom = () => {
               {errors.email.message}
             </p>
           )}
-          <small className="form-text text-muted">
-            Please enter a valid email address include an "@".
-          </small>
         </div>
         <div className="form-group">
           <input
@@ -148,22 +138,6 @@ const RegisterFrom = () => {
             ref={register}
             pattern="^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$"
           />
-          <small className="form-text text-muted">
-            Please enter a valid US phone number (123) 123-1234.
-          </small>
-        </div>
-        <div className="form-group">
-        <label htmlFor="Datebirth">
-          <DatePicker
-            id="date"
-            selected={startDate}
-            onChange={(date) => setBirthdate(date)}
-            ref={register}
-          />
-          </label>
-          <small className="form-text text-muted">
-            Please choose your Date Of Birth.
-          </small>
         </div>
         <div className="form-group">
           <select

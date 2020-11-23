@@ -1,6 +1,6 @@
 .edit-container {
   position: relative;
-  left: 38%;
+  left: 560px;
   bottom: 200px;
   background: white;
   color: black;
@@ -14,9 +14,11 @@
   display: inline;
   width: 400px;
 }
+
 .form-control {
   background: #f0f0f0;
 }
+
 .title-form {
   position: relative;
   top: 30px;
@@ -30,6 +32,7 @@
   border-radius: 18px;
   cursor: pointer;
   display: inline-block;
+  background-color: #eaecef;
 }
 .edit-form label {
   position: relative;
